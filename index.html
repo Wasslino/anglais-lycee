@@ -4,7 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="light dark" />
-    <link rel="icon" href="data:," />
+    <meta name="description" content="LinguaLink — tout l'anglais du lycée marocain au même endroit : leçons de grammaire, fiches de vocabulaire, exercices corrigés et examens nationaux du ministère (2ème année Bac). Gratuit, sans compte." />
+    <meta property="og:title" content="LinguaLink — Anglais au lycée" />
+    <meta property="og:description" content="Leçons, fiches, examens nationaux corrigés et quiz du jour. Gratuit, pour tous les lycéens marocains." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://wasslino.github.io/anglais-lycee/assets/hero-eleves.webp" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="apple-touch-icon" href="favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
     <title>LINGUALINK — Anglais au lycée : cours, exercices et examens corrigés (Tronc Commun, 1ère et 2ème année du Baccalauréat)</title>
     <style>
       :root {
@@ -22,8 +31,17 @@
         --green-bg: #e2f2e8;
         --red: #b3352b;
         --red-bg: #f9e6e3;
-        --radius: 14px;
+        --lvl-tc: #1e7d4f;
+        --lvl-tc-bg: #e2f2e8;
+        --lvl-1bac: #2f6fb2;
+        --lvl-1bac-bg: #e3edf7;
+        --lvl-2bac: #c8891b;
+        --lvl-2bac-bg: #f3e3c2;
+        --radius: 16px;
         --shadow: 0 2px 10px rgba(27, 42, 74, 0.08);
+        --shadow-lift: 0 10px 26px rgba(27, 42, 74, 0.14);
+        --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+        --font-body: "Inter", "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
       }
       @media (prefers-color-scheme: dark) {
         :root {
@@ -41,7 +59,14 @@
           --green-bg: #173527;
           --red: #e07a6e;
           --red-bg: #3d201c;
+          --lvl-tc: #4cc084;
+          --lvl-tc-bg: #173527;
+          --lvl-1bac: #6ea8e0;
+          --lvl-1bac-bg: #1b2c44;
+          --lvl-2bac: #e0a63e;
+          --lvl-2bac-bg: #3a3018;
           --shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+          --shadow-lift: 0 10px 26px rgba(0, 0, 0, 0.45);
         }
       }
       * { box-sizing: border-box; }
@@ -52,12 +77,12 @@
       }
       body {
         margin: 0;
-        font-family: "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
+        font-family: var(--font-body);
         background: var(--bg);
         color: var(--ink);
-        line-height: 1.55;
+        line-height: 1.6;
       }
-      h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.2; margin: 0; }
+      h1, h2, h3 { font-family: var(--font-display); line-height: 1.15; margin: 0; letter-spacing: -0.01em; }
       a { color: inherit; }
       .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
 
@@ -66,16 +91,18 @@
         position: sticky; top: 0; z-index: 40;
         background: var(--navy-deep);
         color: #f5efe2;
+        box-shadow: 0 2px 14px rgba(0, 0, 0, 0.25);
       }
       .topbar-in {
-        display: flex; flex-direction: column; align-items: center; gap: 8px;
-        padding: 14px 20px 12px; max-width: 1120px; margin: 0 auto;
-        text-align: center;
+        display: flex; align-items: center; justify-content: space-between; gap: 16px;
+        padding: 10px 20px; max-width: 1120px; margin: 0 auto;
       }
-      .brand { font-family: Georgia, serif; font-size: clamp(1.9rem, 5.5vw, 2.6rem); font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; line-height: 1.1; padding-left: 0.14em; }
-      .brand em { color: var(--gold); font-style: normal; }
-      .brand small { display: block; margin-top: 6px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: #cbbf9f; font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif; padding-left: 0.3em; }
-      .topnav { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; }
+      .brand { display: flex; align-items: center; gap: 12px; }
+      .brand img { width: 46px; height: auto; flex: none; }
+      .brand .wordmark { font-family: var(--font-display); font-size: 1.55rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1; color: #f5efe2; }
+      .brand .wordmark em { color: var(--gold); font-style: normal; }
+      .brand small { display: block; margin-top: 4px; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; color: #cbbf9f; font-family: var(--font-body); }
+      .topnav { display: flex; gap: 2px; flex-wrap: wrap; justify-content: flex-end; }
       .topnav a {
         text-decoration: none; font-size: 0.92rem; padding: 7px 12px; border-radius: 8px;
         color: #e9e2cf;
@@ -85,12 +112,12 @@
       /* ---------- Hero ---------- */
       .hero { background: var(--navy); color: #f7f2e4; }
       .hero-in {
-        display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 34px;
-        align-items: center; padding: 44px 20px 50px;
+        display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 40px;
+        align-items: center; padding: 52px 20px 56px;
       }
-      .hero h1 { font-size: clamp(1.9rem, 4.4vw, 2.9rem); font-weight: 700; }
+      .hero h1 { font-size: clamp(2rem, 4.6vw, 3.1rem); font-weight: 700; }
       .hero h1 .hl { color: var(--gold); }
-      .hero p.lede { font-size: 1.08rem; color: #ddd3ba; max-width: 36rem; margin: 16px 0 22px; }
+      .hero p.lede { font-size: 1.08rem; color: #ddd3ba; max-width: 36rem; margin: 18px 0 24px; }
       .searchbox {
         display: flex; background: #fff; border-radius: 12px; overflow: hidden;
         max-width: 34rem; box-shadow: 0 6px 22px rgba(0,0,0,0.25);
@@ -105,8 +132,8 @@
         padding: 0 22px; font-size: 1rem; cursor: pointer; font-family: inherit;
       }
       .searchbox button:hover { filter: brightness(1.08); }
-      .stats { display: flex; gap: 26px; margin-top: 26px; flex-wrap: wrap; }
-      .stat b { display: block; font-family: Georgia, serif; font-size: 1.55rem; color: #fff; }
+      .stats { display: flex; gap: 26px; margin-top: 28px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.16); flex-wrap: wrap; }
+      .stat b { display: block; font-family: var(--font-display); font-size: 1.6rem; color: #fff; }
       .stat span { font-size: 0.82rem; color: #c9bd9c; }
       .hero img {
         width: 100%; height: auto; border-radius: 18px; display: block;
@@ -126,20 +153,25 @@
       .search-results .none { padding: 10px 12px; color: #ddd3ba; font-size: 0.95rem; }
 
       /* ---------- Sections ---------- */
-      section { padding: 52px 0 8px; }
-      .sec-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 8px; }
-      .sec-head h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+      section { padding: 60px 0 8px; }
+      .sec-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 10px; }
+      .sec-head h2 { font-size: clamp(1.55rem, 3.2vw, 2.1rem); }
+      .sec-head h2::after { content: ""; display: block; width: 46px; height: 3px; border-radius: 2px; background: var(--gold); margin-top: 9px; }
       .sec-head .count { color: var(--gold); font-weight: 700; font-size: 0.95rem; }
       .sec-sub { color: var(--ink-soft); max-width: 46rem; margin: 0 0 24px; }
 
-      .grid { display: grid; gap: 16px; }
+      .grid { display: grid; gap: 18px; }
       .grid.c3 { grid-template-columns: repeat(3, 1fr); }
       .grid.c2 { grid-template-columns: repeat(2, 1fr); }
 
       .card {
         background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
-        padding: 20px; box-shadow: var(--shadow);
+        padding: 22px; box-shadow: var(--shadow);
         display: flex; flex-direction: column; gap: 8px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      @media (hover: hover) {
+        .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
       }
       .card h3 { font-size: 1.15rem; }
       .card p { margin: 0; color: var(--ink-soft); font-size: 0.95rem; }
@@ -152,14 +184,19 @@
       .chip.level { background: var(--navy); color: #f5efe2; border-color: var(--navy); }
       .chip.soon { background: transparent; color: var(--ink-soft); border-style: dashed; }
       .chip.done { background: var(--green-bg); color: var(--green); border-color: transparent; }
+      .card[data-level="tc"] .chip.level { background: var(--lvl-tc-bg); color: var(--lvl-tc); border-color: transparent; }
+      .card[data-level="1bac"] .chip.level { background: var(--lvl-1bac-bg); color: var(--lvl-1bac); border-color: transparent; }
+      .card[data-level="2bac"] .chip.level { background: var(--lvl-2bac-bg); color: var(--lvl-2bac); border-color: transparent; }
       .card .actions { margin-top: auto; padding-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
 
       .btn {
         display: inline-block; text-decoration: none; font-weight: 700; font-size: 0.92rem;
-        padding: 10px 16px; border-radius: 10px; border: 1px solid transparent; cursor: pointer;
+        padding: 11px 18px; border-radius: 10px; border: 1px solid transparent; cursor: pointer;
         font-family: inherit; text-align: center;
+        transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
       }
-      .btn-gold { background: var(--gold); color: #fff; }
+      .btn:hover { transform: translateY(-1px); }
+      .btn-gold { background: var(--gold); color: #fff; box-shadow: 0 4px 14px rgba(200, 137, 27, 0.35); }
       .btn-gold:hover { filter: brightness(1.08); }
       .btn-navy { background: var(--navy); color: #f5efe2; }
       .btn-navy:hover { filter: brightness(1.15); }
@@ -169,9 +206,14 @@
       .btn-wa:hover { filter: brightness(1.07); }
 
       /* ---------- Niveaux ---------- */
-      .level-card { position: relative; }
-      .level-card.featured { border: 2px solid var(--gold); }
-      .level-card .tracks { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--gold); }
+      .level-card { position: relative; overflow: hidden; padding: 0; gap: 0; border-top: 4px solid var(--lvl, var(--gold)); }
+      .level-card .level-photo { display: block; width: 100%; height: 168px; object-fit: cover; flex: none; }
+      .level-card .level-body { display: flex; flex-direction: column; gap: 8px; padding: 20px 22px 22px; flex: 1; }
+      .level-card.lvl-tc { --lvl: var(--lvl-tc); }
+      .level-card.lvl-1bac { --lvl: var(--lvl-1bac); }
+      .level-card.lvl-2bac { --lvl: var(--lvl-2bac); }
+      .level-card.featured { border: 2px solid var(--gold); border-top: 4px solid var(--gold); }
+      .level-card .tracks { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--lvl, var(--gold)); }
       .level-card ul { margin: 4px 0 0; padding-left: 18px; color: var(--ink-soft); font-size: 0.95rem; }
       .level-card li { margin: 3px 0; }
       .level-status { margin-top: auto; padding-top: 10px; font-size: 0.88rem; font-weight: 600; }
@@ -235,7 +277,7 @@
       .reader-head .tag { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
       .reader-body { padding: 22px; display: grid; gap: 18px; }
       .formula {
-        font-family: Georgia, serif; font-size: 1.15rem; text-align: center;
+        font-family: var(--font-display); font-size: 1.15rem; text-align: center;
         background: var(--gold-soft); border-radius: 10px; padding: 14px; color: var(--ink);
       }
       .reader-body h4 { margin: 0 0 6px; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); }
@@ -256,7 +298,7 @@
       .quiz .sec-sub { color: #cfc4a4; }
       .q-progress { height: 8px; background: rgba(255,255,255,0.15); border-radius: 99px; overflow: hidden; margin: 18px 0 22px; }
       .q-progress i { display: block; height: 100%; background: var(--gold); width: 0; transition: width 0.35s ease; }
-      .q-sentence { font-family: Georgia, serif; font-size: clamp(1.15rem, 2.6vw, 1.45rem); margin: 0 0 6px; }
+      .q-sentence { font-family: var(--font-display); font-size: clamp(1.15rem, 2.6vw, 1.45rem); margin: 0 0 6px; }
       .q-trans { color: #cfc4a4; margin: 0 0 20px; font-size: 0.98rem; }
       .q-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
       .q-opt {
@@ -272,12 +314,12 @@
       .q-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
       .q-score { font-size: 0.95rem; color: #cfc4a4; }
       .q-final { text-align: center; padding: 12px 0 4px; }
-      .q-final .big { font-family: Georgia, serif; font-size: 2.4rem; color: #fff; }
+      .q-final .big { font-family: var(--font-display); font-size: 2.4rem; color: #fff; }
       [hidden] { display: none !important; }
 
       /* ---------- Offers ---------- */
       .offer-featured { border: 2px solid var(--gold); }
-      .price { font-family: Georgia, serif; font-size: 2rem; color: var(--ink); }
+      .price { font-family: var(--font-display); font-size: 2rem; color: var(--ink); }
       .price small { font-size: 0.95rem; color: var(--ink-soft); font-family: inherit; }
       .price .old { text-decoration: line-through; color: var(--ink-soft); font-size: 1.15rem; margin-right: 8px; }
       .offer ul { margin: 4px 0 0; padding-left: 20px; color: var(--ink-soft); font-size: 0.95rem; }
@@ -290,7 +332,7 @@
         padding: 20px; box-shadow: var(--shadow);
       }
       .step .num {
-        font-family: Georgia, serif; font-size: 1.9rem; color: var(--gold); display: block; margin-bottom: 6px;
+        font-family: var(--font-display); font-size: 1.9rem; color: var(--gold); display: block; margin-bottom: 6px;
       }
       .step h3 { font-size: 1.1rem; margin-bottom: 6px; }
       .step p { margin: 0; color: var(--ink-soft); font-size: 0.95rem; }
@@ -300,6 +342,9 @@
       footer {
         margin-top: 60px; background: var(--navy-deep); color: #d9d0b8; padding: 34px 0 40px;
       }
+      .foot-brand { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 26px; }
+      .foot-brand img { background: #fdfbf6; border-radius: 12px; padding: 10px 14px; width: 190px; height: auto; }
+      .foot-brand p { margin: 0; color: #d9d0b8; font-size: 0.98rem; max-width: 34rem; }
       footer .cols { display: flex; gap: 34px; flex-wrap: wrap; justify-content: space-between; }
       footer h4 { margin: 0 0 10px; color: #fff; font-size: 0.95rem; }
       footer a { color: #d9d0b8; text-decoration: none; display: block; padding: 3px 0; font-size: 0.92rem; }
@@ -311,15 +356,21 @@
         .grid.c3, .steps { grid-template-columns: 1fr; }
         .grid.c2 { grid-template-columns: 1fr; }
         .q-opts { grid-template-columns: 1fr; }
-        .topnav { margin-left: 0; }
+        .topbar-in { flex-direction: column; align-items: center; gap: 6px; padding: 10px 12px 8px; }
+        .brand img { width: 38px; }
+        .brand .wordmark { font-size: 1.3rem; }
+        .topnav { flex-wrap: nowrap; overflow-x: auto; max-width: 100%; padding-bottom: 2px; scrollbar-width: none; }
+        .topnav a { white-space: nowrap; font-size: 0.86rem; padding: 6px 10px; }
         .frow .flabel { width: 100%; }
+        .level-card .level-photo { height: 180px; }
+        .foot-brand { flex-direction: column; align-items: flex-start; gap: 12px; }
       }
     </style>
   </head>
   <body>
     <header class="topbar">
       <div class="topbar-in">
-        <div class="brand">LINGUA<em>LINK</em><small>Anglais au lycée — Maroc</small></div>
+        <div class="brand"><img src="assets/logo-mark.webp" alt="Logo LinguaLink" width="46" height="43" /><span><span class="wordmark">LINGUA<em>LINK</em></span><small>Anglais au lycée — Maroc</small></span></div>
         <nav class="topnav" aria-label="Navigation principale">
           <a href="#niveaux">Niveaux</a>
           <a href="#lecons">Leçons</a>
@@ -359,7 +410,9 @@
         <p class="sec-sub">Trois années, un seul endroit. Commence par ton niveau : les fiches des trois niveaux sont en ligne — choisis le tien et révise.</p>
         <p class="honest-note"><b>Et pour le Tronc Commun et la 1ère année ?</b> Le Pack et le cours en direct restent pour l'instant réservés à la 2ème année du Baccalauréat. Un pack Tronc Commun / 1ère année pourra venir plus tard — en attendant, toutes les fiches gratuites ci-dessous sont déjà pour vous.</p>
         <div class="grid c3">
-          <article class="card level-card">
+          <article class="card level-card lvl-tc">
+            <img class="level-photo" src="assets/niveau-tc.webp" alt="Élèves qui révisent ensemble à la bibliothèque" loading="lazy" />
+            <div class="level-body">
             <span class="tracks">Tronc Commun</span>
             <h3>Tronc Commun</h3>
             <p><strong>Filières :</strong> Sciences (SVT) · Lettres &amp; Sciences Humaines</p>
@@ -371,9 +424,12 @@
             </ul>
             <p class="level-status done">✓ Contenu disponible — les 3 fiches de ce niveau sont en ligne.</p>
             <div class="actions"><button class="btn btn-ghost" type="button" data-goto-level="tc">Voir les fiches Tronc Commun</button></div>
+            </div>
           </article>
 
-          <article class="card level-card">
+          <article class="card level-card lvl-1bac">
+            <img class="level-photo" src="assets/niveau-1bac.webp" alt="Élève qui écrit dans son cahier de révision" loading="lazy" />
+            <div class="level-body">
             <span class="tracks">1ère année du Baccalauréat</span>
             <h3>1ère année du Baccalauréat</h3>
             <p><strong>Filières :</strong> Sciences Expérimentales · Lettres &amp; Sciences Humaines</p>
@@ -385,9 +441,12 @@
             </ul>
             <p class="level-status done">✓ Contenu disponible — les 3 fiches de ce niveau sont en ligne.</p>
             <div class="actions"><button class="btn btn-ghost" type="button" data-goto-level="1bac">Voir les fiches 1ère année Bac</button></div>
+            </div>
           </article>
 
-          <article class="card level-card featured">
+          <article class="card level-card featured lvl-2bac">
+            <img class="level-photo" src="assets/niveau-2bac.webp" alt="Toques de diplômés levées vers le ciel" loading="lazy" />
+            <div class="level-body">
             <span class="tracks">2ème année du Baccalauréat</span>
             <h3>2ème année du Baccalauréat</h3>
             <p><strong>Filières :</strong> Sciences · Lettres · Sciences Humaines — toutes filières</p>
@@ -399,6 +458,7 @@
             </ul>
             <p class="level-status done">✓ Contenu complet — disponible dès maintenant.</p>
             <div class="actions"><button class="btn btn-navy" type="button" data-goto-level="2bac">Voir les fiches 2ème année Bac</button></div>
+            </div>
           </article>
         </div>
       </section>
@@ -536,6 +596,10 @@
 
     <footer>
       <div class="wrap">
+        <div class="foot-brand">
+          <img src="assets/logo-lingualink.webp" alt="LinguaLink" width="190" height="159" loading="lazy" />
+          <p>Tout l'anglais du lycée marocain, au même endroit — gratuit, sans compte.</p>
+        </div>
         <div class="cols">
           <div>
             <h4 style="text-transform: uppercase; letter-spacing: 0.08em;">LINGUALINK</h4>
@@ -556,7 +620,7 @@
             <a href="#cours">Cours en direct — 2ème année du Baccalauréat uniquement, dès le 14 novembre</a>
           </div>
         </div>
-        <p class="fine">Examens : sujets et corrigés officiels du ministère de l'Éducation nationale (2ème année du Baccalauréat uniquement).</p>
+        <p class="fine">Examens : sujets et corrigés officiels du ministère de l'Éducation nationale (2ème année du Baccalauréat uniquement). Photos : Pexels (libres de droits).</p>
       </div>
     </footer>
 
