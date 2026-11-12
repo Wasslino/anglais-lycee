@@ -71,6 +71,7 @@
       }
       * { box-sizing: border-box; }
       html { scroll-behavior: smooth; }
+      html, body { overflow-x: clip; }
       @media (prefers-reduced-motion: reduce) {
         html { scroll-behavior: auto; }
         * { transition: none !important; animation: none !important; }
@@ -356,10 +357,12 @@
         .grid.c3, .steps { grid-template-columns: 1fr; }
         .grid.c2 { grid-template-columns: 1fr; }
         .q-opts { grid-template-columns: 1fr; }
-        .topbar-in { flex-direction: column; align-items: center; gap: 6px; padding: 10px 12px 8px; }
-        .brand img { width: 38px; }
-        .brand .wordmark { font-size: 1.3rem; }
-        .topnav { flex-wrap: nowrap; overflow-x: auto; max-width: 100%; padding-bottom: 2px; scrollbar-width: none; }
+        .topbar-in { flex-direction: column; align-items: center; gap: 8px; padding: 12px 12px 10px; }
+        .brand { flex-direction: column; gap: 3px; text-align: center; }
+        .brand img { width: 40px; }
+        .brand .wordmark { font-size: 1.35rem; letter-spacing: 0.08em; }
+        .brand small { font-size: 0.62rem; letter-spacing: 0.24em; margin-top: 3px; }
+        .topnav { width: 100%; justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
         .topnav a { white-space: nowrap; font-size: 0.86rem; padding: 6px 10px; }
         .frow .flabel { width: 100%; }
         .level-card .level-photo { height: 180px; }
