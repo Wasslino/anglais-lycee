@@ -140,6 +140,7 @@
         width: 100%; height: auto; border-radius: 18px; display: block;
         box-shadow: 0 14px 34px rgba(0,0,0,0.3);
       }
+      .hero-in > * { min-width: 0; }
       .search-results {
         margin-top: 14px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
         border-radius: 12px; padding: 6px; max-width: 34rem; display: none;
@@ -155,6 +156,7 @@
 
       /* ---------- Sections ---------- */
       section { padding: 60px 0 8px; }
+      section[id] { scroll-margin-top: 84px; }
       .sec-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 10px; }
       .sec-head h2 { font-size: clamp(1.55rem, 3.2vw, 2.1rem); }
       .sec-head h2::after { content: ""; display: block; width: 46px; height: 3px; border-radius: 2px; background: var(--gold); margin-top: 9px; }
@@ -277,6 +279,10 @@
       .reader-head h3 { font-size: 1.25rem; }
       .reader-head .tag { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
       .reader-body { padding: 22px; display: grid; gap: 18px; }
+      #readerExo { scroll-margin-top: 96px; }
+      #readerExo ol { margin: 0; padding-left: 20px; }
+      #readerExo li { margin: 8px 0; }
+      .exo-answer { color: var(--green); font-weight: 600; }
       .formula {
         font-family: var(--font-display); font-size: 1.15rem; text-align: center;
         background: var(--gold-soft); border-radius: 10px; padding: 14px; color: var(--ink);
@@ -344,7 +350,7 @@
         margin-top: 60px; background: var(--navy-deep); color: #d9d0b8; padding: 34px 0 40px;
       }
       .foot-brand { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 26px; }
-      .foot-brand img { background: #fdfbf6; border-radius: 12px; padding: 10px 14px; width: 190px; height: auto; }
+      .foot-brand img { width: 190px; height: auto; }
       .foot-brand p { margin: 0; color: #d9d0b8; font-size: 0.98rem; max-width: 34rem; }
       footer .cols { display: flex; gap: 34px; flex-wrap: wrap; justify-content: space-between; }
       footer h4 { margin: 0 0 10px; color: #fff; font-size: 0.95rem; }
@@ -353,10 +359,12 @@
       footer .fine { margin-top: 26px; font-size: 0.82rem; color: #9a9078; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 16px; }
 
       @media (max-width: 860px) {
-        .hero-in { grid-template-columns: 1fr; padding-top: 32px; }
-        .grid.c3, .steps { grid-template-columns: 1fr; }
-        .grid.c2 { grid-template-columns: 1fr; }
-        .q-opts { grid-template-columns: 1fr; }
+        .hero-in { grid-template-columns: minmax(0, 1fr); padding-top: 32px; }
+        .grid.c3, .steps { grid-template-columns: minmax(0, 1fr); }
+        .grid.c2 { grid-template-columns: minmax(0, 1fr); }
+        .q-opts { grid-template-columns: minmax(0, 1fr); }
+        section[id] { scroll-margin-top: 140px; }
+        #readerExo { scroll-margin-top: 150px; }
         .topbar-in { flex-direction: column; align-items: center; gap: 8px; padding: 12px 12px 10px; }
         .brand { flex-direction: column; gap: 3px; text-align: center; }
         .brand img { width: 40px; }
@@ -485,14 +493,14 @@
 
       <!-- ======== LECTURE D'UNE LEÇON ======== -->
       <section id="lecture" aria-label="Exemple de leçon complète">
-        <div class="sec-head"><h2>À quoi ressemble une leçon</h2></div>
-        <p class="sec-sub">Exemple complet (2ème année du Baccalauréat), tel que l'élève le verrait en cliquant sur « Lire la leçon ».</p>
+        <div class="sec-head"><h2>La leçon complète</h2></div>
+        <p class="sec-sub">Clique sur « Lire la leçon » sur une fiche ci-dessus : toute la leçon s'affiche ici, avec un mini-exercice corrigé.</p>
         <article class="reader">
           <div class="reader-head">
-            <h3>The Present Perfect</h3>
-            <span class="tag">Grammaire · Unité 1 — Éducation · 2ème année Bac</span>
+            <h3 id="readerTitle">The Present Perfect</h3>
+            <span class="tag" id="readerTag">Grammaire · Unité 1 — Éducation · 2ème année Bac</span>
           </div>
-          <div class="reader-body">
+          <div class="reader-body" id="readerBody">
             <div>
               <h4>À quoi ça sert</h4>
               <p>Parler d'une action passée dont le résultat compte <strong>maintenant</strong>, ou d'une expérience de vie sans date précise. C'est le temps le plus testé dans la partie Language de l'examen national.</p>
@@ -511,6 +519,7 @@
               <p>already · yet · just · ever · never · since · for · recently</p>
             </div>
             <div class="trap"><b>Piège d'examen :</b> avec une date précise du passé (<em>yesterday, in 2020, last week</em>), on utilise le <strong>Past Simple</strong>, jamais le Present Perfect. « I have seen him yesterday » est faux : <em>I saw him yesterday.</em></div>
+            <div id="readerExo"><h4>Mini-exercice corrigé</h4><ol><li><p>Complète : « I ___ (just/finish) my homework. »</p><p class="exo-answer">Correction : have just finished — just + Present Perfect.</p></li><li><p>Complète : « She ___ (live) here since 2019. »</p><p class="exo-answer">Correction : has lived — since + durée qui continue.</p></li></ol></div>
           </div>
         </article>
       </section>
@@ -600,7 +609,7 @@
     <footer>
       <div class="wrap">
         <div class="foot-brand">
-          <img src="assets/logo-lingualink.webp" alt="LinguaLink" width="190" height="159" loading="lazy" />
+          <img src="assets/logo-lingualink-light.webp" alt="LinguaLink" width="190" height="159" loading="lazy" />
           <p>Tout l'anglais du lycée marocain, au même endroit — gratuit, sans compte.</p>
         </div>
         <div class="cols">
@@ -629,25 +638,115 @@
 
     <script>
       /* ================= Données — Leçons (15 fiches, 3 niveaux) ================= */
-      var LESSONS = [
+            var LESSONS = [
         /* --- Tronc Commun --- */
-        { title: "Present Simple vs Present Continuous", type: "Grammaire", level: "tc", levelLabel: "Tronc Commun", unit: "Bases — Tronc Commun", desc: "Habitudes vs action en cours : I play / I am playing, les mots-signaux (every day, now, look!) et l'erreur classique des verbes d'état.", anchor: "#lecture" },
-        { title: "Articles — a / an / the", type: "Grammaire", level: "tc", levelLabel: "Tronc Commun", unit: "Bases — Tronc Commun", desc: "Quand mettre a, an, the… et quand ne rien mettre du tout. La règle en une phrase, avec les cas du programme : school, home, the sun.", anchor: "#lecture" },
-        { title: "Vocabulary — Education & School Life", type: "Vocabulaire", level: "tc", levelLabel: "Tronc Commun", unit: "Thème — Éducation", desc: "Les mots de l'école et des études : subjects, timetable, homework, marks… regroupés par thème, prêts à réviser en 5 minutes.", anchor: "#lecture" },
+        { title: "Present Simple vs Present Continuous", type: "Grammaire", level: "tc", levelLabel: "Tronc Commun", unit: "Bases — Tronc Commun", desc: "Habitudes vs action en cours : I play / I am playing, les mots-signaux (every day, now, look!) et l'erreur classique des verbes d'état.",
+          content: { purpose: "Le Present Simple parle des habitudes et des vérités générales ; le Present Continuous parle de ce qui se passe maintenant.",
+            formula: "I play every day. / I <strong>am playing</strong> now.",
+            examples: ["She <strong>goes</strong> to school by bus every morning.", "Look! It <strong>is raining</strong>.", "Water <strong>boils</strong> at 100°C."],
+            signalsTitle: "Mots-signaux", signals: "every day · always · usually · now · at the moment · Look! · Listen!",
+            trap: "Les verbes d'état (like, love, know, want, believe) ne prennent presque jamais la forme -ing : « I like this book », jamais « I am liking ».",
+            exo: [{ q: "Complète : « She ___ (watch) TV every evening. »", a: "watches — habitude = Present Simple." }, { q: "Complète : « Be quiet! The baby ___ (sleep). »", a: "is sleeping — action en cours = Present Continuous." }] } },
+        { title: "Articles — a / an / the", type: "Grammaire", level: "tc", levelLabel: "Tronc Commun", unit: "Bases — Tronc Commun", desc: "Quand mettre a, an, the… et quand ne rien mettre du tout. La règle en une phrase, avec les cas du programme : school, home, the sun.",
+          content: { purpose: "a/an = un, une (une chose parmi d'autres) ; the = le, la, les (une chose précise, déjà connue) ; parfois, on ne met RIEN.",
+            formula: "<strong>a</strong> + consonne · <strong>an</strong> + voyelle · <strong>the</strong> = précis · <strong>Ø</strong> = général",
+            examples: ["I saw <strong>a</strong> dog. <strong>The</strong> dog was black.", "She is <strong>an</strong> honest girl.", "<strong>Ø</strong> School starts at 8. / I love <strong>Ø</strong> music."],
+            signalsTitle: "Mots-signaux", signals: "a/an = première mention · the = déjà mentionné, unique (the sun, the moon) · Ø = habitudes, matières, sports",
+            trap: "Pas d'article devant les noms de repas, de sports et de matières : « I play football », « I like English », jamais « the football / the English ».",
+            exo: [{ q: "Complète : « ___ sun rises in the east. »", a: "The — le soleil est unique." }, { q: "Complète : « My father is ___ engineer. »", a: "an — engineer commence par une voyelle." }] } },
+        { title: "Vocabulary — Education & School Life", type: "Vocabulaire", level: "tc", levelLabel: "Tronc Commun", unit: "Thème — Éducation", desc: "Les mots de l'école et des études : subjects, timetable, homework, marks… regroupés par thème, prêts à réviser en 5 minutes.",
+          content: { purpose: "Les mots de l'école et des études, regroupés par thème pour les retenir vite et les retrouver dans les textes de l'examen.",
+            formula: "subject · timetable · homework · mark / grade · <strong>pass / fail</strong> an exam",
+            examples: ["My favourite <strong>subject</strong> is English.", "We have six lessons on our <strong>timetable</strong> today.", "She <strong>passed</strong> her exam with high marks."],
+            signalsTitle: "Mots-clés du thème", signals: "school subjects · classroom · exams & results · school life : degree, graduate, lesson, pupil, teacher",
+            trap: "« Homework » ne se compte pas : on dit « a lot of homework », jamais « homeworks ». Et « pass an exam » = réussir, « fail » = échouer.",
+            exo: [{ q: "Traduis : « réussir un examen »", a: "pass an exam." }, { q: "Complète : « Our ___ has 6 lessons today. » (emploi du temps)", a: "timetable." }] } },
         /* --- 1ère année du Baccalauréat --- */
-        { title: "Past Simple vs Past Continuous", type: "Grammaire", level: "1bac", levelLabel: "1ère année Bac", unit: "Récit — 1ère année Bac", desc: "L'action longue interrompue par l'action courte : While I was studying, the phone rang. When / while sans se tromper.", anchor: "#lecture" },
-        { title: "Modal Verbs — can, must, should…", type: "Grammaire", level: "1bac", levelLabel: "1ère année Bac", unit: "Modalité — 1ère année Bac", desc: "Capacité, obligation, conseil, interdiction : can, could, must, have to, should, mustn't — et la différence mustn't / don't have to.", anchor: "#lecture" },
-        { title: "Vocabulary — Technology & Media", type: "Vocabulaire", level: "1bac", levelLabel: "1ère année Bac", unit: "Thème — Technologie", desc: "Ordinateurs, réseaux sociaux, médias : le vocabulaire du thème technologie, avec les collocations qui font la différence.", anchor: "#lecture" },
+        { title: "Past Simple vs Past Continuous", type: "Grammaire", level: "1bac", levelLabel: "1ère année Bac", unit: "Récit — 1ère année Bac", desc: "L'action longue interrompue par l'action courte : While I was studying, the phone rang. When / while sans se tromper.",
+          content: { purpose: "Le Past Continuous décrit une action longue en cours ; le Past Simple raconte l'action courte qui l'interrompt.",
+            formula: "While I <strong>was studying</strong>, the phone <strong>rang</strong>.",
+            examples: ["While I <strong>was walking</strong> home, I <strong>met</strong> Sara.", "At 8 pm yesterday, we <strong>were having</strong> dinner.", "He <strong>broke</strong> his leg when he <strong>was playing</strong> football."],
+            signalsTitle: "Mots-signaux", signals: "while · when · at 7 pm yesterday · all day · all morning",
+            trap: "Après while, on met le Past Continuous (action longue) ; après when, le plus souvent le Past Simple (action courte). Ne les inverse pas.",
+            exo: [{ q: "Complète : « While she ___ (cook), the guests arrived. »", a: "was cooking — action longue interrompue." }, { q: "Complète : « I ___ (read) when he called me. »", a: "was reading — l'appel interrompt la lecture." }] } },
+        { title: "Modal Verbs — can, must, should…", type: "Grammaire", level: "1bac", levelLabel: "1ère année Bac", unit: "Modalité — 1ère année Bac", desc: "Capacité, obligation, conseil, interdiction : can, could, must, have to, should, mustn't — et la différence mustn't / don't have to.",
+          content: { purpose: "Les modaux expriment la capacité, l'obligation, le conseil ou l'interdiction — toujours suivis d'un verbe sans « to ».",
+            formula: "can / could · must / have to · should · mustn't + <strong>base verbale</strong>",
+            examples: ["You <strong>must</strong> stop at a red light.", "Students <strong>should</strong> revise every day.", "You <strong>mustn't</strong> cheat in exams."],
+            signalsTitle: "Mots-signaux", signals: "can = pouvoir · must = devoir · should = conseil · mustn't = interdit · don't have to = pas nécessaire",
+            trap: "« mustn't » (interdit) n'est pas « don't have to » (pas nécessaire) : « You mustn't smoke here » = c'est interdit ; « You don't have to come » = ce n'est pas obligé.",
+            exo: [{ q: "Complète : « You ___ wear a uniform at school. It's the rule. »", a: "must / have to — obligation." }, { q: "Complète : « You ___ eat in class. It's forbidden. »", a: "mustn't — interdiction." }] } },
+        { title: "Vocabulary — Technology & Media", type: "Vocabulaire", level: "1bac", levelLabel: "1ère année Bac", unit: "Thème — Technologie", desc: "Ordinateurs, réseaux sociaux, médias : le vocabulaire du thème technologie, avec les collocations qui font la différence.",
+          content: { purpose: "Le vocabulaire de la technologie et des médias, avec les collocations qui rapportent des points à l'examen.",
+            formula: "surf the net · send a message · social media · <strong>go viral</strong>",
+            examples: ["Teenagers spend hours on <strong>social media</strong> every day.", "This video <strong>went viral</strong> in one night.", "The Internet <strong>connects</strong> people all over the world."],
+            signalsTitle: "Mots-clés du thème", signals: "devices · the Internet · social media · advantages & dangers : invention, network, online, digital",
+            trap: "« Information » et « news » ne se comptent pas : « a piece of news », jamais « informations / a news ». Et on dit « on the Internet », pas « in the Internet ».",
+            exo: [{ q: "Traduis : « les réseaux sociaux »", a: "social media." }, { q: "Complète : « The video ___ viral in one day. »", a: "went (go viral = devenir viral)." }] } },
         /* --- 2ème année du Baccalauréat --- */
-        { title: "The Present Perfect", type: "Grammaire", level: "2bac", levelLabel: "2ème année Bac", unit: "Unité 1 — Éducation", desc: "Le temps le plus testé à l'examen : have/has + participe passé, mots-signaux et le piège des dates précises.", anchor: "#lecture" },
-        { title: "Passive Voice", type: "Grammaire", level: "2bac", levelLabel: "2ème année Bac", unit: "Tous niveaux Bac", desc: "Transformer une phrase active en passive sans perdre le temps du verbe — un exercice présent chaque année.", anchor: "#lecture" },
-        { title: "Reported Speech", type: "Grammaire", level: "2bac", levelLabel: "2ème année Bac", unit: "Programme 2ème année du Baccalauréat", desc: "Rapporter des paroles : recul des temps, say / tell, et les questions rapportées.", anchor: "#lecture" },
-        { title: "Conditionals — Types 2 & 3", type: "Grammaire", level: "2bac", levelLabel: "2ème année Bac", unit: "Programme 2ème année du Baccalauréat", desc: "If + past simple, would + verbe… et l'hypothèse impossible du passé, avec les formes mixtes.", anchor: "#lecture" },
-        { title: "Future Forms", type: "Grammaire", level: "2bac", levelLabel: "2ème année Bac", unit: "Programme 2ème année du Baccalauréat", desc: "Will, going to, present continuous : choisir la bonne forme selon l'intention, pas au hasard.", anchor: "#lecture" },
-        { title: "Phrasal Verbs — les 40 de l'examen", type: "Vocabulaire", level: "2bac", levelLabel: "2ème année Bac", unit: "Série quotidienne", desc: "Give up, hand in, look into, catch up with… les verbes à particule qui reviennent dans les sujets, avec la phrase du jour.", anchor: "#quiz" },
-        { title: "Cartes mentales de vocabulaire", type: "Vocabulaire", level: "2bac", levelLabel: "2ème année Bac", unit: "10 unités", desc: "Une carte par unité du programme : les mots regroupés par thème, prêts à réviser en 5 minutes.", anchor: "#pack" },
-        { title: "Writing — l'essai argumentatif", type: "Writing · 10 points", level: "2bac", levelLabel: "2ème année Bac", unit: "Méthode", desc: "Introduction, deux arguments, conclusion : la structure qui sécurise les points, avec des modèles corrigés.", anchor: "#pack" },
-        { title: "Reading — réussir la compréhension", type: "Reading · 15 points", level: "2bac", levelLabel: "2ème année Bac", unit: "Méthode", desc: "Skimming, scanning, vrai/faux justifié : la méthode question par question, sur des textes d'annales.", anchor: "#examens" }
+        { title: "The Present Perfect", type: "Grammaire", level: "2bac", levelLabel: "2ème année Bac", unit: "Unité 1 — Éducation", desc: "Le temps le plus testé à l'examen : have/has + participe passé, mots-signaux et le piège des dates précises.",
+          content: { purpose: "Parler d'une action passée dont le résultat compte <strong>maintenant</strong>, ou d'une expérience de vie sans date précise. C'est le temps le plus testé dans la partie Language de l'examen national.",
+            formula: "Subject + <strong>have / has</strong> + past participle",
+            examples: ["I <strong>have finished</strong> my homework. <em>(= c'est fait, maintenant)</em>", "She <strong>has never visited</strong> Casablanca.", "<strong>Have</strong> you <strong>ever read</strong> this novel?"],
+            signalsTitle: "Mots-signaux", signals: "already · yet · just · ever · never · since · for · recently",
+            trap: "avec une date précise du passé (<em>yesterday, in 2020, last week</em>), on utilise le <strong>Past Simple</strong>, jamais le Present Perfect. « I have seen him yesterday » est faux : <em>I saw him yesterday.</em>",
+            exo: [{ q: "Complète : « I ___ (just/finish) my homework. »", a: "have just finished — just + Present Perfect." }, { q: "Complète : « She ___ (live) here since 2019. »", a: "has lived — since + durée qui continue." }] } },
+        { title: "Passive Voice", type: "Grammaire", level: "2bac", levelLabel: "2ème année Bac", unit: "Tous niveaux Bac", desc: "Transformer une phrase active en passive sans perdre le temps du verbe — un exercice présent chaque année.",
+          content: { purpose: "La voix passive met l'accent sur l'action ou sur celui qui la subit, pas sur celui qui la fait.",
+            formula: "Subject + <strong>be</strong> (au même temps) + <strong>past participle</strong>",
+            examples: ["The room <strong>is cleaned</strong> every day.", "This novel <strong>was written</strong> in 1980.", "The letters <strong>will be sent</strong> tomorrow."],
+            signalsTitle: "Mots-signaux", signals: "be + participe passé · by + agent (facultatif) · même temps que la phrase active",
+            trap: "En passant au passif, on GARDE le temps du verbe actif : « They built this school in 1990 » → « This school was built in 1990 » (was, pas is).",
+            exo: [{ q: "Mets au passif : « They clean the classroom every day. »", a: "The classroom is cleaned every day." }, { q: "Mets au passif : « Someone stole my bike yesterday. »", a: "My bike was stolen yesterday." }] } },
+        { title: "Reported Speech", type: "Grammaire", level: "2bac", levelLabel: "2ème année Bac", unit: "Programme 2ème année du Baccalauréat", desc: "Rapporter des paroles : recul des temps, say / tell, et les questions rapportées.",
+          content: { purpose: "Rapporter les paroles de quelqu'un en reculant les temps d'un cran vers le passé.",
+            formula: "Present Simple → Past Simple · will → <strong>would</strong> · can → <strong>could</strong>",
+            examples: ["« I like tea. » → He said that he <strong>liked</strong> tea.", "« I will help you. » → She said she <strong>would</strong> help me.", "« Do you speak English? » → He asked me <strong>if</strong> I spoke English."],
+            signalsTitle: "Mots-signaux", signals: "said (that) · told + personne · asked if/whether · recul des temps",
+            trap: "« say » ne prend pas de complément de personne (« He said me » est faux) ; « tell » en prend un : « He told me ». Et les questions rapportées n'ont ni point d'interrogation ni inversion.",
+            exo: [{ q: "Rapporte : « I am tired. » (She said...)", a: "She said (that) she was tired." }, { q: "Rapporte : « Can you help me? » (He asked...)", a: "He asked me if/whether I could help him." }] } },
+        { title: "Conditionals — Types 2 & 3", type: "Grammaire", level: "2bac", levelLabel: "2ème année Bac", unit: "Programme 2ème année du Baccalauréat", desc: "If + past simple, would + verbe… et l'hypothèse impossible du passé, avec les formes mixtes.",
+          content: { purpose: "Type 2 : imaginer une situation irréelle au présent. Type 3 : regretter une situation impossible du passé.",
+            formula: "Type 2 : If + Past Simple, <strong>would</strong> + BV · Type 3 : If + Past Perfect, <strong>would have</strong> + PP",
+            examples: ["If I <strong>had</strong> money, I <strong>would travel</strong> the world.", "If she <strong>had studied</strong>, she <strong>would have passed</strong> the exam.", "If I <strong>were</strong> rich, I <strong>would buy</strong> a big house."],
+            signalsTitle: "Mots-signaux", signals: "Type 2 : If I were you… · Type 3 : If + had + PP · would have + PP",
+            trap: "Après if, jamais de « would » dans la subordonnée : « If I would have money » est faux. Le would est dans la principale.",
+            exo: [{ q: "Complète : « If I ___ (be) you, I would study more. »", a: "were — Type 2 (If I were you)." }, { q: "Complète : « If he ___ (leave) earlier, he would have caught the bus. »", a: "had left — Type 3 (If + Past Perfect)." }] } },
+        { title: "Future Forms", type: "Grammaire", level: "2bac", levelLabel: "2ème année Bac", unit: "Programme 2ème année du Baccalauréat", desc: "Will, going to, present continuous : choisir la bonne forme selon l'intention, pas au hasard.",
+          content: { purpose: "Will, going to et le Present Continuous ne s'emploient pas au hasard : chacun a son intention.",
+            formula: "<strong>will</strong> = décision spontanée · <strong>going to</strong> = intention/plan · <strong>Present Continuous</strong> = rendez-vous fixé",
+            examples: ["I think it <strong>will rain</strong> tomorrow.", "We <strong>are going to visit</strong> Marrakech next week.", "I <strong>am meeting</strong> my teacher at 4 pm."],
+            signalsTitle: "Mots-signaux", signals: "will : I think, probably, I promise · going to : plans, prévisions visibles · Present Continuous : horaires, rendez-vous",
+            trap: "Pour une décision prise AU MOMENT où l'on parle, c'est will : « I'm thirsty. — I'll bring you some water. » (pas going to).",
+            exo: [{ q: "Complète : « Watch out! You ___ (drop) your phone! »", a: "are going to drop — prévision visible, danger immédiat." }, { q: "Complète : « I promise I ___ (help) you. »", a: "will help — promesse spontanée." }] } },
+        { title: "Phrasal Verbs — les 40 de l'examen", type: "Vocabulaire", level: "2bac", levelLabel: "2ème année Bac", unit: "Série quotidienne", desc: "Give up, hand in, look into, catch up with… les verbes à particule qui reviennent dans les sujets, avec la phrase du jour.",
+          content: { purpose: "Les verbes à particule qui reviennent dans les sujets d'examen — le sens ne se devine pas mot à mot, il s'apprend en contexte.",
+            formula: "verbe + particule = sens nouveau (<strong>give up</strong> ≠ give)",
+            examples: ["Never <strong>give up</strong> your dreams.", "Please <strong>hand in</strong> your homework before Friday.", "The teacher promised to <strong>look into</strong> the problem."],
+            signalsTitle: "À connaître", signals: "give up · hand in · look into · put up with · turn down · catch up with · take off · break the ice",
+            trap: "Ne traduis jamais les deux mots séparément : « look into » ne veut pas dire « regarder dans » mais « examiner ». Apprends chaque phrasal verb avec SA phrase.",
+            exo: [{ q: "Complète : « He ___ the job offer because the salary was too low. »", a: "turned down — refuser une offre." }, { q: "Complète : « I can't ___ his noise anymore! »", a: "put up with — supporter, tolérer." }] } },
+        { title: "Cartes mentales de vocabulaire", type: "Vocabulaire", level: "2bac", levelLabel: "2ème année Bac", unit: "10 unités", desc: "Une carte par unité du programme : les mots regroupés par thème, prêts à réviser en 5 minutes.",
+          content: { purpose: "Une carte par unité du programme : les mots regroupés par thème, pour réviser en 5 minutes et les retrouver à l'examen.",
+            formula: "1 thème = 1 carte = mots regroupés (noms · verbes · adjectifs)",
+            examples: ["Éducation : subject, timetable, degree, graduate, pass/fail.", "Cultural values : tradition, customs, respect, heritage, identity.", "Science & technology : invention, discovery, device, artificial intelligence."],
+            signalsTitle: "Les 10 unités", signals: "Éducation · Valeurs culturelles · Dons de la jeunesse · Femmes · Science & techno · Humour · Citoyenneté · Fuite des cerveaux · Développement durable · Organisations internationales",
+            trap: "Apprendre des mots isolés ne sert à rien : retiens chaque mot dans une courte phrase ou une collocation (« graduate from university », pas juste « graduate »).",
+            exo: [{ q: "Donne 3 mots du thème « Éducation ».", a: "Exemples : subject, timetable, degree, homework, graduate." }, { q: "Complète la collocation : « graduate ___ university. »", a: "from — graduate from university." }] } },
+        { title: "Writing — l'essai argumentatif", type: "Writing · 10 points", level: "2bac", levelLabel: "2ème année Bac", unit: "Méthode", desc: "Introduction, deux arguments, conclusion : la structure qui sécurise les points, avec des modèles corrigés.",
+          content: { purpose: "L'épreuve de Writing vaut 10 points : une tâche de complétion de paragraphe (4 pts) et une rédaction libre (6 pts). La structure fait la moitié des points.",
+            formula: "Introduction (opinion) · <strong>2 arguments</strong> + exemples · Conclusion (reformulation)",
+            examples: ["Introduction : « Nowadays, many people believe that... »", "Argument : « Firstly, ... For example, ... »", "Conclusion : « In conclusion, I strongly believe that... »"],
+            signalsTitle: "Connecteurs utiles", signals: "Firstly · Secondly · Moreover · However · On the one hand · In conclusion · In my opinion",
+            trap: "Ne commence jamais par « I think » à chaque phrase, et ne finis jamais sans conclusion : une rédaction sans conclusion perd des points, même avec de bons arguments.",
+            exo: [{ q: "Écris une phrase d'introduction pour : « Should mobile phones be banned at school? »", a: "Exemple : « Nowadays, mobile phones are a controversial issue at school. In my opinion, they should be banned. »" }, { q: "Relie ces idées avec un connecteur : « Phones distract students. ___ , they can help research. »", a: "However / On the other hand — opposition." }] } },
+        { title: "Reading — réussir la compréhension", type: "Reading · 15 points", level: "2bac", levelLabel: "2ème année Bac", unit: "Méthode", desc: "Skimming, scanning, vrai/faux justifié : la méthode question par question, sur des textes d'annales.",
+          content: { purpose: "La partie Reading vaut 15 points. La méthode : lire les questions AVANT le texte, puis chercher les réponses une par une.",
+            formula: "1. Questions d'abord · 2. <strong>Skimming</strong> (idée générale) · 3. <strong>Scanning</strong> (détails) · 4. Justifier",
+            examples: ["Vrai/Faux : la justification doit être une citation du texte.", "Référence : « they » renvoie au nom pluriel le plus proche avant.", "Choix du titre : le meilleur titre couvre TOUT le texte, pas un détail."],
+            signalsTitle: "Le vocabulaire de la méthode", signals: "skimming = survol · scanning = recherche ciblée · justify = citer · refer to = renvoie à",
+            trap: "Pour les Vrai/Faux, une réponse sans justification (ou avec une mauvaise justification) vaut zéro, même si Vrai/Faux est correct. Cite toujours le passage.",
+            exo: [{ q: "Que faut-il lire EN PREMIER : le texte ou les questions ?", a: "Les questions — pour savoir quoi chercher dans le texte." }, { q: "Vrai ou Faux ? « On peut justifier avec ses propres mots. »", a: "Faux — il faut citer le texte (ou le paraphraser fidèlement)." }] } }
       ];
 
       var YEARS = [2024, 2023, 2022, 2021, 2020];
@@ -764,7 +863,7 @@
       var lessonGrid = document.getElementById("lessonGrid");
       var lessonEmpty = document.getElementById("lessonEmpty");
       var lessonCards = [];
-      LESSONS.forEach(function (l) {
+      LESSONS.forEach(function (l, i) {
         var card = document.createElement("article");
         card.className = "card";
         card.setAttribute("data-level", l.level);
@@ -779,9 +878,36 @@
         card.querySelector("h3").textContent = l.title;
         card.querySelector("p").textContent = l.desc;
         var links = card.querySelectorAll(".actions a");
-        links[0].href = l.anchor; links[1].href = l.anchor;
+        links[0].href = "#lecture"; links[0].setAttribute("data-lesson", i);
+        links[1].href = "#lecture"; links[1].setAttribute("data-lesson", i); links[1].setAttribute("data-exo", "1");
         lessonGrid.appendChild(card);
         lessonCards.push(card);
+      });
+
+      /* Affiche UNE leçon dans le lecteur : chaque bouton ouvre LA bonne leçon */
+      function showLesson(i, toExo) {
+        var l = LESSONS[i];
+        if (!l || !l.content) return;
+        var c = l.content;
+        document.getElementById("readerTitle").textContent = l.title;
+        document.getElementById("readerTag").textContent = l.type + " · " + l.unit + " · " + l.levelLabel;
+        var ex = c.examples.map(function (e) { return "<li>" + e + "</li>"; }).join("");
+        var exo = c.exo.map(function (e) { return "<li><p>" + e.q + "</p><p class=\"exo-answer\">Correction : " + e.a + "</p></li>"; }).join("");
+        document.getElementById("readerBody").innerHTML =
+          "<div><h4>À quoi ça sert</h4><p>" + c.purpose + "</p></div>" +
+          "<div class=\"formula\">" + c.formula + "</div>" +
+          "<div><h4>Exemples</h4><ul>" + ex + "</ul></div>" +
+          "<div><h4>" + c.signalsTitle + "</h4><p>" + c.signals + "</p></div>" +
+          "<div class=\"trap\"><b>Piège d'examen :</b> " + c.trap + "</div>" +
+          "<div id=\"readerExo\"><h4>Mini-exercice corrigé</h4><ol>" + exo + "</ol></div>";
+        var target = toExo ? document.getElementById("readerExo") : document.getElementById("lecture");
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      lessonGrid.addEventListener("click", function (ev) {
+        var a = ev.target.closest ? ev.target.closest("a[data-lesson]") : null;
+        if (!a) return;
+        ev.preventDefault();
+        showLesson(parseInt(a.getAttribute("data-lesson"), 10), a.hasAttribute("data-exo"));
       });
 
       var lessonFilterBtns = document.querySelectorAll(".lfbtn");
@@ -878,7 +1004,7 @@
       /* ================= Recherche ================= */
       var SEARCH_INDEX = [];
       SEARCH_INDEX.push({ label: "Niveaux du lycée — Tronc Commun, 1ère & 2ème année Bac", tag: "Niveaux", href: "#niveaux", keys: "niveau niveaux tronc commun premiere 1ere deuxieme 2eme bac lycee filiere" });
-      LESSONS.forEach(function (l) { SEARCH_INDEX.push({ label: l.title + " — " + l.levelLabel, tag: "Leçon · " + l.levelLabel, href: l.anchor, keys: (l.title + " " + l.type + " " + l.levelLabel + " " + l.desc).toLowerCase() }); });
+      LESSONS.forEach(function (l, i) { SEARCH_INDEX.push({ label: l.title + " — " + l.levelLabel, tag: "Leçon · " + l.levelLabel, href: "#lecture", lesson: i, keys: (l.title + " " + l.type + " " + l.levelLabel + " " + l.desc).toLowerCase() }); });
       EXAMS.forEach(function (e) {
         SEARCH_INDEX.push({
           label: "Examen " + e.year + " — " + e.trackLabel + " (" + e.sessionLabel.toLowerCase() + ")",
@@ -905,6 +1031,7 @@
         hits.forEach(function (h) {
           var a = document.createElement("a");
           a.href = h.href;
+          if (h.lesson !== undefined) { a.setAttribute("data-lesson", h.lesson); }
           a.innerHTML = "<span></span><span class='tag'></span>";
           a.querySelector("span").textContent = h.label;
           a.querySelector(".tag").textContent = h.tag;
@@ -912,10 +1039,17 @@
         });
       }
       searchInput.addEventListener("input", runSearch);
+      searchResults.addEventListener("click", function (ev) {
+        var a = ev.target.closest ? ev.target.closest("a[data-lesson]") : null;
+        if (!a) return;
+        ev.preventDefault();
+        showLesson(parseInt(a.getAttribute("data-lesson"), 10), false);
+      });
       document.getElementById("searchForm").addEventListener("submit", function (ev) {
         ev.preventDefault(); runSearch();
         var first = searchResults.querySelector("a");
-        if (first) { window.location.hash = first.getAttribute("href"); }
+        if (first && first.hasAttribute("data-lesson")) { showLesson(parseInt(first.getAttribute("data-lesson"), 10), false); }
+        else if (first) { window.location.hash = first.getAttribute("href"); }
       });
 
       /* ================= Quiz (lecture du bloc QUIZ_DU_JOUR ci-dessus) ================= */
