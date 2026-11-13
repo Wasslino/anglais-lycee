@@ -1,1 +1,485 @@
-<!-- placeholder -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test de niveau — LinguaLink</title>
+<meta name="description" content="Test de niveau d'anglais gratuit LinguaLink : 30 questions, environ 15 minutes. Votre résultat est envoyé uniquement à votre professeur, qui vous répond par email.">
+<link rel="icon" href="../favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1b2a4a; --navy-deep:#131f38; --gold:#c8891b; --gold-soft:#f3e3c2;
+    --bg:#faf7f1; --surface:#ffffff; --surface-2:#f3eee3;
+    --ink:#23202a; --ink-soft:#5b5648; --line:#e3dcc9;
+    --green:#1e7d4f; --green-bg:#e2f2e8; --red:#a83232; --red-bg:#f9e6e3;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6;
+  }
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif; color:var(--navy); line-height:1.25; margin:0 0 .5em}
+  a{color:var(--navy)}
+
+  /* Header */
+  .site-header{
+    background:linear-gradient(135deg,var(--navy-deep),var(--navy) 60%,#24365f);
+    color:#fff; padding:18px 20px 26px; text-align:center;
+    border-bottom:4px solid var(--gold);
+  }
+  .brand{display:flex;align-items:center;justify-content:center;gap:12px}
+  .brand img{height:56px;width:auto}
+  .brand .wordmark{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.5rem;letter-spacing:.14em}
+  .site-header p{margin:8px 0 0;color:#d9d0b8;font-size:.95rem}
+  .back-link{display:inline-block;margin-top:14px;color:#fff;font-size:.85rem;text-decoration:none;border:1px solid rgba(255,255,255,.45);border-radius:999px;padding:6px 14px}
+  .back-link:hover{background:rgba(255,255,255,.12)}
+
+  main{max-width:720px;margin:0 auto;padding:28px 18px 48px}
+  .card{
+    background:var(--surface); border:1px solid var(--line); border-radius:18px;
+    padding:28px 26px; box-shadow:0 8px 28px rgba(27,42,74,.08);
+  }
+  .hidden{display:none !important}
+
+  /* Start screen */
+  .intro-list{margin:18px 0;padding:0;list-style:none}
+  .intro-list li{padding:8px 0 8px 30px;position:relative;border-bottom:1px dashed var(--line)}
+  .intro-list li:last-child{border-bottom:none}
+  .intro-list li::before{content:"✓";position:absolute;left:4px;top:8px;color:var(--green);font-weight:700}
+  label{display:block;font-weight:600;margin:16px 0 6px;color:var(--navy)}
+  input[type="text"],input[type="email"],input[type="tel"]{
+    width:100%;padding:13px 14px;font-size:1rem;font-family:inherit;
+    border:1.5px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);
+  }
+  input:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
+  .field-hint{font-size:.85rem;color:var(--ink-soft);margin-top:4px}
+  .privacy{
+    margin-top:20px;background:var(--gold-soft);border:1px solid #e0c98f;
+    border-radius:12px;padding:14px 16px;font-size:.92rem;color:#3a3018;
+  }
+  .error-text{color:var(--red);font-size:.9rem;margin-top:6px;display:none}
+  .error-text.show{display:block}
+
+  .btn{
+    display:inline-block;border:none;cursor:pointer;font-family:inherit;font-weight:700;
+    font-size:1.05rem;border-radius:999px;padding:14px 30px;margin-top:22px;
+    background:linear-gradient(135deg,var(--navy),#2a3f6e);color:#fff;
+    box-shadow:0 6px 18px rgba(27,42,74,.25);transition:transform .1s ease;
+  }
+  .btn:hover{transform:translateY(-1px)}
+  .btn:disabled{opacity:.6;cursor:wait;transform:none}
+  .btn-gold{background:linear-gradient(135deg,#d99a2b,var(--gold));color:#fff}
+  .btn-ghost{background:transparent;color:var(--navy);box-shadow:none;border:1.5px solid var(--line)}
+  .btn-block{width:100%}
+
+  /* Quiz screen */
+  .progress-wrap{margin-bottom:20px}
+  .progress-meta{display:flex;justify-content:space-between;font-size:.88rem;color:var(--ink-soft);margin-bottom:8px}
+  .progress-meta strong{color:var(--navy)}
+  .progress-bar{height:10px;background:var(--surface-2);border-radius:999px;overflow:hidden;border:1px solid var(--line)}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),#e0a63e);border-radius:999px;transition:width .3s ease}
+  .section-tag{
+    display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--navy);background:var(--gold-soft);border:1px solid #e0c98f;
+    padding:4px 12px;border-radius:999px;margin-bottom:12px;
+  }
+  .question-text{font-size:1.2rem;font-weight:600;color:var(--ink);margin:0 0 18px}
+  .passage{
+    background:var(--surface-2);border-left:4px solid var(--gold);border-radius:0 12px 12px 0;
+    padding:14px 16px;margin:0 0 18px;font-size:.98rem;
+  }
+  .passage .passage-label{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:6px}
+  .options{display:grid;gap:10px}
+  .option{
+    display:flex;align-items:center;gap:12px;width:100%;text-align:left;cursor:pointer;
+    font-family:inherit;font-size:1rem;color:var(--ink);
+    background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:13px 16px;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .option:hover{border-color:var(--gold)}
+  .option .letter{
+    flex:0 0 auto;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:var(--surface-2);border:1px solid var(--line);font-weight:700;font-size:.85rem;color:var(--navy);
+  }
+  .option.selected{border-color:var(--navy);background:#eef1f7}
+  .option.selected .letter{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .nav-row{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+  .nav-row .btn{margin-top:0}
+  .must-choose{color:var(--red);font-size:.9rem;margin-top:12px;display:none;text-align:center}
+  .must-choose.show{display:block}
+
+  /* Done / sending / error */
+  .done{text-align:center}
+  .done .big-emoji{font-size:3rem;line-height:1}
+  .done p{color:var(--ink-soft)}
+  .spinner{
+    width:44px;height:44px;margin:10px auto 16px;border-radius:50%;
+    border:4px solid var(--surface-2);border-top-color:var(--gold);
+    animation:spin 1s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .send-error{
+    background:var(--red-bg);border:1px solid #e0b3b3;border-radius:12px;
+    padding:14px 16px;font-size:.95rem;color:#5c1a1a;margin-top:16px;
+  }
+
+  footer{
+    max-width:720px;margin:0 auto;padding:0 18px 40px;text-align:center;
+    color:var(--ink-soft);font-size:.85rem;
+  }
+  footer a{color:var(--ink-soft)}
+
+  @media (max-width:480px){
+    .card{padding:22px 18px}
+    .brand img{height:46px}
+    .brand .wordmark{font-size:1.25rem}
+    .question-text{font-size:1.1rem}
+    .nav-row .btn{padding:13px 20px;font-size:.98rem}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="brand">
+    <img src="../assets/logo-mark.webp" alt="Logo LinguaLink" width="68" height="64">
+    <span class="wordmark">LINGUALINK</span>
+  </div>
+  <p>Test de niveau d'anglais — gratuit</p>
+  <a class="back-link" href="../">← Retour au site</a>
+</header>
+
+<main>
+  <!-- ÉCRAN 1 : ACCUEIL -->
+  <section class="card" id="screen-start">
+    <h1>Quel est votre niveau d'anglais&nbsp;?</h1>
+    <p>Passez ce petit test pour connaître votre niveau. C'est votre professeur qui vous enverra le résultat par email.</p>
+    <ul class="intro-list">
+      <li><strong>30 questions</strong> à choix multiples : grammaire, vocabulaire et lecture.</li>
+      <li><strong>Environ 15 minutes.</strong> Les questions deviennent de plus en plus difficiles.</li>
+      <li>Répondez <strong>seul(e)</strong>, sans dictionnaire ni traducteur : le test sert à connaître votre vrai niveau.</li>
+      <li>Votre résultat <strong>ne s'affiche pas</strong> sur cette page : vous le recevrez par email.</li>
+    </ul>
+
+    <form id="start-form" novalidate>
+      <label for="student-name">Nom complet *</label>
+      <input type="text" id="student-name" name="student-name" autocomplete="name" placeholder="Votre nom complet" required>
+      <p class="error-text" id="err-name">Merci d'écrire votre nom.</p>
+
+      <label for="student-email">Email *</label>
+      <input type="email" id="student-email" name="student-email" autocomplete="email" placeholder="votre@email.com" required>
+      <p class="error-text" id="err-email">Merci d'écrire un email valide : c'est là que vous recevrez votre résultat.</p>
+
+      <label for="student-phone">WhatsApp (facultatif)</label>
+      <input type="tel" id="student-phone" name="student-phone" autocomplete="tel" placeholder="06 …">
+      <p class="field-hint">Facultatif — pour que votre professeur puisse vous contacter plus vite.</p>
+
+      <div class="privacy">
+        🔒 Vos réponses sont envoyées <strong>uniquement à votre professeur</strong>. Elles ne sont visibles par personne d'autre, et votre résultat ne s'affiche jamais sur cette page.
+      </div>
+
+      <button type="submit" class="btn btn-gold btn-block">Commencer le test →</button>
+    </form>
+  </section>
+
+  <!-- ÉCRAN 2 : QUESTIONS -->
+  <section class="card hidden" id="screen-quiz">
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span>Question <strong id="q-counter">1 sur 30</strong></span>
+        <span id="q-answered">0 réponse</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:3%"></div></div>
+    </div>
+
+    <span class="section-tag" id="q-section">Grammaire</span>
+
+    <div class="passage hidden" id="q-passage">
+      <span class="passage-label">Texte à lire</span>
+      <span id="q-passage-text"></span>
+    </div>
+
+    <p class="question-text" id="q-text"></p>
+    <div class="options" id="q-options"></div>
+    <p class="must-choose" id="must-choose">Choisissez une réponse pour continuer.</p>
+
+    <div class="nav-row">
+      <button type="button" class="btn btn-ghost" id="btn-prev">← Précédent</button>
+      <button type="button" class="btn" id="btn-next">Suivant →</button>
+    </div>
+  </section>
+
+  <!-- ÉCRAN 3 : ENVOI -->
+  <section class="card hidden" id="screen-sending">
+    <div class="done">
+      <div class="spinner" aria-hidden="true"></div>
+      <h2>Envoi de votre test…</h2>
+      <p>Merci de patienter quelques secondes, ne fermez pas cette page.</p>
+    </div>
+  </section>
+
+  <!-- ÉCRAN 4 : MERCI (aucun score affiché) -->
+  <section class="card hidden" id="screen-done">
+    <div class="done">
+      <div class="big-emoji">🎉</div>
+      <h2>Merci, <span id="done-name">!</span></h2>
+      <p>Votre test a bien été envoyé à votre professeur.</p>
+      <p><strong>Vous recevrez votre niveau par email très vite.</strong><br>Pensez à vérifier vos spams si vous ne voyez rien arriver.</p>
+      <a class="btn" href="../">Retour au site LinguaLink</a>
+    </div>
+  </section>
+
+  <!-- ÉCRAN 5 : ERREUR D'ENVOI -->
+  <section class="card hidden" id="screen-error">
+    <div class="done">
+      <div class="big-emoji">😕</div>
+      <h2>L'envoi n'a pas abouti</h2>
+      <p>Il y a eu un problème de connexion. <strong>Vos réponses sont conservées</strong> — vous n'avez rien perdu.</p>
+      <div class="send-error" id="error-detail">Vérifiez votre connexion Internet, puis réessayez.</div>
+      <button type="button" class="btn btn-gold" id="btn-retry">Réessayer l'envoi</button>
+      <p style="margin-top:16px"><a href="../">Retour au site</a></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  © LinguaLink — Test de niveau d'anglais.<br>
+  <a href="../">Accueil du site</a> · Contact WhatsApp : 0650 41 39 04
+</footer>
+
+<script>
+"use strict";
+
+/* ---------- Configuration ---------- */
+var ACCESS_KEY = "952fbf8b-9ca1-4903-9f41-460d1cfdb8b1";
+var ENDPOINT = "https://api.web3forms.com/submit";
+
+var PASSAGE = "When Sara moved to Casablanca, she knew nobody in the city. Within a year, she had built a small circle of friends through her evening English classes. She says the secret was simple: show up every week, even when you feel tired.";
+
+/* ---------- Questions (ordre = difficulté progressive A1 → C1) ---------- */
+/* section: Grammaire | Vocabulaire | Lecture — answer = index de la bonne option */
+var QUESTIONS = [
+  {level:"A1", section:"Grammaire", q:"I ___ from Morocco.", options:["am","is","are","be"], answer:0},
+  {level:"A1", section:"Grammaire", q:"She ___ a teacher.", options:["are","am","is","be"], answer:2},
+  {level:"A1", section:"Grammaire", q:"___ you speak English?", options:["Is","Are","Does","Do"], answer:3},
+  {level:"A1", section:"Grammaire", q:"My brother ___ football every Sunday.", options:["play","plays","playing","played"], answer:1},
+  {level:"A1", section:"Grammaire", q:"There ___ two books on the table.", options:["is","am","be","are"], answer:3},
+  {level:"A2", section:"Grammaire", q:"I ___ TV last night.", options:["watch","watches","watched","watching"], answer:2},
+  {level:"A2", section:"Grammaire", q:"She is ___ than her sister.", options:["tall","taller","tallest","more tall"], answer:1},
+  {level:"A2", section:"Grammaire", q:"I have lived here ___ 2019.", options:["for","from","since","at"], answer:2},
+  {level:"A2", section:"Grammaire", q:"You ___ eat in class. It's forbidden.", options:["mustn't","don't have to","can","should"], answer:0},
+  {level:"A2", section:"Vocabulaire", q:"This book is ___ interesting than that one.", options:["most","much","many","more"], answer:3},
+  {level:"B1", section:"Grammaire", q:"If it rains tomorrow, we ___ at home.", options:["stay","will stay","stayed","staying"], answer:1},
+  {level:"B1", section:"Grammaire", q:"I have never ___ to Spain.", options:["be","being","went","been"], answer:3},
+  {level:"B1", section:"Grammaire", q:"The homework ___ yesterday.", options:["finished","was finished","is finished","finishes"], answer:1},
+  {level:"B1", section:"Grammaire", q:"She asked me where I ___.", options:["live","lives","lived","living"], answer:2},
+  {level:"B1", section:"Vocabulaire", q:"I'm interested ___ learning English.", options:["in","on","at","for"], answer:0},
+  {level:"B1", section:"Grammaire", q:"By the time we arrived, the film ___.", options:["started","has started","starts","had started"], answer:3},
+  {level:"B1", section:"Vocabulaire", q:"You should ___ your homework before you go out.", options:["make","doing","do","making"], answer:2},
+  {level:"B1", section:"Grammaire", q:"Neither the teacher nor the students ___ in the classroom.", options:["was","is","were","has been"], answer:2},
+  {level:"B1", section:"Grammaire", q:"I wish I ___ speak French fluently.", options:["can","could","will","would"], answer:1},
+  {level:"B1", section:"Grammaire", q:"The man ___ car was stolen called the police.", options:["who","which","whom","whose"], answer:3},
+  {level:"B2", section:"Grammaire", q:"___ the rain, we went for a walk.", options:["Despite","Although","However","Whereas"], answer:0},
+  {level:"B2", section:"Grammaire", q:"The report must ___ by Friday.", options:["finish","be finished","have finished","finishing"], answer:1},
+  {level:"B2", section:"Grammaire", q:"She denied ___ the money.", options:["to take","take","taken","taking"], answer:3},
+  {level:"B2", section:"Grammaire", q:"If I had studied harder, I ___ the exam.", options:["would pass","will pass","passed","would have passed"], answer:3},
+  {level:"B2", section:"Grammaire", q:"Hardly ___ when the phone rang.", options:["I had sat down","had I sat down","I sat down","did I sat down"], answer:1},
+  {level:"B2", section:"Vocabulaire", q:"The meeting was ___ until next week.", options:["put up","put off","put out","put on"], answer:1},
+  {level:"B2", section:"Lecture", q:"According to the text, how did Sara make friends?", options:["At work","Through social media","Through her evening English classes","In her neighbourhood"], answer:2},
+  {level:"B2", section:"Lecture", q:"In the text, “show up” means ___.", options:["to arrive","to disappear","to speak loudly","to give up"], answer:0},
+  {level:"C1", section:"Lecture", q:"The word “circle” in the text is closest in meaning to ___.", options:["shape","lesson","group","city"], answer:2},
+  {level:"C1", section:"Lecture", q:"What can we understand from the text?", options:["Sara gave up quickly","Sara moved to Rabat","Sara teaches English","Regular attendance helped Sara"], answer:3}
+];
+
+/* ---------- État ---------- */
+var current = 0;
+var answers = [];
+for (var i = 0; i < QUESTIONS.length; i++) { answers.push(null); }
+var student = { name: "", email: "", phone: "" };
+var lastPayload = null;
+
+var $ = function(id){ return document.getElementById(id); };
+var LETTERS = ["A","B","C","D"];
+
+function showScreen(id){
+  ["screen-start","screen-quiz","screen-sending","screen-done","screen-error"].forEach(function(s){
+    $(s).classList.add("hidden");
+  });
+  $(id).classList.remove("hidden");
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+/* ---------- Écran 1 : infos élève ---------- */
+$("start-form").addEventListener("submit", function(e){
+  e.preventDefault();
+  var name = $("student-name").value.trim();
+  var email = $("student-email").value.trim();
+  var phone = $("student-phone").value.trim();
+  var ok = true;
+
+  if (!name) { $("err-name").classList.add("show"); ok = false; }
+  else { $("err-name").classList.remove("show"); }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { $("err-email").classList.add("show"); ok = false; }
+  else { $("err-email").classList.remove("show"); }
+
+  if (!ok) { return; }
+  student = { name: name, email: email, phone: phone };
+  current = 0;
+  renderQuestion();
+  showScreen("screen-quiz");
+});
+
+/* ---------- Écran 2 : questions ---------- */
+function answeredCount(){
+  var n = 0;
+  for (var i = 0; i < answers.length; i++) { if (answers[i] !== null) { n++; } }
+  return n;
+}
+
+function renderQuestion(){
+  var q = QUESTIONS[current];
+  $("q-counter").textContent = (current + 1) + " sur " + QUESTIONS.length;
+  var n = answeredCount();
+  $("q-answered").textContent = n + (n > 1 ? " réponses" : " réponse");
+  $("progress-fill").style.width = Math.round(((current + 1) / QUESTIONS.length) * 100) + "%";
+  $("q-section").textContent = q.section;
+
+  if (q.section === "Lecture") {
+    $("q-passage-text").textContent = PASSAGE;
+    $("q-passage").classList.remove("hidden");
+  } else {
+    $("q-passage").classList.add("hidden");
+  }
+
+  $("q-text").textContent = q.q;
+  $("must-choose").classList.remove("show");
+
+  var box = $("q-options");
+  box.innerHTML = "";
+  q.options.forEach(function(opt, idx){
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "option" + (answers[current] === idx ? " selected" : "");
+    btn.setAttribute("aria-pressed", answers[current] === idx ? "true" : "false");
+    var letter = document.createElement("span");
+    letter.className = "letter";
+    letter.textContent = LETTERS[idx];
+    var text = document.createElement("span");
+    text.textContent = opt;
+    btn.appendChild(letter);
+    btn.appendChild(text);
+    btn.addEventListener("click", function(){
+      answers[current] = idx;
+      renderQuestion();
+    });
+    box.appendChild(btn);
+  });
+
+  $("btn-prev").style.visibility = current === 0 ? "hidden" : "visible";
+  $("btn-next").textContent = current === QUESTIONS.length - 1 ? "Terminer le test ✓" : "Suivant →";
+}
+
+$("btn-prev").addEventListener("click", function(){
+  if (current > 0) { current--; renderQuestion(); }
+});
+
+$("btn-next").addEventListener("click", function(){
+  if (answers[current] === null) {
+    $("must-choose").classList.add("show");
+    return;
+  }
+  if (current < QUESTIONS.length - 1) {
+    current++;
+    renderQuestion();
+  } else {
+    submitTest();
+  }
+});
+
+/* ---------- Calcul du niveau (jamais affiché à l'élève) ---------- */
+function levelFor(score){
+  if (score <= 7)  { return "A1 (Débutant)"; }
+  if (score <= 13) { return "A2 (Élémentaire)"; }
+  if (score <= 19) { return "B1 (Intermédiaire)"; }
+  if (score <= 25) { return "B2 (Intermédiaire supérieur)"; }
+  return "C1 (Avancé)";
+}
+
+function buildPayload(){
+  var score = 0;
+  var sub = { "Grammaire": [0,0], "Vocabulaire": [0,0], "Lecture": [0,0] };
+  var detail = [];
+  for (var i = 0; i < QUESTIONS.length; i++) {
+    var q = QUESTIONS[i];
+    var good = answers[i] === q.answer;
+    if (good) { score++; sub[q.section][0]++; }
+    sub[q.section][1]++;
+    detail.push("Q" + (i+1) + " (" + q.level + ") " + (good ? "✓" : "✗"));
+  }
+  var level = levelFor(score);
+  var dateStr;
+  try {
+    dateStr = new Date().toLocaleString("fr-FR", { timeZone: "Africa/Casablanca" });
+  } catch (e) {
+    dateStr = new Date().toLocaleString("fr-FR");
+  }
+  return {
+    access_key: ACCESS_KEY,
+    subject: "Nouveau test de niveau — " + student.name + " — Niveau estimé : " + level,
+    from_name: "LinguaLink - Test de niveau",
+    botcheck: "",
+    name: student.name,
+    email: student.email,
+    "WhatsApp": student.phone || "—",
+    "Score": score + " / " + QUESTIONS.length,
+    "Niveau estimé": level,
+    "Grammaire": sub["Grammaire"][0] + " / " + sub["Grammaire"][1],
+    "Vocabulaire": sub["Vocabulaire"][0] + " / " + sub["Vocabulaire"][1],
+    "Lecture": sub["Lecture"][0] + " / " + sub["Lecture"][1],
+    "Détail des réponses": detail.join("  ·  "),
+    "Date": dateStr + " (heure du Maroc)"
+  };
+}
+
+/* ---------- Envoi ---------- */
+function submitTest(){
+  lastPayload = buildPayload();
+  showScreen("screen-sending");
+  sendPayload();
+}
+
+function sendPayload(){
+  fetch(ENDPOINT, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Accept": "application/json" },
+    body: JSON.stringify(lastPayload)
+  })
+  .then(function(res){ return res.json().then(function(data){ return { ok: res.ok, data: data }; }); })
+  .then(function(result){
+    if (result.ok && result.data && result.data.success) {
+      $("done-name").textContent = student.name.split(" ")[0] + " !";
+      showScreen("screen-done");
+    } else {
+      var msg = (result.data && result.data.message) ? result.data.message : "Erreur inconnue.";
+      $("error-detail").textContent = "Le service a répondu : " + msg + " Vérifiez votre connexion, puis réessayez.";
+      showScreen("screen-error");
+    }
+  })
+  .catch(function(){
+    $("error-detail").textContent = "Vérifiez votre connexion Internet, puis réessayez.";
+    showScreen("screen-error");
+  });
+}
+
+$("btn-retry").addEventListener("click", function(){
+  showScreen("screen-sending");
+  sendPayload();
+});
+</script>
+</body>
+</html>
