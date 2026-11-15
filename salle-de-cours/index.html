@@ -45,6 +45,12 @@
     padding:14px 30px;border-radius:999px;text-decoration:none}
   .btn-join:hover{background:#a96f14}
   .join-card .note{font-size:13px;color:#9fb0cc;margin:16px 0 0}
+  .btn-join{cursor:pointer;border:0;font:inherit}
+  .fallback{margin:14px 0 0 !important;font-size:14px}
+  .fallback a{color:var(--gold-soft)}
+  #jitsi-container{display:none;width:100%;aspect-ratio:16/9;min-height:420px;border-radius:14px;overflow:hidden;margin-bottom:28px;background:#131f38}
+  #jitsi-container.active{display:block}
+  @media (max-width:700px){#jitsi-container{min-height:360px}}
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
   @media (max-width:700px){.grid{grid-template-columns:1fr} h1{font-size:28px}}
   .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px}
@@ -78,15 +84,18 @@
   <div class="join-card">
     <h2>🎥 Entrer dans la salle</h2>
     <p>Le cours a lieu à l'heure annoncée dans le groupe WhatsApp du cours.</p>
-    <a class="btn-join" href="https://meet.jit.si/LinguaLink-Cours-Bac-2026" target="_blank" rel="noopener">Rejoindre le cours en direct</a>
-    <p class="note">La salle s'ouvre dans un nouvel onglet. Aucun compte à créer. Sur téléphone, installe l'application gratuite Jitsi Meet (une seule fois) : le lien ouvrira ensuite la salle directement dans l'appli.</p>
+    <button type="button" class="btn-join" id="btn-join">Entrer dans la salle</button>
+    <p class="fallback"><a href="https://meet.jit.si/LinguaLink-Cours-Bac-2026" target="_blank" rel="noopener">Ouvrir la salle dans un nouvel onglet →</a></p>
+    <p class="note">Sur ordinateur, la salle s'ouvre directement dans cette page. Aucun compte à créer. Sur téléphone, installe l'application gratuite Jitsi Meet (une seule fois) : le lien ci-dessus ouvrira ensuite la salle directement dans l'appli.</p>
   </div>
+
+  <div id="jitsi-container"></div>
 
   <div class="grid">
     <section class="card">
       <h2>Comment rejoindre le cours ?</h2>
       <ol>
-        <li>Au moment du cours, clique sur <strong>« Rejoindre le cours en direct »</strong>.</li>
+        <li>Au moment du cours, clique sur <strong>« Entrer dans la salle »</strong> : sur ordinateur, la salle s'ouvre directement dans cette page.</li>
         <li>Sur <strong>téléphone</strong>, si on te propose de télécharger l'application <strong>Jitsi Meet</strong>, installe-la (gratuite), puis reviens sur ce lien.</li>
         <li>Écris ton <strong>prénom</strong> quand on te le demande.</li>
         <li>Autorise la <strong>caméra</strong> et le <strong>micro</strong> quand le navigateur te le propose.</li>
@@ -112,5 +121,46 @@
 <footer>
   <p>LinguaLink — Anglais au lycée, Maroc · Email : <a href="mailto:lingualinkcenter@gmail.com">lingualinkcenter@gmail.com</a> · WhatsApp : 0650 41 39 04</p>
 </footer>
+<script>
+(function(){
+  var btn = document.getElementById('btn-join');
+  var box = document.getElementById('jitsi-container');
+  var started = false;
+  btn.addEventListener('click', function(){
+    if (started) { box.scrollIntoView({behavior:'smooth'}); return; }
+    started = true;
+    btn.textContent = 'Ouverture de la salle…';
+    btn.disabled = true;
+    var s = document.createElement('script');
+    s.src = 'https://meet.jit.si/external_api.js';
+    s.onload = function(){
+      try {
+        box.classList.add('active');
+        new JitsiMeetExternalAPI('meet.jit.si', {
+          roomName: 'LinguaLink-Cours-Bac-2026',
+          width: '100%',
+          height: '100%',
+          parentNode: box,
+          lang: 'fr',
+          configOverwrite: { prejoinPageEnabled: true, startWithAudioMuted: true, disableDeepLinking: true },
+          interfaceConfigOverwrite: { SHOW_JITSI_WATERMARK: false, SHOW_WATERMARK_FOR_GUESTS: false }
+        });
+        box.scrollIntoView({behavior:'smooth'});
+        btn.textContent = 'Salle ouverte ci-dessous ↓';
+      } catch (e) {
+        btn.textContent = 'Entrer dans la salle';
+        btn.disabled = false;
+        started = false;
+      }
+    };
+    s.onerror = function(){
+      btn.textContent = 'Entrer dans la salle';
+      btn.disabled = false;
+      started = false;
+    };
+    document.head.appendChild(s);
+  });
+})();
+</script>
 </body>
 </html>
