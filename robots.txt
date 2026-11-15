@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://anglais-lycee.vercel.app/sitemap.xml
