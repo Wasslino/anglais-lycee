@@ -442,7 +442,9 @@
         .topnav a { white-space: nowrap; font-size: 0.86rem; padding: 6px 10px; }
         .frow .flabel { width: 100%; }
         .level-card .level-photo { height: 180px; }
-        .foot-brand { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .foot-brand { flex-direction: column; align-items: flex-start; gap: 12px; }
+      }
+      
       /* ---------- Menu déroulant + bouton Cours en direct ---------- */
       .has-sub { position: relative; }
       .nav-drop-btn {
@@ -463,10 +465,11 @@
       .topnav a.nav-cta:hover, .topnav a.nav-cta:focus-visible { filter: brightness(1.08); color: #fff; }
       /* ---------- Boutons d'action du héros ---------- */
       .hero-cta { display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0 2px; }
+      .hero-cta .btn-ghost { color: #fff; border-color: rgba(255,255,255,0.6); background: transparent; }
+      .hero-cta .btn-ghost:hover, .hero-cta .btn-ghost:focus-visible { background: rgba(255,255,255,0.12); color: #fff; }
       @media (max-width: 860px) {
         .has-sub, .submenu { display: contents; }
         .nav-drop-btn { display: none; }
-      }
       }
     </style>
     <!-- Vercel Web Analytics -->
