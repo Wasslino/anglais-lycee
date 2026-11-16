@@ -480,7 +480,7 @@
           </form>
           <div class="search-results" id="searchResults" aria-live="polite"></div>
           <div class="stats">
-            <div class="stat"><b>47</b><span>PDF d'examens officiels (2ème année Bac)</span></div>
+            <div class="stat"><b>48</b><span>PDF d'examens officiels (2ème année Bac)</span></div>
             <div class="stat"><b>15</b><span>leçons &amp; fiches en accès libre</span></div>
             <div class="stat"><b>3</b><span>niveaux du lycée</span></div>
             <div class="stat"><b>100 %</b><span>gratuit pour démarrer</span></div>
@@ -541,7 +541,7 @@
             <p>L'année du diplôme : programme complet, méthode d'examen et entraînement sur les vraies annales du ministère.</p>
             <ul>
               <li>9 leçons &amp; fiches complètes (grammaire, writing, reading)</li>
-              <li>47 PDF d'examens nationaux 2020–2024, corrigés compris</li>
+              <li>48 PDF d'examens nationaux 2020–2025, corrigés compris</li>
               <li>Quiz du jour et préparation ciblée (Reading 15 · Language 15 · Writing 10)</li>
             </ul>
             <p class="level-status done">✓ Contenu complet — disponible dès maintenant.</p>
@@ -616,7 +616,7 @@
 
       <!-- ======== EXAMENS ======== -->
       <section id="examens">
-        <div class="sec-head"><h2>Examens nationaux</h2><span class="count">2020 – 2024 · sujets + corrigés officiels</span></div>
+        <div class="sec-head"><h2>Examens nationaux</h2><span class="count">2020 – 2025 · sujets + corrigés officiels</span></div>
         <p class="sec-sub">Les annales du ministère, déjà téléchargées et rangées par année, session et filière. L'élève filtre, clique, et le PDF s'ouvre.</p>
 
         <p class="exam-intro"><strong>À noter :</strong> les examens nationaux n'existent qu'en <strong>2ème année du Baccalauréat</strong> — c'est l'année du diplôme. Si tu es en Tronc Commun ou en 1ère année, cette bibliothèque te servira plus tard ; pour l'instant, tes leçons, fiches et quiz sont juste au-dessus.</p>
@@ -629,7 +629,7 @@
 
         <p class="exam-count" id="examCount"></p>
         <div class="grid c3" id="examGrid"></div>
-        <p class="exam-note">47 PDF au total (sujets et corrigés). Le rattrapage 2020 n'est pas publié par le ministère en ligne, et 3 corrigés de 2021 sont absents de la source : la bibliothèque reflète exactement ce qui existe.</p>
+        <p class="exam-note">48 PDF au total (sujets et corrigés). Le rattrapage 2020 n'est pas publié par le ministère en ligne, 3 corrigés de 2021 sont absents de la source, et pour 2025 seul le sujet Sciences de la session normale est publié pour l'instant : la bibliothèque reflète exactement ce qui existe.</p>
       </section>
 
       <!-- ======== QUIZ ======== -->
@@ -903,7 +903,7 @@
             exo: [{ q: "Que faut-il lire EN PREMIER : le texte ou les questions ?", a: "Les questions — pour savoir quoi chercher dans le texte." }, { q: "Vrai ou Faux ? « On peut justifier avec ses propres mots. »", a: "Faux — il faut citer le texte (ou le paraphraser fidèlement)." }] } }
       ];
 
-      var YEARS = [2024, 2023, 2022, 2021, 2020];
+      var YEARS = [2025, 2024, 2023, 2022, 2021, 2020];
       var SESSIONS = [
         { id: "normale", label: "Normale" },
         { id: "rattrapage", label: "Rattrapage" }
@@ -1647,7 +1647,18 @@
         "lettres|2021|rattrapage|corrige": 1,
         "sh|2021|normale|corrige": 1,
         "sh|2021|rattrapage|sujet": 1,
-        "sh|2021|rattrapage|corrige": 1
+        "sh|2021|rattrapage|corrige": 1,
+        "sciences|2025|normale|corrige": 1,
+        "sciences|2025|rattrapage|sujet": 1,
+        "sciences|2025|rattrapage|corrige": 1,
+        "lettres|2025|normale|sujet": 1,
+        "lettres|2025|normale|corrige": 1,
+        "lettres|2025|rattrapage|sujet": 1,
+        "lettres|2025|rattrapage|corrige": 1,
+        "sh|2025|normale|sujet": 1,
+        "sh|2025|normale|corrige": 1,
+        "sh|2025|rattrapage|sujet": 1,
+        "sh|2025|rattrapage|corrige": 1
       };
       function dlLink(e, kind) {
         var label = kind === "sujet" ? "Sujet PDF \u2193" : "Corrigé PDF \u2193";
@@ -1676,7 +1687,7 @@
                  (state.track === "all" || e.track === state.track);
         });
         document.getElementById("examCount").innerHTML =
-          "<b>" + shown.length + " examen" + (shown.length > 1 ? "s" : "") + "</b> affiché" + (shown.length > 1 ? "s" : "") + " — bibliothèque complète : 47 PDF téléchargés (2ème année du Baccalauréat)";
+          "<b>" + shown.length + " examen" + (shown.length > 1 ? "s" : "") + "</b> affiché" + (shown.length > 1 ? "s" : "") + " — bibliothèque complète : 48 PDF téléchargés (2ème année du Baccalauréat)";
         if (!shown.length) {
           grid.innerHTML = '<p class="exam-note">Aucun examen pour cette combinaison — le rattrapage 2020, par exemple, n\'a pas été publié en ligne.</p>';
           return;
