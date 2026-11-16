@@ -931,41 +931,29 @@
       var EXAMS = buildExams();
 
       /* ============================================================
-         ★★★  QUIZ DU JOUR — C'EST ICI QUE TU MODIFIES, CHAQUE JOUR  ★★★
+         ★★★  QUIZ DU JOUR — COMMENT ÇA MARCHE MAINTENANT  ★★★
          ============================================================
-         Tu n'as QUE ce bloc à toucher. Tout le reste du fichier,
-         ne le modifie pas.
+         Le quiz change tout seul chaque jour, tu n'as RIEN à faire
+         au quotidien :
 
-         COMMENT FAIRE (2 minutes) :
-         1. Pour CHAQUE question, change le texte entre guillemets :
-              jour          → le jour de ta série, ex : "Jour 10"
-              question      → la phrase à compléter (mets ______ à la place du verbe)
-              choix         → les 4 réponses possibles, entre guillemets, séparées par des virgules
-              bonne_reponse → le NUMÉRO de la bonne réponse :
-                                0 = le 1er choix, 1 = le 2e choix,
-                                2 = le 3e choix, 3 = le 4e choix
-              explication   → la correction affichée après la réponse
+         • Question 1 = le fichier quiz.json (à la racine du site).
+           C'est la question de ta série TikTok du jour. Pour la
+           changer : modifie quiz.json, pas ce fichier.
 
-         2. ⚠ NE TOUCHE JAMAIS aux virgules, aux guillemets, aux
-            crochets [ ] et aux accolades { } — sinon le quiz ne
-            s'affichera plus.
+         • Questions 2 à 6 = 5 questions tirées automatiquement de
+           la banque QUIZ_BANK (30 questions, juste en dessous).
+           Chaque jour, le site en choisit 5 différentes. Aucune
+           action de ta part.
 
-         3. Tu peux avoir 1 question ou 6 questions : duplique un
-            bloc { ... } entier pour ajouter une question (n'oublie
-            pas la virgule entre deux blocs).
+         • Le bloc QUIZ_DU_JOUR ci-dessous est une RÉSERVE, il ne
+           sert plus : ne le modifie pas, ça ne changerait rien.
 
-         EXEMPLE d'une question :
-           {
-             jour: "Jour 10",
-             question: "“Please ______ your shoes before entering.”",
-             choix: ["take off", "give up", "hand in", "look into"],
-             bonne_reponse: 0,
-             explication: "Take off = enlever (ses chaussures, ses vêtements)."
-           }
-
-         Quand le site sera sur ton GitHub : fichier → icône crayon
-         → modifie ce bloc → « Commit changes ». Le site se met à
-         jour tout seul en ~2 minutes.
+         POUR MODIFIER LA BANQUE (QUIZ_BANK, plus bas) :
+         Même format que ci-dessous : jour, question (avec ______),
+         choix (4 réponses), bonne_reponse (0 = 1er choix, 1 = 2e,
+         2 = 3e, 3 = 4e), explication. ⚠ NE TOUCHE JAMAIS aux
+         virgules, aux guillemets, aux crochets [ ] et aux
+         accolades { } — sinon le quiz ne s'affichera plus.
          ============================================================ */
       var QUIZ_DU_JOUR = [
         {
@@ -1012,6 +1000,224 @@
         }
       ];
       /* ============ FIN DU BLOC À MODIFIER — en dessous, ne touche à rien ============ */
+
+      /* ================= Banque du Quiz du jour (30 questions) =================
+         NE TOUCHE PAS à ce bloc : le quiz choisit tout seul 6 questions
+         différentes chaque jour dans cette banque. La question 1 vient
+         toujours de quiz.json (la leçon TikTok du moment) quand le fichier
+         charge ; les autres tournent ici, une par jour, dans l'ordre. */
+      var QUIZ_BANK = [
+        {
+          jour: "Révision",
+          question: "“It's 6 a.m. — time to ______ and get ready for school!”",
+          choix: ["get up", "lie down", "slow down", "fall behind"],
+          bonne_reponse: 0,
+          explication: "Get up = se lever. Il est 6 h — l’heure de se lever et de se préparer pour l’école !"
+        },
+        {
+          jour: "Révision",
+          question: "“I can't find my English notebook — can you help me ______ it?”",
+          choix: ["look out", "look for", "look up", "look back"],
+          bonne_reponse: 1,
+          explication: "Look for = chercher. Je ne trouve pas mon cahier — aide-moi à le chercher."
+        },
+        {
+          jour: "Révision",
+          question: "“The plane ______ at 8 o'clock, so we must arrive early at the airport.”",
+          choix: ["took back", "took over", "took off", "took out"],
+          bonne_reponse: 2,
+          explication: "Take off = décoller (avion). L’avion décolle à 8 h, il faut arriver tôt à l’aéroport."
+        },
+        {
+          jour: "Révision",
+          question: "“The thief ______ when he saw the police.”",
+          choix: ["ran into", "ran over", "ran across", "ran away"],
+          bonne_reponse: 3,
+          explication: "Run away = s’enfuir. Le voleur s’est enfui en voyant la police."
+        },
+        {
+          jour: "Révision",
+          question: "“Please ______ the lights before you leave the classroom.”",
+          choix: ["turn over", "turn off", "turn around", "turn back"],
+          bonne_reponse: 1,
+          explication: "Turn off = éteindre. Éteins les lumières avant de quitter la classe."
+        },
+        {
+          jour: "Révision",
+          question: "“My father will ______ me from school at 5 p.m.”",
+          choix: ["pick out", "pick on", "pick up", "pick at"],
+          bonne_reponse: 2,
+          explication: "Pick up = passer prendre (quelqu’un en voiture). Mon père viendra me chercher à l’école à 17 h."
+        },
+        {
+          jour: "Révision",
+          question: "“Please ______ this form with your name and your phone number.”",
+          choix: ["fill up", "write up", "add up", "fill in"],
+          bonne_reponse: 3,
+          explication: "Fill in = remplir (un formulaire). Remplis ce formulaire avec ton nom et ton numéro de téléphone."
+        },
+        {
+          jour: "Révision",
+          question: "“Let's ______ the answer together: 15 + 27 = ?”",
+          choix: ["work out", "work up", "work off", "work over"],
+          bonne_reponse: 0,
+          explication: "Work out = trouver (la réponse), résoudre. Trouvons la réponse ensemble."
+        },
+        {
+          jour: "Révision",
+          question: "“The football match was ______ because of the rain.”",
+          choix: ["called back", "called off", "called out", "called in"],
+          bonne_reponse: 1,
+          explication: "Call off = annuler. Le match de foot a été annulé à cause de la pluie."
+        },
+        {
+          jour: "Révision",
+          question: "“It took Sara two weeks to ______ her cold.”",
+          choix: ["get across", "get around", "get over", "get about"],
+          bonne_reponse: 2,
+          explication: "Get over = se remettre de (une maladie). Sara a mis deux semaines à se remettre de son rhume."
+        },
+        {
+          jour: "Révision",
+          question: "“It's cold outside — ______ your coat before you go out.”",
+          choix: ["put away", "put back", "put down", "put on"],
+          bonne_reponse: 3,
+          explication: "Put on = mettre (un vêtement). Mets ton manteau, il fait froid dehors."
+        },
+        {
+          jour: "Révision",
+          question: "“This pen doesn't work anymore — just ______ it.”",
+          choix: ["throw away", "throw up", "throw back", "throw around"],
+          bonne_reponse: 0,
+          explication: "Throw away = jeter. Ce stylo ne marche plus — jette-le."
+        },
+        {
+          jour: "Révision",
+          question: "“You should ______ this new English website — it's great for the Bac!”",
+          choix: ["check in", "check out", "check off", "check up"],
+          bonne_reponse: 1,
+          explication: "Check out = jeter un œil à, découvrir. Tu devrais découvrir ce nouveau site d’anglais !"
+        },
+        {
+          jour: "Révision",
+          question: "“We ______ early in the morning to arrive in Marrakech before noon.”",
+          choix: ["set back", "set down", "set off", "set aside"],
+          bonne_reponse: 2,
+          explication: "Set off = partir (en voyage). Nous sommes partis tôt le matin pour arriver avant midi."
+        },
+        {
+          jour: "Révision",
+          question: "“The teacher asked the students to ______ into groups of four.”",
+          choix: ["break in", "break out", "break off", "break up"],
+          bonne_reponse: 3,
+          explication: "Break up = se diviser, se répartir (en groupes). Le prof a demandé aux élèves de se répartir en groupes de quatre."
+        },
+        {
+          jour: "Révision",
+          question: "“On Fridays, I ______ with my friends at the café near school.”",
+          choix: ["hang out", "hang up", "hang on", "hang over"],
+          bonne_reponse: 0,
+          explication: "Hang out = passer du temps (avec des amis), traîner. Le vendredi, je passe du temps avec mes amis au café."
+        },
+        {
+          jour: "Révision",
+          question: "“Yasmine studies every day to ______ her classmates.”",
+          choix: ["keep on", "keep up with", "keep back", "keep away"],
+          bonne_reponse: 1,
+          explication: "Keep up with = rester au niveau de, suivre le rythme. Yasmine étudie chaque jour pour suivre le rythme de ses camarades."
+        },
+        {
+          jour: "Révision",
+          question: "“If you don't know the word, ______ in the dictionary.”",
+          choix: ["look it out", "look it over", "look it up", "look it back"],
+          bonne_reponse: 2,
+          explication: "Look up = chercher (un mot dans le dictionnaire). Si tu ne connais pas le mot, cherche-le dans le dictionnaire."
+        },
+        {
+          jour: "Révision",
+          question: "“______ — the bus leaves in five minutes!”",
+          choix: ["Slow down", "Calm down", "Warm up", "Hurry up"],
+          bonne_reponse: 3,
+          explication: "Hurry up = dépêche-toi ! Le bus part dans cinq minutes !"
+        },
+        {
+          jour: "Révision",
+          question: "“Can you ______ my book tomorrow? I need it for the lesson.”",
+          choix: ["give back", "give in", "give out", "give away"],
+          bonne_reponse: 0,
+          explication: "Give back = rendre. Tu peux me rendre mon livre demain ? J’en ai besoin pour la leçon."
+        },
+        {
+          jour: "Révision",
+          question: "“Omar promised not to ______ about the exam results.”",
+          choix: ["hit the sack", "spill the beans", "cut corners", "beat around the bush"],
+          bonne_reponse: 1,
+          explication: "Spill the beans = vendre la mèche (révéler un secret). Omar a promis de ne pas vendre la mèche."
+        },
+        {
+          jour: "Révision",
+          question: "“You ______ — that's exactly the problem with our school.”",
+          choix: ["hit the sack", "hit the road", "hit the nail on the head", "hit the roof"],
+          bonne_reponse: 2,
+          explication: "Hit the nail on the head = mettre le doigt dessus, avoir tout à fait raison. Tu as mis le doigt dessus !"
+        },
+        {
+          jour: "Révision",
+          question: "“Stop ______ and tell me the truth!”",
+          choix: ["burning the midnight oil", "cutting corners", "hitting the sack", "beating around the bush"],
+          bonne_reponse: 3,
+          explication: "Beat around the bush = tourner autour du pot. Arrête de tourner autour du pot et dis-moi la vérité !"
+        },
+        {
+          jour: "Révision",
+          question: "“Before the Bac exam, Karim ______ every night to revise all the lessons.”",
+          choix: ["burned the midnight oil", "hit the sack", "called it a day", "hit the road"],
+          bonne_reponse: 0,
+          explication: "Burn the midnight oil = travailler tard dans la nuit. Avant le Bac, Karim travaillait tard chaque nuit pour réviser."
+        },
+        {
+          jour: "Révision",
+          question: "“I'm so tired — I'm going to ______ early tonight.”",
+          choix: ["hit the road", "hit the sack", "hit the roof", "hit the wall"],
+          bonne_reponse: 1,
+          explication: "Hit the sack = aller se coucher. Je suis fatigué — je vais me coucher tôt ce soir."
+        },
+        {
+          jour: "Révision",
+          question: "“We've worked for five hours — let's ______ and go home.”",
+          choix: ["cut corners", "beat around the bush", "call it a day", "spill the beans"],
+          bonne_reponse: 2,
+          explication: "Call it a day = s’arrêter là pour aujourd’hui. On a travaillé cinq heures — arrêtons-nous là et rentrons."
+        },
+        {
+          jour: "Révision",
+          question: "“______, it started to rain during our picnic.”",
+          choix: ["In hot water", "In a nutshell", "On cloud nine", "Out of the blue"],
+          bonne_reponse: 3,
+          explication: "Out of the blue = de façon inattendue, sans prévenir. Soudain, sans prévenir, il a commencé à pleuvoir pendant notre pique-nique."
+        },
+        {
+          jour: "Révision",
+          question: "“Omar forgot his homework again — now he's ______ with his teacher.”",
+          choix: ["in hot water", "on cloud nine", "on top of the world", "down to earth"],
+          bonne_reponse: 0,
+          explication: "In hot water = dans le pétrin, en difficulté. Omar est dans le pétrin avec son prof."
+        },
+        {
+          jour: "Révision",
+          question: "“Saving 10 dirhams a week is just ______ when you need 10,000 for the trip.”",
+          choix: ["a fish out of water", "a drop in the ocean", "a tough nut to crack", "a needle in a haystack"],
+          bonne_reponse: 1,
+          explication: "A drop in the ocean = une goutte d’eau dans l’océan (une quantité insignifiante). 10 dirhams par semaine, c’est une goutte d’eau quand il en faut 10 000."
+        },
+        {
+          jour: "Révision",
+          question: "“Don't worry, I'm only ______ — the exam is not tomorrow!”",
+          choix: ["hitting the sack", "cutting corners", "pulling your leg", "burning the midnight oil"],
+          bonne_reponse: 2,
+          explication: "Pull someone’s leg = faire une blague à quelqu’un, le taquiner. Ne t’inquiète pas, je plaisante !"
+        }
+      ];
 
       /* ================= Leçons + filtre par niveau ================= */
       var lessonGrid = document.getElementById("lessonGrid");
@@ -1541,14 +1747,33 @@
         else if (first) { window.location.hash = first.getAttribute("href"); }
       });
 
-      /* ================= Quiz (lecture du bloc QUIZ_DU_JOUR ci-dessus) ================= */
-      var QUIZ = QUIZ_DU_JOUR;
+      /* ================= Quiz : rotation quotidienne dans QUIZ_BANK =================
+         Chaque jour, le quiz montre 6 questions : la question 1 vient de
+         quiz.json (la leçon TikTok du moment) quand le fichier charge, et les
+         autres viennent de la banque QUIZ_BANK, en partant d'un index qui
+         avance d'un cran chaque jour (jour de l'année, date locale du
+         visiteur). Même jour = mêmes questions pour tout le monde. */
+      function quizDayIndex() {
+        var now = new Date();
+        var dayOfYear = Math.floor((Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) - Date.UTC(now.getFullYear(), 0, 0)) / 86400000);
+        return dayOfYear % QUIZ_BANK.length;
+      }
+      function dailyBankQuestions(n, excludeQuestion) {
+        var out = [], i = 0, start = quizDayIndex();
+        while (out.length < n && i < QUIZ_BANK.length) {
+          var q = QUIZ_BANK[(start + i) % QUIZ_BANK.length];
+          if (q.question !== excludeQuestion) out.push(q);
+          i++;
+        }
+        return out;
+      }
+      var QUIZ = dailyBankQuestions(6);
       fetch("quiz.json").then(function (r) { if (!r.ok) throw new Error("quiz"); return r.json(); }).then(function (d) {
         if (d && d.questions && d.questions.length) {
           var fresh = d.questions.map(function (q) {
             return { jour: q.jour, question: q.question, choix: q.choix, bonne_reponse: q.bonne_reponse, explication: q.explication };
           });
-          QUIZ = fresh.concat(QUIZ_DU_JOUR.filter(function (q) { return q.jour !== fresh[0].jour; }).slice(0, 5));
+          QUIZ = fresh.slice(0, 1).concat(dailyBankQuestions(5, fresh[0].question));
           qi = 0; score = 0; renderQuestion();
         }
       }).catch(function () { /* quiz intégré gardé en secours */ });
