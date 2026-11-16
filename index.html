@@ -583,7 +583,7 @@
       <!-- ======== LECTURE D'UNE LEÇON ======== -->
       <section id="lecture" aria-label="Exemple de leçon complète">
         <div class="sec-head"><h2>La leçon complète</h2></div>
-        <p class="sec-sub">Clique sur « Lire la leçon » sur une fiche ci-dessus : toute la leçon s'affiche ici, avec un mini-exercice corrigé.</p>
+        <p class="sec-sub">Cherche une leçon en haut de la page pour l'afficher ici, ou clique sur « Lire la leçon » sur sa fiche pour ouvrir sa page complète, avec mini-exercice et quiz corrigés.</p>
         <article class="reader">
           <div class="reader-head">
             <h3 id="readerTitle">The Present Perfect</h3>
@@ -1223,6 +1223,11 @@
       var lessonGrid = document.getElementById("lessonGrid");
       var lessonEmpty = document.getElementById("lessonEmpty");
       var lessonCards = [];
+      /* Slugs des pages leçon (lecons/<slug>/) : même dérivation que le générateur des pages */
+      function slugifyTitle(t) {
+        return t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+      }
+      var LESSON_SLUGS = LESSONS.map(function (l) { return slugifyTitle(l.title); });
       LESSONS.forEach(function (l, i) {
         var card = document.createElement("article");
         card.className = "card";
@@ -1239,8 +1244,8 @@
         card.querySelector("h3").textContent = l.title;
         card.querySelector("p").textContent = l.desc;
         var links = card.querySelectorAll(".actions a");
-        links[0].href = "#lecture"; links[0].setAttribute("data-lesson", i);
-        links[1].href = "#lecture"; links[1].setAttribute("data-lesson", i); links[1].setAttribute("data-exo", "1");
+        links[0].href = "lecons/" + LESSON_SLUGS[i] + "/";
+        links[1].href = "lecons/" + LESSON_SLUGS[i] + "/#exercice";
         lessonGrid.appendChild(card);
         lessonCards.push(card);
       });
