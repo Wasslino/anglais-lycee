@@ -368,6 +368,57 @@
       footer a:hover { color: var(--gold); }
       footer .fine { margin-top: 26px; font-size: 0.82rem; color: #9a9078; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 16px; }
 
+      /* ---------- Progression ---------- */
+      .progress-strip { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px 20px; margin-bottom: 20px; }
+      .progress-strip-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+      .progress-strip-top strong { font-family: var(--font-display); font-size: 1.1rem; }
+      .progress-strip-top span { color: var(--ink-soft); font-size: 0.95rem; font-weight: 600; }
+      .progress-bar { height: 8px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 99px; overflow: hidden; margin: 12px 0 10px; }
+      .progress-bar i { display: block; height: 100%; background: var(--gold); width: 0; transition: width 0.35s ease; }
+      .progress-strip-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; font-size: 0.85rem; color: var(--ink-soft); }
+      .progress-clear { font-family: inherit; font-size: 0.85rem; background: transparent; border: 1px solid var(--line); color: var(--ink-soft); border-radius: 8px; padding: 6px 12px; cursor: pointer; }
+      .progress-clear:hover { border-color: var(--red); color: var(--red); }
+      .progress-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+      .progress-badges:empty { display: none; }
+
+      /* ---------- Quiz par leçon ---------- */
+      #readerQuiz { display: grid; gap: 16px; border-top: 1px solid var(--line); padding-top: 4px; }
+      .lq-q { display: grid; gap: 10px; }
+      .lq-stem { font-weight: 600; }
+      .lq-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+      .lq-opt { font-family: inherit; text-align: left; font-size: 0.98rem; font-weight: 600; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 10px; padding: 11px 14px; cursor: pointer; }
+      .lq-opt:hover:not(:disabled) { border-color: var(--gold); }
+      .lq-opt:disabled { cursor: default; }
+      .lq-opt.good { background: var(--green-bg); border-color: var(--green); color: var(--green); font-weight: 700; }
+      .lq-opt.bad { background: var(--red-bg); border-color: var(--red); color: var(--red); font-weight: 700; }
+      .lq-expl { font-size: 0.95rem; font-weight: 600; }
+      .lq-expl.good { color: var(--green); }
+      .lq-expl.bad { color: var(--red); }
+      .lq-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+      .lq-score { font-weight: 700; }
+
+      /* ---------- Flashcards ---------- */
+      .fc-wrap { max-width: 640px; margin: 0 auto; text-align: center; }
+      .fc-card { perspective: 1200px; cursor: pointer; border-radius: var(--radius); }
+      .fc-card:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+      .fc-inner { display: grid; min-height: 280px; transition: transform 0.45s ease; transform-style: preserve-3d; }
+      .fc-card.flipped .fc-inner { transform: rotateY(180deg); }
+      .fc-face { grid-area: 1 / 1; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: var(--radius); box-shadow: var(--shadow-lift); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 28px 24px; position: relative; }
+      .fc-front { background: var(--navy); color: #f5efe2; border: 1px solid var(--navy-deep); }
+      .fc-back { background: var(--surface); color: var(--ink); border: 1px solid var(--line); transform: rotateY(180deg); }
+      .fc-num { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; color: var(--gold); }
+      .fc-term { font-family: var(--font-display); font-size: clamp(1.6rem, 5vw, 2.2rem); font-weight: 700; }
+      .fc-fr { font-family: var(--font-display); font-size: clamp(1.3rem, 4vw, 1.7rem); font-weight: 700; }
+      .fc-ex { font-size: 1rem; color: var(--ink-soft); font-style: italic; }
+      .fc-hint { font-size: 0.82rem; opacity: 0.75; }
+      .fc-known-badge { position: absolute; top: 14px; right: 14px; background: var(--green-bg); color: var(--green); font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 999px; }
+      .fc-count { margin: 16px 0 12px; font-weight: 700; color: var(--ink-soft); }
+      .fc-controls { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+
+      @media (max-width: 860px) {
+        .lq-opts { grid-template-columns: minmax(0, 1fr); }
+      }
+
       @media (max-width: 860px) {
         .hero-in { grid-template-columns: minmax(0, 1fr); padding-top: 32px; }
         .grid.c3, .steps { grid-template-columns: minmax(0, 1fr); }
@@ -505,6 +556,18 @@
           <button type="button" class="lfbtn" data-level="2bac" aria-pressed="false">2ème année Bac</button>
         </div>
 
+        <div class="progress-strip" id="progressStrip">
+          <div class="progress-strip-top">
+            <strong>Ta progression</strong>
+            <span id="progressText">0 / 15 leçons lues · score quiz total 0 / 45</span>
+          </div>
+          <div class="progress-bar"><i id="progressBar"></i></div>
+          <div class="progress-strip-foot">
+            <span>Tout est enregistré sur ton appareil, sans compte.</span>
+            <button type="button" class="progress-clear" id="progressClear">Effacer ma progression</button>
+          </div>
+        </div>
+
         <div class="grid c3" id="lessonGrid"></div>
         <p class="lesson-empty" id="lessonEmpty" hidden>Aucune fiche pour ce niveau pour le moment.</p>
       </section>
@@ -583,6 +646,38 @@
               <button class="btn btn-gold" id="qRestart">Recommencer le quiz</button>
               <a class="btn btn-wa" href="https://wa.me/212650413904?text=Bonjour%2C%20je%20veux%20des%20infos%20sur%20les%20cours%20d%27anglais%20au%20lyc%C3%A9e" target="_blank" rel="noopener">Continuer avec le prof sur WhatsApp</a>
             </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======== FLASHCARDS ======== -->
+      <section id="flashcards">
+        <div class="sec-head"><h2>Flashcards — Phrasal verbs &amp; idiomes</h2><span class="count">40 cartes · Deck A</span></div>
+        <p class="sec-sub">Touche la carte pour la retourner : l'expression devant, le sens et la phrase exemple derrière. Marque les cartes que tu connais, et mélange pour réviser dans le désordre.</p>
+        <div class="fc-wrap">
+          <div class="fc-card" id="fcCard" role="button" tabindex="0" aria-label="Carte flash : touche pour retourner la carte">
+            <div class="fc-inner" id="fcInner">
+              <div class="fc-face fc-front">
+                <span class="fc-num" id="fcNum">Expression 1 / 40</span>
+                <span class="fc-term" id="fcTerm"></span>
+                <span class="fc-hint">Touche pour voir le sens →</span>
+                <span class="fc-known-badge" id="fcKnownBadge" hidden>✓ Connue</span>
+              </div>
+              <div class="fc-face fc-back">
+                <span class="fc-num" id="fcNumBack">Expression 1 / 40</span>
+                <span class="fc-fr" id="fcFr"></span>
+                <span class="fc-ex" id="fcEx"></span>
+                <span class="fc-hint">Touche pour revenir à l'expression →</span>
+              </div>
+            </div>
+          </div>
+          <p class="fc-count" id="fcCount">0 / 40 connues</p>
+          <div class="fc-controls">
+            <button type="button" class="btn btn-ghost" id="fcPrev">← Précédent</button>
+            <button type="button" class="btn btn-gold" id="fcKnow">✓ Je sais</button>
+            <button type="button" class="btn btn-ghost" id="fcReview">À revoir</button>
+            <button type="button" class="btn btn-ghost" id="fcShuffle">🔀 Mélanger</button>
+            <button type="button" class="btn btn-ghost" id="fcNext">Suivant →</button>
           </div>
         </div>
       </section>
@@ -912,6 +1007,7 @@
         card.innerHTML =
           '<div class="meta"><span class="chip gold"></span><span class="chip level"></span><span class="chip"></span></div>' +
           "<h3></h3><p></p>" +
+          '<div class="progress-badges"></div>' +
           '<div class="actions"><a class="btn btn-navy">Lire la leçon</a><a class="btn btn-ghost">Exercice corrigé</a></div>';
         var chips = card.querySelectorAll(".chip");
         chips[0].textContent = l.type;
@@ -941,7 +1037,11 @@
           "<div><h4>Exemples</h4><ul>" + ex + "</ul></div>" +
           "<div><h4>" + c.signalsTitle + "</h4><p>" + c.signals + "</p></div>" +
           "<div class=\"trap\"><b>Piège d'examen :</b> " + c.trap + "</div>" +
-          "<div id=\"readerExo\"><h4>Mini-exercice corrigé</h4><ol>" + exo + "</ol></div>";
+          "<div id=\"readerExo\"><h4>Mini-exercice corrigé</h4><ol>" + exo + "</ol></div>" +
+          "<div id=\"readerQuiz\"></div>";
+        markLessonRead(i);
+        renderLessonQuiz(i);
+        updateProgressUI();
         var target = toExo ? document.getElementById("readerExo") : document.getElementById("lecture");
         target.scrollIntoView({ behavior: "smooth", block: "start" });
       }
@@ -951,6 +1051,309 @@
         ev.preventDefault();
         showLesson(parseInt(a.getAttribute("data-lesson"), 10), a.hasAttribute("data-exo"));
       });
+
+      /* ================= Progression + quiz par leçon + flashcards ================= */
+      function llLoad(key, fallback) {
+        try { var v = JSON.parse(localStorage.getItem(key)); return (v === null || v === undefined) ? fallback : v; }
+        catch (e) { return fallback; }
+      }
+      function llSave(key, val) {
+        try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) { /* stockage indisponible : rien n'est gardé */ }
+      }
+      var llProgress = llLoad("ll_progress", []);
+      var llQuizScores = llLoad("ll_quiz_scores", {});
+      var llCardsKnown = llLoad("ll_cards_known", []);
+      var currentLessonIndex = 6;
+
+      /* ----- Quiz par leçon : 3 questions par leçon, même ordre que LESSONS ----- */
+      var LESSON_QUIZ = [
+        [ /* 0 — Present Simple vs Present Continuous */
+          { q: "She ___ to school by bus every morning.", options: ["goes", "is going", "go", "going"], answer: 0, expl: "Habitude (every morning) = Present Simple ; à la 3e personne : goes." },
+          { q: "Look! It ___ outside.", options: ["rains", "is raining", "rain", "raining"], answer: 1, expl: "« Look! » + action en cours = Present Continuous." },
+          { q: "Which sentence is correct?", options: ["I am knowing the answer.", "I know the answer.", "I am know the answer.", "I knows the answer."], answer: 1, expl: "Know est un verbe d'état : jamais de forme en -ing." }
+        ],
+        [ /* 1 — Articles a / an / the */
+          { q: "___ sun rises in the east.", options: ["A", "An", "The", "Ø (rien)"], answer: 2, expl: "Le soleil est unique : the." },
+          { q: "My father is ___ honest man.", options: ["a", "an", "the", "Ø (rien)"], answer: 1, expl: "Honest commence par un son voyelle : an." },
+          { q: "I love ___ music and I play ___ football.", options: ["the / the", "Ø / Ø", "a / a", "the / Ø"], answer: 1, expl: "Pas d'article devant la musique, les matières et les sports en général." }
+        ],
+        [ /* 2 — Vocabulary: Education & School Life */
+          { q: "What is the French for “timetable”?", options: ["les devoirs", "l'emploi du temps", "le bulletin de notes", "le cahier"], answer: 1, expl: "Timetable = emploi du temps." },
+          { q: "She ___ her exam with high marks.", options: ["passed", "past", "passe", "passing"], answer: 0, expl: "Pass an exam = réussir un examen ; passé : passed." },
+          { q: "Which sentence is correct?", options: ["I have many homeworks.", "I have a lot of homework.", "I have a homework.", "I have two homeworks."], answer: 1, expl: "Homework ne se compte pas : a lot of homework." }
+        ],
+        [ /* 3 — Past Simple vs Past Continuous */
+          { q: "While I ___ home, I met Sara.", options: ["walked", "was walking", "am walking", "walk"], answer: 1, expl: "While + action longue = Past Continuous." },
+          { q: "At 8 pm yesterday, we ___ dinner.", options: ["had", "were having", "have", "are having"], answer: 1, expl: "À une heure précise du passé, action en cours = Past Continuous." },
+          { q: "He ___ his leg when he was playing football.", options: ["breaks", "was breaking", "broke", "is breaking"], answer: 2, expl: "L'action courte qui interrompt = Past Simple." }
+        ],
+        [ /* 4 — Modal Verbs */
+          { q: "You ___ stop at a red light. It's the law.", options: ["should", "must", "can", "may"], answer: 1, expl: "Obligation, loi = must." },
+          { q: "You ___ smoke here. It's forbidden.", options: ["don't have to", "mustn't", "shouldn't", "needn't"], answer: 1, expl: "Interdiction = mustn't (≠ don't have to = pas nécessaire)." },
+          { q: "Which sentence is correct?", options: ["Students should to revise.", "Students should revising.", "Students should revise.", "Students should revised."], answer: 2, expl: "Après un modal : verbe sans to, sans -s, sans -ing, sans -ed." }
+        ],
+        [ /* 5 — Vocabulary: Technology & Media */
+          { q: "What does “go viral” mean?", options: ["devenir viral", "aller vite", "tomber en panne", "éteindre"], answer: 0, expl: "Go viral = se répandre très vite sur Internet." },
+          { q: "This video ___ viral in one night.", options: ["went", "goed", "goes", "going"], answer: 0, expl: "Le passé de go est went : went viral." },
+          { q: "Which sentence is correct?", options: ["I read an interesting information.", "I read interesting informations.", "I read an interesting piece of information.", "I read a news."], answer: 2, expl: "Information ne se compte pas : a piece of information." }
+        ],
+        [ /* 6 — The Present Perfect */
+          { q: "I ___ my homework. It's done now.", options: ["have just finished", "just finished", "has just finished", "am just finishing"], answer: 0, expl: "Just + résultat présent = Present Perfect." },
+          { q: "She ___ here since 2019.", options: ["lives", "has lived", "lived", "is living"], answer: 1, expl: "Since + point de départ qui continue = Present Perfect." },
+          { q: "Which sentence is correct?", options: ["I have seen him yesterday.", "I saw him yesterday.", "I have saw him yesterday.", "I seen him yesterday."], answer: 1, expl: "Avec une date précise (yesterday) = Past Simple, jamais Present Perfect." }
+        ],
+        [ /* 7 — Passive Voice */
+          { q: "The room ___ every day.", options: ["is cleaned", "cleaned", "cleans", "is cleaning"], answer: 0, expl: "Passif au présent : be (is) + participe passé." },
+          { q: "This novel ___ in 1980.", options: ["is written", "was written", "wrote", "has written"], answer: 1, expl: "On garde le temps de l'actif : 1980 → passé, was written." },
+          { q: "Active → passive : “They will send the letters tomorrow.”", options: ["The letters will be sent tomorrow.", "The letters will send tomorrow.", "The letters are sent tomorrow.", "The letters will be send tomorrow."], answer: 0, expl: "Futur passif : will be + participe passé (sent)." }
+        ],
+        [ /* 8 — Reported Speech */
+          { q: "“I like tea.” → He said that he ___ tea.", options: ["likes", "liked", "like", "liking"], answer: 1, expl: "Recul des temps : Present Simple → Past Simple." },
+          { q: "“I will help you.” → She said she ___ help me.", options: ["will", "would", "can", "shall"], answer: 1, expl: "Will devient would au discours rapporté." },
+          { q: "“Do you speak English?” → He asked me ___ I spoke English.", options: ["that", "if", "what", "why"], answer: 1, expl: "Question fermée rapportée : asked + if + sujet + verbe, sans inversion." }
+        ],
+        [ /* 9 — Conditionals Types 2 & 3 */
+          { q: "If I ___ you, I would study more.", options: ["am", "was", "were", "will be"], answer: 2, expl: "Type 2 : If I were you (were pour toutes les personnes)." },
+          { q: "If he ___ earlier, he would have caught the bus.", options: ["left", "had left", "leaves", "would leave"], answer: 1, expl: "Type 3 : If + Past Perfect (had left)." },
+          { q: "Which sentence is correct?", options: ["If I would have money, I would travel.", "If I had money, I would travel.", "If I have money, I would travel.", "If I will have money, I would travel."], answer: 1, expl: "Après if, jamais de would : If + Past Simple, would + verbe." }
+        ],
+        [ /* 10 — Future Forms */
+          { q: "Watch out! You ___ your phone!", options: ["will drop", "are going to drop", "drop", "are dropping"], answer: 1, expl: "Prévision visible, danger immédiat = going to." },
+          { q: "I promise I ___ you.", options: ["will help", "am going to help", "help", "am helping"], answer: 0, expl: "Promesse spontanée, au moment où l'on parle = will." },
+          { q: "I ___ my teacher at 4 pm tomorrow. We have an appointment.", options: ["will meet", "am going to meet", "am meeting", "meet"], answer: 2, expl: "Rendez-vous fixé, arrangement = Present Continuous." }
+        ],
+        [ /* 11 — Phrasal Verbs */
+          { q: "Never ___ your dreams.", options: ["give up", "give in", "give out", "give away"], answer: 0, expl: "Give up = abandonner." },
+          { q: "Please ___ your homework before Friday.", options: ["hand out", "hand in", "hand over", "hand up"], answer: 1, expl: "Hand in = rendre (un devoir)." },
+          { q: "The teacher promised to ___ the problem.", options: ["look after", "look into", "look for", "look up"], answer: 1, expl: "Look into = examiner, enquêter sur." }
+        ],
+        [ /* 12 — Cartes mentales de vocabulaire */
+          { q: "Which word belongs to the theme “Education”?", options: ["timetable", "invention", "heritage", "device"], answer: 0, expl: "Timetable (emploi du temps) appartient au thème Éducation." },
+          { q: "Complete the collocation: “graduate ___ university.”", options: ["from", "of", "at", "in"], answer: 0, expl: "La collocation est graduate from university." },
+          { q: "Which word belongs to the theme “Science & technology”?", options: ["customs", "artificial intelligence", "degree", "identity"], answer: 1, expl: "Artificial intelligence (intelligence artificielle) = Science & technologie." }
+        ],
+        [ /* 13 — Writing: l'essai argumentatif */
+          { q: "What is the best order for an argumentative essay?", options: ["Conclusion – arguments – introduction", "Introduction – arguments – conclusion", "Arguments – introduction – conclusion", "Introduction – conclusion – arguments"], answer: 1, expl: "Introduction (opinion), arguments + exemples, conclusion." },
+          { q: "Which connector shows opposition?", options: ["Moreover", "However", "Firstly", "For example"], answer: 1, expl: "However = cependant (opposition)." },
+          { q: "Which sentence is the best conclusion?", options: ["In conclusion, I strongly believe that phones should be banned at school.", "I think phones. I think school.", "Phones are phones.", "To conclude, I have no opinion."], answer: 0, expl: "La conclusion reformule l'opinion, sans idée nouvelle." }
+        ],
+        [ /* 14 — Reading: réussir la compréhension */
+          { q: "What should you read FIRST?", options: ["The text", "The questions", "The title only", "The answers"], answer: 1, expl: "Lire les questions d'abord, pour savoir quoi chercher." },
+          { q: "For True/False questions, a good justification is…", options: ["your own opinion", "a quotation from the text", "nothing — True/False is enough", "a guess"], answer: 1, expl: "Sans justification tirée du texte, la réponse vaut zéro." },
+          { q: "“They” in a text usually refers to…", options: ["the nearest plural noun before it", "the writer", "the first word of the text", "the reader"], answer: 0, expl: "Un pronom renvoie au nom le plus proche avant, de même nombre." }
+        ]
+      ];
+
+      function markLessonRead(i) {
+        if (llProgress.indexOf(i) === -1) { llProgress.push(i); llSave("ll_progress", llProgress); }
+      }
+      function quizTotal() {
+        var t = 0;
+        Object.keys(llQuizScores).forEach(function (k) { t += Math.min(3, llQuizScores[k] || 0); });
+        return t;
+      }
+      function updateProgressUI() {
+        var txt = document.getElementById("progressText");
+        if (txt) txt.textContent = llProgress.length + " / 15 leçons lues · score quiz total " + quizTotal() + " / 45";
+        var bar = document.getElementById("progressBar");
+        if (bar) bar.style.width = (llProgress.length / 15 * 100) + "%";
+        lessonCards.forEach(function (card, idx) {
+          var zone = card.querySelector(".progress-badges");
+          if (!zone) return;
+          zone.innerHTML = "";
+          if (llProgress.indexOf(idx) !== -1) {
+            var b1 = document.createElement("span"); b1.className = "chip done"; b1.textContent = "✓ Lue"; zone.appendChild(b1);
+          }
+          if (llQuizScores[idx] !== undefined) {
+            var b2 = document.createElement("span"); b2.className = "chip"; b2.textContent = "Quiz : " + llQuizScores[idx] + "/3"; zone.appendChild(b2);
+          }
+        });
+      }
+
+      function renderLessonQuiz(i) {
+        var box = document.getElementById("readerQuiz");
+        if (!box) return;
+        var qs = LESSON_QUIZ[i];
+        if (!qs) { box.innerHTML = ""; return; }
+        currentLessonIndex = i;
+        var state = { done: [false, false, false], good: [false, false, false] };
+        box.innerHTML = "";
+        var title = document.createElement("h4");
+        title.textContent = "Exercice — vérifie que tu as compris";
+        box.appendChild(title);
+        var scoreLine = document.createElement("p");
+        scoreLine.className = "lq-score";
+        function refreshScore() {
+          var n = 0;
+          state.good.forEach(function (g) { if (g) n++; });
+          scoreLine.textContent = "Score : " + n + " / 3" + (llQuizScores[i] !== undefined ? " · Meilleur score : " + llQuizScores[i] + "/3" : "");
+        }
+        qs.forEach(function (q, qi) {
+          var wrap = document.createElement("div");
+          wrap.className = "lq-q";
+          var stem = document.createElement("p");
+          stem.className = "lq-stem";
+          stem.textContent = (qi + 1) + ". " + q.q;
+          wrap.appendChild(stem);
+          var opts = document.createElement("div");
+          opts.className = "lq-opts";
+          var expl = document.createElement("p");
+          expl.className = "lq-expl";
+          expl.hidden = true;
+          q.options.forEach(function (opt, oi) {
+            var b = document.createElement("button");
+            b.type = "button"; b.className = "lq-opt"; b.textContent = opt;
+            b.addEventListener("click", function () {
+              if (state.done[qi]) return;
+              state.done[qi] = true;
+              var btns = opts.querySelectorAll(".lq-opt");
+              btns.forEach(function (x, xj) {
+                x.disabled = true;
+                if (xj === q.answer) x.classList.add("good");
+              });
+              if (oi === q.answer) {
+                state.good[qi] = true;
+                expl.textContent = "✓ Bravo ! " + q.expl;
+                expl.className = "lq-expl good";
+              } else {
+                b.classList.add("bad");
+                expl.textContent = "✗ Pas tout à fait. " + q.expl;
+                expl.className = "lq-expl bad";
+              }
+              expl.hidden = false;
+              if (state.done[0] && state.done[1] && state.done[2]) {
+                var total = (state.good[0] ? 1 : 0) + (state.good[1] ? 1 : 0) + (state.good[2] ? 1 : 0);
+                if (llQuizScores[i] === undefined || total > llQuizScores[i]) { llQuizScores[i] = total; llSave("ll_quiz_scores", llQuizScores); }
+                updateProgressUI();
+              }
+              refreshScore();
+            });
+            opts.appendChild(b);
+          });
+          wrap.appendChild(opts);
+          wrap.appendChild(expl);
+          box.appendChild(wrap);
+        });
+        var foot = document.createElement("div");
+        foot.className = "lq-foot";
+        foot.appendChild(scoreLine);
+        var retry = document.createElement("button");
+        retry.type = "button"; retry.className = "btn btn-ghost"; retry.textContent = "↻ Recommencer";
+        retry.addEventListener("click", function () { renderLessonQuiz(i); });
+        foot.appendChild(retry);
+        box.appendChild(foot);
+        refreshScore();
+      }
+
+      var clearBtn = document.getElementById("progressClear");
+      if (clearBtn) {
+        clearBtn.addEventListener("click", function () {
+          if (!window.confirm("Effacer toute ta progression enregistrée sur cet appareil ? (leçons lues, scores des quiz, flashcards connues)")) return;
+          try { localStorage.removeItem("ll_progress"); localStorage.removeItem("ll_quiz_scores"); localStorage.removeItem("ll_cards_known"); } catch (e) {}
+          llProgress = []; llQuizScores = {}; llCardsKnown = [];
+          renderLessonQuiz(currentLessonIndex);
+          updateProgressUI();
+          fcRender();
+        });
+      }
+
+      /* La leçon affichée par défaut (Present Perfect) a aussi son exercice */
+      (function initReaderQuiz() {
+        var body = document.getElementById("readerBody");
+        if (body && !document.getElementById("readerQuiz")) {
+          var d = document.createElement("div");
+          d.id = "readerQuiz";
+          body.appendChild(d);
+        }
+        renderLessonQuiz(6);
+        updateProgressUI();
+      })();
+
+      /* ----- Flashcards : les 40 expressions du Deck A (même ordre que les fiches) ----- */
+      var FLASHCARDS = [
+        { id: "A-01", term: "GIVE UP", fr: "abandonner, renoncer", ex: "“Never give up your dreams, however hard the bac year may seem.”" },
+        { id: "A-02", term: "BRING UP", fr: "soulever (un sujet), mentionner", ex: "“The teacher brought up the question of cheating during the lesson.”" },
+        { id: "A-03", term: "TAKE UP", fr: "se mettre à, commencer (une activité)", ex: "“Yasmine has decided to take up a new hobby: photography.”" },
+        { id: "A-04", term: "PUT OFF", fr: "remettre à plus tard, reporter", ex: "“Don't put off your revision until the last minute!”" },
+        { id: "A-05", term: "LOOK FORWARD TO", fr: "avoir hâte de, attendre avec impatience", ex: "“I look forward to meeting my pen friend in London.”" },
+        { id: "A-06", term: "GET ON WITH", fr: "bien s'entendre avec", ex: "“Salma gets on very well with all her classmates.”" },
+        { id: "A-07", term: "COME UP WITH", fr: "trouver (une idée), proposer", ex: "“Our group must come up with a solution before Friday.”" },
+        { id: "A-08", term: "RUN OUT OF", fr: "manquer de, ne plus avoir de", ex: "“We have run out of time — the exam ends in five minutes!”" },
+        { id: "A-09", term: "BREAK DOWN", fr: "tomber en panne", ex: "“The school bus broke down on the way to the exam centre.”" },
+        { id: "A-10", term: "SET UP", fr: "créer, fonder, mettre en place", ex: "“The students set up a new English club at school.”" },
+        { id: "A-11", term: "CARRY OUT", fr: "réaliser, mener (une étude)", ex: "“Scientists carry out experiments to find a cure for the disease.”" },
+        { id: "A-12", term: "FIND OUT", fr: "découvrir, apprendre (un fait)", ex: "“I can't wait to find out the results of the competition.”" },
+        { id: "A-13", term: "TAKE PART IN", fr: "participer à", ex: "“Hundreds of students took part in the national science fair.”" },
+        { id: "A-14", term: "DEAL WITH", fr: "traiter, gérer, faire face à", ex: "“A good manager knows how to deal with difficult problems.”" },
+        { id: "A-15", term: "RELY ON", fr: "compter sur, dépendre de", ex: "“You can rely on me: I will help you revise for the exam.”" },
+        { id: "A-16", term: "LOOK AFTER", fr: "s'occuper de, prendre soin de", ex: "“Nora looks after her little brother while her parents are at work.”" },
+        { id: "A-17", term: "PUT UP WITH", fr: "supporter, tolérer", ex: "“I can't put up with this noise any more — I need a quiet place to study!”" },
+        { id: "A-18", term: "TURN DOWN", fr: "refuser, rejeter (une offre)", ex: "“He turned down the job offer because the salary was too low.”" },
+        { id: "A-19", term: "HAND IN", fr: "rendre (un devoir)", ex: "“Students must hand in their essays before Friday.”" },
+        { id: "A-20", term: "DROP OUT", fr: "abandonner les études, décrocher", ex: "“Sadly, some pupils drop out of school for financial reasons.”" },
+        { id: "A-21", term: "CATCH UP WITH", fr: "rattraper (son retard)", ex: "“After his illness, Omar studied hard to catch up with his classmates.”" },
+        { id: "A-22", term: "LOOK INTO", fr: "enquêter sur, examiner", ex: "“The headmaster promised to look into the problem of absenteeism.”" },
+        { id: "A-23", term: "MAKE UP", fr: "inventer (une histoire, une excuse)", ex: "“Don't believe him: he always makes up stories to impress his friends.”" },
+        { id: "A-24", term: "GO ON", fr: "continuer", ex: "“Despite the difficulties, she decided to go on working until late.”" },
+        { id: "A-25", term: "A PIECE OF CAKE", fr: "un jeu d'enfant, très facile", ex: "“The vocabulary test was a piece of cake: I finished it in ten minutes.”" },
+        { id: "A-26", term: "HIT THE BOOKS", fr: "se mettre à réviser, « potasser »", ex: "“The exam is in two weeks; it's time to hit the books!”" },
+        { id: "A-27", term: "BREAK THE ICE", fr: "briser la glace", ex: "“The teacher told a joke to break the ice at the beginning of the course.”" },
+        { id: "A-28", term: "ONCE IN A BLUE MOON", fr: "très rarement", ex: "“He visits his home village once in a blue moon — maybe twice a year.”" },
+        { id: "A-29", term: "UNDER THE WEATHER", fr: "ne pas être dans son assiette, être patraque", ex: "“I can't come to class today; I feel a bit under the weather.”" },
+        { id: "A-30", term: "COST AN ARM AND A LEG", fr: "coûter les yeux de la tête", ex: "“This smartphone costs an arm and a leg — it is far too expensive for a student.”" },
+        { id: "A-31", term: "A BLESSING IN DISGUISE", fr: "un mal pour un bien", ex: "“Losing that job was a blessing in disguise: a month later he found a much better one.”" },
+        { id: "A-32", term: "OVER THE MOON", fr: "aux anges, folle de joie", ex: "“Lina was over the moon when she got her bac with honours.”" },
+        { id: "A-33", term: "BY HEART", fr: "par cœur", ex: "“We had to learn the whole poem by heart for the literature lesson.”" },
+        { id: "A-34", term: "FACE THE MUSIC", fr: "assumer les conséquences, faire face", ex: "“He cheated in the test and now he must face the music and accept the punishment.”" },
+        { id: "A-35", term: "LET THE CAT OUT OF THE BAG", fr: "vendre la mèche, dévoiler un secret", ex: "“Don't let the cat out of the bag — the birthday party must stay a surprise!”" },
+        { id: "A-36", term: "BITE THE BULLET", fr: "prendre son courage à deux mains, serrer les dents", ex: "“I hate dentists, but I'll have to bite the bullet and make an appointment.”" },
+        { id: "A-37", term: "IN THE SAME BOAT", fr: "dans la même galère, dans le même bateau", ex: "“Don't worry about the maths test: we're all in the same boat.”" },
+        { id: "A-38", term: "RAINING CATS AND DOGS", fr: "pleuvoir des cordes", ex: "“Take an umbrella: it's raining cats and dogs outside!”" },
+        { id: "A-39", term: "THE BALL IS IN YOUR COURT", fr: "la balle est dans ton camp", ex: "“I've given you all the information; now the ball is in your court.”" },
+        { id: "A-40", term: "BREAK A LEG", fr: "bonne chance ! (litt. « casse-toi une jambe »)", ex: "“Break a leg! I'm sure you'll pass your exam brilliantly.”" }
+      ];
+      var fcOrder = FLASHCARDS.map(function (c, idx) { return idx; });
+      var fcPos = 0;
+      var fcCardEl = document.getElementById("fcCard");
+      function fcRender() {
+        if (!fcCardEl) return;
+        var c = FLASHCARDS[fcOrder[fcPos]];
+        document.getElementById("fcNum").textContent = "Expression " + (fcPos + 1) + " / 40";
+        document.getElementById("fcNumBack").textContent = "Expression " + (fcPos + 1) + " / 40";
+        document.getElementById("fcTerm").textContent = c.term;
+        document.getElementById("fcFr").textContent = c.fr;
+        document.getElementById("fcEx").textContent = c.ex;
+        document.getElementById("fcKnownBadge").hidden = llCardsKnown.indexOf(c.id) === -1;
+        document.getElementById("fcCount").textContent = llCardsKnown.length + " / 40 connues";
+        fcCardEl.classList.remove("flipped");
+      }
+      function fcFlip() { if (fcCardEl) fcCardEl.classList.toggle("flipped"); }
+      function fcGo(d) { fcPos = (fcPos + d + FLASHCARDS.length) % FLASHCARDS.length; fcRender(); }
+      if (fcCardEl) {
+        fcCardEl.addEventListener("click", fcFlip);
+        fcCardEl.addEventListener("keydown", function (ev) {
+          if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); fcFlip(); }
+        });
+        document.getElementById("fcPrev").addEventListener("click", function () { fcGo(-1); });
+        document.getElementById("fcNext").addEventListener("click", function () { fcGo(1); });
+        document.getElementById("fcShuffle").addEventListener("click", function () {
+          var i, j, tmp;
+          for (i = fcOrder.length - 1; i > 0; i--) { j = Math.floor(Math.random() * (i + 1)); tmp = fcOrder[i]; fcOrder[i] = fcOrder[j]; fcOrder[j] = tmp; }
+          fcPos = 0; fcRender();
+        });
+        document.getElementById("fcKnow").addEventListener("click", function () {
+          var id = FLASHCARDS[fcOrder[fcPos]].id;
+          if (llCardsKnown.indexOf(id) === -1) { llCardsKnown.push(id); llSave("ll_cards_known", llCardsKnown); }
+          fcGo(1);
+        });
+        document.getElementById("fcReview").addEventListener("click", function () {
+          var id = FLASHCARDS[fcOrder[fcPos]].id;
+          var k = llCardsKnown.indexOf(id);
+          if (k !== -1) { llCardsKnown.splice(k, 1); llSave("ll_cards_known", llCardsKnown); }
+          fcGo(1);
+        });
+        fcRender();
+      }
 
       var lessonFilterBtns = document.querySelectorAll(".lfbtn");
       function setLessonFilter(level) {
@@ -1055,6 +1458,7 @@
         });
       });
       SEARCH_INDEX.push({ label: "Quiz du jour — phrasal verbs", tag: "Quiz", href: "#quiz", keys: "quiz phrasal verbs exercice give up hand in" });
+      SEARCH_INDEX.push({ label: "Flashcards — Phrasal verbs & idiomes (40 cartes)", tag: "Flashcards", href: "#flashcards", keys: "flashcards carte cartes phrasal verbs idiomes reviser memoire" });
       SEARCH_INDEX.push({ label: "Pack Réussite Bac — 75 DH (2ème année Bac)", tag: "Pack", href: "#pack", keys: "pack prix acheter pdf reussite 75 bac" });
       SEARCH_INDEX.push({ label: "Cours en direct — inscriptions ouvertes (2ème année Bac)", tag: "Cours", href: "#cours", keys: "cours direct live inscription whatsapp groupe individuel bac" });
 
