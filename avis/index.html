@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-20HZBQ6SFK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-20HZBQ6SFK');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ton avis — LinguaLink</title>
+<link rel="canonical" href="https://anglais-lycee.vercel.app/avis/" />
+<meta name="description" content="Donne ton avis sur le site LinguaLink : 1 minute, sans compte. Dis-nous ce qui t'aide et ce qu'on peut améliorer pour les lycéens marocains.">
+<link rel="icon" href="../favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1b2a4a; --navy-deep:#131f38; --gold:#c8891b; --gold-soft:#f3e3c2;
+    --bg:#faf7f1; --surface:#ffffff; --surface-2:#f3eee3;
+    --ink:#23202a; --ink-soft:#5b5648; --line:#e3dcc9;
+    --green:#1e7d4f; --green-bg:#e2f2e8; --red:#a83232; --red-bg:#f9e6e3;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6;
+  }
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif; color:var(--navy); line-height:1.25; margin:0 0 .5em}
+  a{color:var(--navy)}
+
+  /* Header */
+  .site-header{
+    background:linear-gradient(135deg,var(--navy-deep),var(--navy) 60%,#24365f);
+    color:#fff; padding:18px 20px 26px; text-align:center;
+    border-bottom:4px solid var(--gold);
+  }
+  .brand{display:flex;align-items:center;justify-content:center;gap:12px}
+  .brand img{height:56px;width:auto}
+  .brand .wordmark{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.5rem;letter-spacing:.14em}
+  .site-header p{margin:8px 0 0;color:#d9d0b8;font-size:.95rem}
+  .back-link{display:inline-block;margin-top:14px;color:#fff;font-size:.85rem;text-decoration:none;border:1px solid rgba(255,255,255,.45);border-radius:999px;padding:6px 14px}
+  .back-link:hover{background:rgba(255,255,255,.12)}
+
+  main{max-width:720px;margin:0 auto;padding:28px 18px 48px}
+  .card{
+    background:var(--surface); border:1px solid var(--line); border-radius:18px;
+    padding:28px 26px; box-shadow:0 8px 28px rgba(27,42,74,.08);
+  }
+  .hidden{display:none !important}
+
+  label{display:block;font-weight:600;margin:22px 0 6px;color:var(--navy)}
+  label .opt{font-weight:400;color:var(--ink-soft);font-size:.88rem}
+  input[type="text"],textarea{
+    width:100%;padding:13px 14px;font-size:1rem;font-family:inherit;
+    border:1.5px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);
+  }
+  textarea{min-height:110px;resize:vertical}
+  input:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
+  .field-hint{font-size:.85rem;color:var(--ink-soft);margin-top:4px}
+  .privacy{
+    margin-top:20px;background:var(--gold-soft);border:1px solid #e0c98f;
+    border-radius:12px;padding:14px 16px;font-size:.92rem;color:#3a3018;
+  }
+  .error-text{color:var(--red);font-size:.9rem;margin-top:6px;display:none}
+  .error-text.show{display:block}
+
+  /* Stars */
+  .stars{display:flex;gap:6px;margin-top:6px}
+  .star{
+    background:none;border:none;cursor:pointer;padding:4px 2px;line-height:1;
+    font-size:2.6rem;color:#d8d0b8;transition:transform .1s ease, color .15s ease;
+  }
+  .star:hover{transform:scale(1.12)}
+  .star.on{color:var(--gold)}
+  .star-label{min-height:1.4em;margin-top:2px;font-weight:700;color:var(--navy);font-size:1.05rem}
+
+  /* Checkboxes */
+  .checks{display:grid;gap:10px;margin-top:6px}
+  .check{
+    display:flex;align-items:center;gap:12px;cursor:pointer;margin:0;font-weight:400;color:var(--ink);
+    background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:12px 16px;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .check:hover{border-color:var(--gold)}
+  .check input{width:20px;height:20px;accent-color:var(--navy);flex:0 0 auto;cursor:pointer}
+  .check.checked{border-color:var(--navy);background:#eef1f7}
+
+  .btn{
+    display:inline-block;border:none;cursor:pointer;font-family:inherit;font-weight:700;
+    font-size:1.05rem;border-radius:999px;padding:14px 30px;margin-top:22px;
+    background:linear-gradient(135deg,var(--navy),#2a3f6e);color:#fff;
+    box-shadow:0 6px 18px rgba(27,42,74,.25);transition:transform .1s ease;
+    text-decoration:none;text-align:center;
+  }
+  .btn:hover{transform:translateY(-1px)}
+  .btn:disabled{opacity:.6;cursor:wait;transform:none}
+  .btn-gold{background:linear-gradient(135deg,#d99a2b,var(--gold));color:#fff}
+  .btn-block{width:100%}
+
+  /* Done / sending / error */
+  .done{text-align:center}
+  .done .big-emoji{font-size:3rem;line-height:1}
+  .done p{color:var(--ink-soft)}
+  .spinner{
+    width:44px;height:44px;margin:10px auto 16px;border-radius:50%;
+    border:4px solid var(--surface-2);border-top-color:var(--gold);
+    animation:spin 1s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .send-error{
+    background:var(--red-bg);border:1px solid #e0b3b3;border-radius:12px;
+    padding:14px 16px;font-size:.95rem;color:#5c1a1a;margin-top:16px;
+  }
+
+  footer{
+    max-width:720px;margin:0 auto;padding:0 18px 40px;text-align:center;
+    color:var(--ink-soft);font-size:.85rem;
+  }
+  footer a{color:var(--ink-soft)}
+
+  @media (max-width:480px){
+    .card{padding:22px 18px}
+    .brand img{height:46px}
+    .brand .wordmark{font-size:1.25rem}
+    .star{font-size:2.3rem}
+  }
+</style>
+  <!-- Vercel Web Analytics -->
+  <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="brand">
+    <img src="../assets/logo-mark.webp" alt="Logo LinguaLink" width="68" height="64">
+    <span class="wordmark">LINGUALINK</span>
+  </div>
+  <p>Ton avis compte — 1 minute, sans compte</p>
+  <a class="back-link" href="../">← Retour au site</a>
+</header>
+
+<main>
+  <!-- ÉCRAN 1 : FORMULAIRE -->
+  <section class="card" id="screen-form">
+    <h1>Ton avis compte&nbsp;!</h1>
+    <p>Tu as visité le site LinguaLink&nbsp;? Dis-nous ce qui t'aide et ce qu'on peut améliorer. C'est rapide, et ça nous aide vraiment à mieux t'aider.</p>
+
+    <form id="avis-form" novalidate>
+      <label id="stars-label">Comment tu trouves le site&nbsp;? *</label>
+      <div class="stars" role="radiogroup" aria-labelledby="stars-label">
+        <button type="button" class="star" data-value="1" aria-label="1 étoile sur 5" aria-checked="false" role="radio">★</button>
+        <button type="button" class="star" data-value="2" aria-label="2 étoiles sur 5" aria-checked="false" role="radio">★</button>
+        <button type="button" class="star" data-value="3" aria-label="3 étoiles sur 5" aria-checked="false" role="radio">★</button>
+        <button type="button" class="star" data-value="4" aria-label="4 étoiles sur 5" aria-checked="false" role="radio">★</button>
+        <button type="button" class="star" data-value="5" aria-label="5 étoiles sur 5" aria-checked="false" role="radio">★</button>
+      </div>
+      <p class="star-label" id="star-label">Touche une étoile pour noter le site.</p>
+      <p class="error-text" id="err-stars">Choisis une note en étoiles pour envoyer ton avis.</p>
+
+      <label>Qu'est-ce qui t'a le plus aidé&nbsp;? <span class="opt">(plusieurs choix possibles)</span></label>
+      <div class="checks">
+        <label class="check"><input type="checkbox" name="aide" value="Les leçons"><span>Les leçons</span></label>
+        <label class="check"><input type="checkbox" name="aide" value="Les examens nationaux"><span>Les examens nationaux</span></label>
+        <label class="check"><input type="checkbox" name="aide" value="Les quiz"><span>Les quiz</span></label>
+        <label class="check"><input type="checkbox" name="aide" value="Les flashcards"><span>Les flashcards</span></label>
+        <label class="check"><input type="checkbox" name="aide" value="Le test de niveau"><span>Le test de niveau</span></label>
+        <label class="check"><input type="checkbox" name="aide" value="La prononciation"><span>La prononciation</span></label>
+      </div>
+
+      <label for="amelioration">Qu'est-ce qu'on pourrait améliorer&nbsp;? <span class="opt">(facultatif)</span></label>
+      <textarea id="amelioration" name="amelioration" placeholder="Écris ici ce que tu aimerais voir sur le site, ou ce qui ne marche pas bien…"></textarea>
+
+      <label for="prenom">Ton prénom <span class="opt">(facultatif)</span></label>
+      <input type="text" id="prenom" name="prenom" autocomplete="given-name" placeholder="Ton prénom">
+
+      <label for="contact">Ton email ou WhatsApp <span class="opt">(facultatif, si tu veux qu'on te réponde)</span></label>
+      <input type="text" id="contact" name="contact" autocomplete="email" placeholder="ton@email.com ou 06 …">
+
+      <div class="privacy">
+        🔒 Ton avis est envoyé <strong>uniquement à ton professeur</strong>. Le prénom et le contact sont facultatifs : tu peux répondre sans rien écrire sur toi.
+      </div>
+
+      <button type="submit" class="btn btn-gold btn-block">Envoyer mon avis</button>
+    </form>
+  </section>
+
+  <!-- ÉCRAN 2 : ENVOI -->
+  <section class="card hidden" id="screen-sending">
+    <div class="done">
+      <div class="spinner" aria-hidden="true"></div>
+      <h2>Envoi de ton avis…</h2>
+      <p>Merci de patienter quelques secondes, ne ferme pas cette page.</p>
+    </div>
+  </section>
+
+  <!-- ÉCRAN 3 : MERCI -->
+  <section class="card hidden" id="screen-done">
+    <div class="done">
+      <div class="big-emoji">🙏</div>
+      <h2>Merci pour ton avis&nbsp;!</h2>
+      <p>Ton avis a bien été envoyé. Merci de nous aider à améliorer le site&nbsp;!</p>
+      <a class="btn" href="../">← Retour au site</a>
+    </div>
+  </section>
+
+  <!-- ÉCRAN 4 : ERREUR D'ENVOI -->
+  <section class="card hidden" id="screen-error">
+    <div class="done">
+      <div class="big-emoji">😕</div>
+      <h2>L'envoi n'a pas abouti</h2>
+      <p>Il y a eu un problème de connexion. <strong>Ton avis est conservé</strong> — tu n'as rien perdu.</p>
+      <div class="send-error" id="error-detail">Vérifie ta connexion Internet, puis réessaie.</div>
+      <button type="button" class="btn btn-gold" id="btn-retry">Réessayer l'envoi</button>
+      <p style="margin-top:16px"><a href="../">← Retour au site</a></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  © LinguaLink — Ton avis compte.<br>
+  <a href="../">Accueil du site</a> · Email : <a href="mailto:lingualinkcenter@gmail.com">lingualinkcenter@gmail.com</a>
+</footer>
+
+<script>
+"use strict";
+
+/* ---------- Configuration ---------- */
+var ACCESS_KEY = "952fbf8b-9ca1-4903-9f41-460d1cfdb8b1";
+var ENDPOINT = "https://api.web3forms.com/submit";
+
+/* ---------- État ---------- */
+var rating = 0;
+var lastPayload = null;
+var STAR_LABELS = ["", "Pas terrible", "Pas mal", "Bien", "Très bien", "Excellent"];
+
+var $ = function(id){ return document.getElementById(id); };
+
+function showScreen(id){
+  ["screen-form","screen-sending","screen-done","screen-error"].forEach(function(s){
+    $(s).classList.add("hidden");
+  });
+  $(id).classList.remove("hidden");
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+/* ---------- Étoiles ---------- */
+var starBtns = Array.prototype.slice.call(document.querySelectorAll(".star"));
+function paintStars(){
+  starBtns.forEach(function(btn){
+    var v = parseInt(btn.getAttribute("data-value"), 10);
+    var on = v <= rating;
+    btn.classList.toggle("on", on);
+    btn.setAttribute("aria-checked", on && v === rating ? "true" : "false");
+  });
+  $("star-label").textContent = rating > 0
+    ? STAR_LABELS[rating] + " — " + rating + " / 5"
+    : "Touche une étoile pour noter le site.";
+}
+starBtns.forEach(function(btn){
+  btn.addEventListener("click", function(){
+    rating = parseInt(btn.getAttribute("data-value"), 10);
+    $("err-stars").classList.remove("show");
+    paintStars();
+  });
+});
+
+/* ---------- Cases à cocher : style de la ligne cochée ---------- */
+Array.prototype.slice.call(document.querySelectorAll(".check input")).forEach(function(input){
+  input.addEventListener("change", function(){
+    input.closest(".check").classList.toggle("checked", input.checked);
+  });
+});
+
+/* ---------- Envoi ---------- */
+function buildPayload(){
+  var aide = [];
+  Array.prototype.slice.call(document.querySelectorAll('input[name="aide"]:checked')).forEach(function(input){
+    aide.push(input.value);
+  });
+  var dateStr;
+  try {
+    dateStr = new Date().toLocaleString("fr-FR", { timeZone: "Africa/Casablanca" });
+  } catch (e) {
+    dateStr = new Date().toLocaleString("fr-FR");
+  }
+  return {
+    access_key: ACCESS_KEY,
+    subject: "Nouvel avis sur le site LinguaLink — " + rating + "/5",
+    from_name: "LinguaLink - Ton avis",
+    botcheck: "",
+    note: rating + " / 5 (" + STAR_LABELS[rating] + ")",
+    aide: aide.length ? aide.join(", ") : "—",
+    amelioration: $("amelioration").value.trim() || "—",
+    prenom: $("prenom").value.trim() || "—",
+    contact: $("contact").value.trim() || "—",
+    date: dateStr + " (heure du Maroc)"
+  };
+}
+
+function submitAvis(){
+  lastPayload = buildPayload();
+  showScreen("screen-sending");
+  sendPayload();
+}
+
+function sendPayload(){
+  fetch(ENDPOINT, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Accept": "application/json" },
+    body: JSON.stringify(lastPayload)
+  })
+  .then(function(res){ return res.json().then(function(data){ return { ok: res.ok, data: data }; }); })
+  .then(function(result){
+    if (result.ok && result.data && result.data.success) {
+      showScreen("screen-done");
+    } else {
+      var msg = (result.data && result.data.message) ? result.data.message : "Erreur inconnue.";
+      $("error-detail").textContent = "Le service a répondu : " + msg + " Vérifie ta connexion, puis réessaie.";
+      showScreen("screen-error");
+    }
+  })
+  .catch(function(){
+    $("error-detail").textContent = "Vérifie ta connexion Internet, puis réessaie.";
+    showScreen("screen-error");
+  });
+}
+
+$("avis-form").addEventListener("submit", function(e){
+  e.preventDefault();
+  if (rating === 0) {
+    $("err-stars").classList.add("show");
+    return;
+  }
+  submitAvis();
+});
+
+$("btn-retry").addEventListener("click", function(){
+  showScreen("screen-sending");
+  sendPayload();
+});
+</script>
+</body>
+</html>
