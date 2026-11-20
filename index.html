@@ -594,7 +594,7 @@
         <div class="progress-strip" id="progressStrip">
           <div class="progress-strip-top">
             <strong>Ta progression</strong>
-            <span id="progressText">0 / 15 leçons lues · score quiz total 0 / 45</span>
+            <span id="progressText">0 / 15 leçons lues · score quiz total 0 / 47</span>
           </div>
           <div class="progress-bar"><i id="progressBar"></i></div>
           <div class="progress-strip-foot">
@@ -1421,14 +1421,19 @@
       function markLessonRead(i) {
         if (llProgress.indexOf(i) === -1) { llProgress.push(i); llSave("ll_progress", llProgress); }
       }
+      function quizMax() {
+        var m = 0;
+        LESSON_QUIZ.forEach(function (s) { m += s.length; });
+        return m;
+      }
       function quizTotal() {
         var t = 0;
-        Object.keys(llQuizScores).forEach(function (k) { t += Math.min(3, llQuizScores[k] || 0); });
+        Object.keys(llQuizScores).forEach(function (k) { var m = (LESSON_QUIZ[k] || []).length || 3; t += Math.min(m, llQuizScores[k] || 0); });
         return t;
       }
       function updateProgressUI() {
         var txt = document.getElementById("progressText");
-        if (txt) txt.textContent = llProgress.length + " / 15 leçons lues · score quiz total " + quizTotal() + " / 45";
+        if (txt) txt.textContent = llProgress.length + " / 15 leçons lues · score quiz total " + quizTotal() + " / " + quizMax();
         var bar = document.getElementById("progressBar");
         if (bar) bar.style.width = (llProgress.length / 15 * 100) + "%";
         lessonCards.forEach(function (card, idx) {
@@ -1439,7 +1444,7 @@
             var b1 = document.createElement("span"); b1.className = "chip done"; b1.textContent = "✓ Lue"; zone.appendChild(b1);
           }
           if (llQuizScores[idx] !== undefined) {
-            var b2 = document.createElement("span"); b2.className = "chip"; b2.textContent = "Quiz : " + llQuizScores[idx] + "/3"; zone.appendChild(b2);
+            var b2 = document.createElement("span"); b2.className = "chip"; b2.textContent = "Quiz : " + llQuizScores[idx] + "/" + (LESSON_QUIZ[idx] ? LESSON_QUIZ[idx].length : 3); zone.appendChild(b2);
           }
         });
       }
@@ -1450,7 +1455,8 @@
         var qs = LESSON_QUIZ[i];
         if (!qs) { box.innerHTML = ""; return; }
         currentLessonIndex = i;
-        var state = { done: [false, false, false], good: [false, false, false] };
+        var state = { done: [], good: [] };
+        qs.forEach(function () { state.done.push(false); state.good.push(false); });
         box.innerHTML = "";
         var title = document.createElement("h4");
         title.textContent = "Exercice — vérifie que tu as compris";
@@ -1460,7 +1466,7 @@
         function refreshScore() {
           var n = 0;
           state.good.forEach(function (g) { if (g) n++; });
-          scoreLine.textContent = "Score : " + n + " / 3" + (llQuizScores[i] !== undefined ? " · Meilleur score : " + llQuizScores[i] + "/3" : "");
+          scoreLine.textContent = "Score : " + n + " / " + qs.length + (llQuizScores[i] !== undefined ? " · Meilleur score : " + llQuizScores[i] + "/" + qs.length : "");
         }
         qs.forEach(function (q, qi) {
           var wrap = document.createElement("div");
@@ -1495,8 +1501,9 @@
                 expl.className = "lq-expl bad";
               }
               expl.hidden = false;
-              if (state.done[0] && state.done[1] && state.done[2]) {
-                var total = (state.good[0] ? 1 : 0) + (state.good[1] ? 1 : 0) + (state.good[2] ? 1 : 0);
+              if (state.done.every(function (d) { return d; })) {
+                var total = 0;
+                state.good.forEach(function (g) { if (g) total++; });
                 if (llQuizScores[i] === undefined || total > llQuizScores[i]) { llQuizScores[i] = total; llSave("ll_quiz_scores", llQuizScores); }
                 updateProgressUI();
               }
