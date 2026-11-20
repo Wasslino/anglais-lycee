@@ -512,7 +512,7 @@
           <div class="search-results" id="searchResults" aria-live="polite"></div>
           <div class="stats">
             <div class="stat"><b>48</b><span>PDF d'examens officiels (2ème année Bac)</span></div>
-            <div class="stat"><b>15</b><span>leçons &amp; fiches en accès libre</span></div>
+            <div class="stat"><b>22</b><span>leçons &amp; fiches en accès libre</span></div>
             <div class="stat"><b>3</b><span>niveaux du lycée</span></div>
             <div class="stat"><b>100 %</b><span>gratuit pour démarrer</span></div>
           </div>
@@ -538,8 +538,15 @@
               <li>Present Simple vs Present Continuous</li>
               <li>Articles : a / an / the</li>
               <li>Vocabulaire — Éducation &amp; vie scolaire</li>
+              <li>Countables &amp; Quantifiers — some / any, much / many</li>
+              <li>There is / There are + Prepositions of place</li>
+              <li>Can / Can't + Gerunds — abilities &amp; hobbies</li>
+              <li>Past Simple — regular &amp; irregular verbs</li>
+              <li>Comparatives &amp; Superlatives</li>
+              <li>Will vs Be going to — future plans</li>
+              <li>Writing — the paragraph</li>
             </ul>
-            <p class="level-status done">✓ Contenu disponible — les 3 fiches de ce niveau sont en ligne.</p>
+            <p class="level-status done">✓ Contenu disponible — les 10 fiches de ce niveau sont en ligne.</p>
             <div class="actions"><button class="btn btn-ghost" type="button" data-goto-level="tc">Voir les fiches Tronc Commun</button></div>
             </div>
           </article>
@@ -580,7 +587,7 @@
 
       <!-- ======== LEÇONS ======== -->
       <section id="lecons">
-        <div class="sec-head"><h2>Leçons &amp; fiches</h2><span class="count">Programme officiel — Tronc Commun, 1ère &amp; 2ème année du Baccalauréat · 15 fiches</span></div>
+        <div class="sec-head"><h2>Leçons &amp; fiches</h2><span class="count">Programme officiel — Tronc Commun, 1ère &amp; 2ème année du Baccalauréat · 22 fiches</span></div>
         <p class="sec-sub">Chaque leçon suit le même format : la règle, la formule en évidence, des exemples, et le piège qui tombe à l'examen. Filtre par niveau pour ne voir que ce qui te concerne.</p>
 
         <div class="lesson-filters" role="group" aria-label="Filtrer les leçons par niveau">
@@ -594,7 +601,7 @@
         <div class="progress-strip" id="progressStrip">
           <div class="progress-strip-top">
             <strong>Ta progression</strong>
-            <span id="progressText">0 / 15 leçons lues · score quiz total 0 / 50</span>
+            <span id="progressText">0 / 22 leçons lues · score quiz total 0 / 71</span>
           </div>
           <div class="progress-bar"><i id="progressBar"></i></div>
           <div class="progress-strip-foot">
@@ -820,7 +827,7 @@
     </footer>
 
     <script>
-      /* ================= Données — Leçons (15 fiches, 3 niveaux) ================= */
+      /* ================= Données — Leçons (22 fiches, 3 niveaux) ================= */
             var LESSONS = [
         /* --- Tronc Commun --- */
         { title: "Present Simple vs Present Continuous", type: "Grammaire", level: "tc", levelLabel: "Tronc Commun", unit: "Bases — Tronc Commun", desc: "Habitudes vs action en cours : I play / I am playing, les mots-signaux (every day, now, look!) et l'erreur classique des verbes d'état.",
@@ -929,7 +936,56 @@
             examples: ["Vrai/Faux : la justification doit être une citation du texte.", "Référence : « they » renvoie au nom pluriel le plus proche avant.", "Choix du titre : le meilleur titre couvre TOUT le texte, pas un détail."],
             signalsTitle: "Le vocabulaire de la méthode", signals: "skimming = survol · scanning = recherche ciblée · justify = citer · refer to = renvoie à",
             trap: "Pour les Vrai/Faux, une réponse sans justification (ou avec une mauvaise justification) vaut zéro, même si Vrai/Faux est correct. Cite toujours le passage.",
-            exo: [{ q: "Que faut-il lire EN PREMIER : le texte ou les questions ?", a: "Les questions — pour savoir quoi chercher dans le texte." }, { q: "Vrai ou Faux ? « On peut justifier avec ses propres mots. »", a: "Faux — il faut citer le texte (ou le paraphraser fidèlement)." }] } }
+            exo: [{ q: "Que faut-il lire EN PREMIER : le texte ou les questions ?", a: "Les questions — pour savoir quoi chercher dans le texte." }, { q: "Vrai ou Faux ? « On peut justifier avec ses propres mots. »", a: "Faux — il faut citer le texte (ou le paraphraser fidèlement)." }] } },
+        { title: "Countables & Quantifiers — some / any, much / many", type: "Grammaire", level: "tc", levelLabel: "Tronc Commun", unit: "Thème — Alimentation & santé", desc: "Compter ce qui se compte (et ce qui ne se compte pas) : some/any, much/many, a few/a little, a lot of — avec les cas du programme : food, health.",
+          content: { purpose: "Cette leçon t'apprend à dire combien il y a de quelque chose : some s'utilise avec les comptables (I have some apples) comme avec les non comptables (I have some bread). Tu sauras choisir some, any, much, many, a few, a little et a lot of sans hésiter.",
+            formula: "some + affirmatif · any + question/négatif · <strong>much</strong> + non comptable · <strong>many</strong> + comptable · <strong>a few</strong> + comptable (un peu) · <strong>a little</strong> + non comptable (un peu) · <strong>a lot of</strong> + les deux",
+            examples: ["There are <strong>some</strong> apples in the kitchen, but there is not <strong>any</strong> bread.", "How <strong>much</strong> water do you drink every day? — I drink <strong>a lot of</strong> water.", "I have <strong>a few</strong> friends in Casablanca and <strong>a little</strong> homework to finish."],
+            signalsTitle: "Mots-signaux", signals: "some = du / des (affirmatif, offre) · any = du / des (question, négatif) · much + water, money, time · many + apples, books, friends · a few + comptable · a little + non comptable · a lot of = beaucoup",
+            trap: "On ne dit pas « I have much friends » : much ne va pas avec un nom comptable au pluriel, et on évite much dans une phrase affirmative. On dit « I have a lot of friends » ou « I have many friends ». Attention aussi : informations et homeworks n'existent pas en anglais, on dit « information » et « homework », sans -s.",
+            exo: [{ q: "Complète : There is not ___ milk in the fridge. (some / any)", a: "any — dans une phrase négative, on utilise any, pas some." }, { q: "Traduis : J'ai un peu d'argent pour acheter du pain à Marrakech.", a: "I have a little money to buy bread in Marrakech. — a little + nom non comptable (money)." }] } },
+        { title: "There is / There are + Prepositions of place", type: "Grammaire", level: "tc", levelLabel: "Tronc Commun", unit: "Thème — Maison & voisinage", desc: "Décrire un lieu : There is / There are, et les prépositions in, on, under, next to, between, in front of — pour parler de sa maison et de son quartier.",
+          content: { purpose: "Cette leçon sert à décrire un lieu et à dire ce qui s'y trouve : There is a kitchen in my house. ou There are two bedrooms. Tu apprends aussi à situer les objets et les pièces avec in, on, under, next to, between, in front of, behind et near.",
+            formula: "<strong>There is</strong> + singulier · <strong>There are</strong> + pluriel · <strong>There isn't</strong> / <strong>There aren't</strong> pour la négation · <strong>Is there...?</strong> / <strong>Are there...?</strong> pour la question",
+            examples: ["<strong>There is</strong> a big <strong>sofa</strong> in the living room.", "<strong>There are</strong> two <strong>chairs next to</strong> the table in the kitchen.", "<strong>There is</strong> a garden <strong>behind</strong> my house in Casablanca."],
+            signalsTitle: "Mots-signaux", signals: "a / an + singulier · some / two / three + pluriel · in · on · under · next to · between · in front of · behind · near",
+            trap: "Ne confonds pas There is / There are (il y a) avec It is (c'est) : ne dis pas « It is a book on the table » pour dire qu'il y a un livre, dis « There is a book on the table ». Et attention à l'accord : on dit There is a book mais There are two books, jamais There is two books.",
+            exo: [{ q: "Complète : ___ a kitchen in my house. (There is / There are)", a: "There is a kitchen in my house. — kitchen est singulier, donc on utilise There is." }, { q: "Traduis en anglais : Il y a deux chambres dans ma maison à Marrakech.", a: "There are two bedrooms in my house in Marrakech. — bedrooms est pluriel, donc on utilise There are." }] } },
+        { title: "Can / Can't + Gerunds — abilities & hobbies", type: "Grammaire", level: "tc", levelLabel: "Tronc Commun", unit: "Thème — Loisirs & sports", desc: "Dire ce qu'on sait faire et ce qu'on aime faire : can/can't + base verbale, like/love/hate + verbe en -ing — le vocabulaire des loisirs et du sport.",
+          content: { purpose: "Cette leçon sert à dire ce qu'on sait faire et ce qu'on aime faire. Exemples : I can swim. et I like playing football.",
+            formula: "<strong>can / can't</strong> + base verbale · <strong>like / love / hate / enjoy</strong> + verbe en <strong>-ing</strong>",
+            examples: ["I <strong>can swim</strong> very well, but I <strong>can't drive</strong>.", "She <strong>loves reading</strong> books and he <strong>likes playing</strong> football.", "<strong>Can you dance</strong>? — Yes, I <strong>can</strong>."],
+            signalsTitle: "Mots-signaux", signals: "can · can't · like · love · hate · enjoy · play · swim · read · listen to music",
+            trap: "Après can, on ne met jamais to, -ing ou -s : « I can to swim » est faux, on dit « I can swim ». Après like, on ne met jamais la base verbale seule : « I like play football » est faux, on dit « I like playing football ».",
+            exo: [{ q: "Complète : She ___ play the guitar very well. (can)", a: "She can play the guitar very well. Après can, on met la base verbale play, sans to et sans -s." }, { q: "Traduis en anglais : J'aime écouter de la musique.", a: "I like listening to music. Après like, le verbe prend -ing : listening." }] } },
+        { title: "Past Simple — regular & irregular verbs", type: "Grammaire", level: "tc", levelLabel: "Tronc Commun", unit: "Récit — Tronc Commun", desc: "Raconter le passé : les verbes réguliers en -ed et les irréguliers à apprendre (go/went, see/saw…), avec les mots-signaux : yesterday, last week, ago.",
+          content: { purpose: "Le Past Simple sert à raconter une action terminée dans le passé, par exemple : I watched a football match yesterday. On l'utilise avec yesterday, last week ou ago.",
+            formula: "Sujet + <strong>verbe au passé</strong> : régulier + <strong>-ed</strong> (play → played ; stop → stopped, study → studied, like → liked) ou irrégulier à apprendre (go → <strong>went</strong>, see → saw, have → had, do → did, take → took, buy → bought, get → got, come → came, eat → ate, write → wrote). Négation : <strong>didn't + base verbale</strong>. Question : <strong>Did + sujet + base verbale</strong> ?",
+            examples: ["Yesterday, I <strong>played</strong> football with my friends.", "Last week, we <strong>went</strong> to Marrakech on holiday.", "She <strong>didn't watch</strong> the match last night."],
+            signalsTitle: "Mots-signaux", signals: "yesterday · last night · last week · last month · two days ago · in 2020",
+            trap: "Après didn't et Did, le verbe reste à la base verbale : « Did you went to school yesterday ? » est faux, on dit « Did you go to school yesterday ? ».",
+            exo: [{ q: "Complète : Yesterday, I ______ (watch) a film.", a: "watched — verbe régulier, on ajoute -ed à watch." }, { q: "Traduis : Je n'ai pas vu le match hier soir.", a: "I didn't see the match last night. — après didn't, le verbe see reste à la base verbale, jamais saw." }] } },
+        { title: "Comparatives & Superlatives", type: "Grammaire", level: "tc", levelLabel: "Tronc Commun", unit: "Thème — Voyage & environnement", desc: "Comparer pour décrire : bigger than, the biggest, more interesting than, the most beautiful — pour parler des villes, des voyages et de l'environnement.",
+          content: { purpose: "Pour comparer deux choses, on utilise le comparatif ; pour dire qu'une chose est la plus ... d'un groupe, on utilise le superlatif. Exemples : Casablanca is bigger than Fès. Marrakech is the most beautiful city in Morocco.",
+            formula: "Adjectif court : <strong>adjectif + -er + than</strong> (bigger than) · Adjectif long : <strong>more + adjectif + than</strong> (more interesting than) · Superlatif : <strong>the + adjectif + -est</strong> (the biggest) ou <strong>the most + adjectif</strong> (the most beautiful)",
+            examples: ["Casablanca is <strong>bigger than</strong> Fès.", "Marrakech is <strong>more interesting than</strong> a small village.", "The Hassan II Mosque is <strong>the most beautiful</strong> building in Casablanca."],
+            signalsTitle: "Mots-signaux", signals: "than · the · the most · -er · -est · better · the best · worse · the worst",
+            trap: "Ne dis jamais « more bigger » ou « the most biggest » : on choisit UNE seule forme, -er ou more, jamais les deux. Faux : « This city is more bigger than Fès. » Correct : « This city is bigger than Fès. » N'oublie pas non plus : than après le comparatif, the devant le superlatif. Irréguliers : good → better → the best ; bad → worse → the worst. Orthographe : big → bigger (on double la consonne), happy → happier (y devient i).",
+            exo: [{ q: "Complète : Casablanca is ___ (big) than Rabat.", a: "bigger — big est un adjectif court, on double le g et on ajoute -er + than." }, { q: "Traduis : Marrakech est la plus belle ville du Maroc.", a: "Marrakech is the most beautiful city in Morocco. — beautiful est un adjectif long, donc the most + adjectif, avec the devant le superlatif." }] } },
+        { title: "Will vs Be going to — future plans", type: "Grammaire", level: "tc", levelLabel: "Tronc Commun", unit: "Thème — Projets futurs", desc: "Parler de l'avenir : will pour les décisions et les promesses, be going to pour les projets et les prévisions — sans les confondre.",
+          content: { purpose: "Cette leçon t'apprend à parler de l'avenir en anglais : utilise will pour une décision prise au moment où tu parles (I will help you.) et be going to pour un projet déjà décidé (I am going to study in Rabat.).",
+            formula: "<strong>will</strong> + base verbale = décision, promesse, offre, prédiction · <strong>be going to</strong> + base verbale = projet déjà décidé, prévision visible",
+            examples: ["I'm thirsty. — <strong>I'll</strong> bring you some water.", "We <strong>are going to</strong> visit Marrakech next week.", "Look at the clouds! It <strong>is going to</strong> rain."],
+            signalsTitle: "Mots-signaux", signals: "I think · probably · I promise · now · soon · next week · tomorrow · this weekend · Look!",
+            trap: "Ne dis pas « I am going to help you. » pour une décision spontanée : au moment où tu parles, dis « I will help you. » ; going to est réservé aux projets déjà décidés avant de parler.",
+            exo: [{ q: "Complète : I promise I ___ help you with your homework. (will / am going to)", a: "I promise I will help you. — Une promesse se fait avec will." }, { q: "Traduis en anglais : Nous allons visiter Fès ce week-end. (projet déjà décidé)", a: "We are going to visit Fez this weekend. — Le projet est déjà décidé, donc be going to." }] } },
+        { title: "Writing — the paragraph", type: "Writing", level: "tc", levelLabel: "Tronc Commun", unit: "Méthode — Tronc Commun", desc: "Écrire un paragraphe correct : une phrase d'accroche, des détails qui l'appuient, et les mots de liaison qui relient les idées.",
+          content: { purpose: "Cette leçon t'apprend à écrire un paragraphe clair en anglais : une seule idée, une phrase d'accroche, puis des détails avec des exemples. Tu verras comment utiliser Firstly, For example et In conclusion pour relier tes idées.",
+            formula: "<strong>Topic sentence</strong> + <strong>supporting details</strong> + <strong>concluding sentence</strong> = un paragraphe de 4 à 6 phrases sur une seule idée.",
+            examples: ["<strong>My school</strong> is a friendly place to learn and to meet my friends.", "<strong>Firstly</strong>, the teachers are kind. <strong>Secondly</strong>, the classrooms are clean. <strong>For example</strong>, we have a big library with many books.", "<strong>My favourite sport is football.</strong> <strong>Firstly</strong>, it is fun and easy to play with my friends. <strong>Also</strong>, it keeps me healthy and strong. <strong>Finally</strong>, I like watching matches in my city. <strong>In conclusion</strong>, football is the best sport for me."],
+            signalsTitle: "Mots-clés du thème", signals: "Firstly · Secondly · Also · For example · Finally · In conclusion · topic sentence · supporting details · concluding sentence",
+            trap: "Un paragraphe n'est pas une liste de phrases sans lien : sans mots de liaison et sans phrase de fin, on perd des points. Ne commence jamais chaque phrase par I think. Faute : « I think my school is big. I think the teachers are nice. I think I like it. » Correction : « My school is big. Firstly, the teachers are nice. In conclusion, I like my school very much. »",
+            exo: [{ q: "Complète avec les bons mots de liaison : « My city is beautiful. ____, the streets are clean. ____, the people are friendly. » (Firstly / Secondly)", a: "Firstly, the streets are clean. Secondly, the people are friendly. — Firstly introduit le premier détail, Secondly le deuxième." }, { q: "Traduis en anglais : « Ma ville est calme. Par exemple, il y a un grand parc. En conclusion, j'aime ma ville. »", a: "My city is quiet. For example, there is a big park. In conclusion, I like my city. : For example introduit un exemple, In conclusion annonce la phrase de fin." }] } },
       ];
 
       var YEARS = [2025, 2024, 2023, 2022, 2021, 2020];
@@ -1418,6 +1474,41 @@
           { q: "What should you read FIRST?", options: ["The text", "The questions", "The title only", "The answers"], answer: 1, expl: "Lire les questions d'abord, pour savoir quoi chercher." },
           { q: "For True/False questions, a good justification is…", options: ["your own opinion", "a quotation from the text", "nothing — True/False is enough", "a guess"], answer: 1, expl: "Sans justification tirée du texte, la réponse vaut zéro." },
           { q: "“They” in a text usually refers to…", options: ["the nearest plural noun before it", "the writer", "the first word of the text", "the reader"], answer: 0, expl: "Un pronom renvoie au nom le plus proche avant, de même nombre." }
+        ],
+        [ /* 15 — Countables & Quantifiers — some / any, much / many */
+          { q: "Choose the correct sentence.", options: ["I have some rice for lunch.", "I have some rices for lunch.", "I have many rice for lunch.", "I have a few rice for lunch."], answer: 0, expl: "rice est non comptable : pas de -s, et some convient dans une phrase affirmative ; many et a few ne vont qu'avec les comptables." },
+          { q: "___ friends do you have at school?", options: ["How much", "How many", "How little", "How some"], answer: 1, expl: "friends est comptable au pluriel, on utilise How many ; How much est pour les non comptables." },
+          { q: "There is ___ sugar in my tea. I need a little more.", options: ["many", "a few", "a little", "any"], answer: 2, expl: "sugar est non comptable, et a little veut dire un peu ; a few ne va qu'avec les comptables." }
+        ],
+        [ /* 16 — There is / There are + Prepositions of place */
+          { q: "Choisis la bonne phrase : ___ a table in the kitchen.", options: ["There is a table in the kitchen.", "There are a table in the kitchen.", "It is a table in the kitchen.", "There is tables in the kitchen."], answer: 0, expl: "table est singulier, donc There is + a. There are s'utilise avec le pluriel." },
+          { q: "Choisis la bonne phrase : ___ two windows in my bedroom.", options: ["There is two windows in my bedroom.", "There are two windows in my bedroom.", "There is a two windows in my bedroom.", "It are two windows in my bedroom."], answer: 1, expl: "windows est pluriel, donc There are. There is s'utilise avec le singulier." },
+          { q: "Où est le chat ? The cat is ___ the sofa. (sous le canapé)", options: ["on the sofa", "next to the sofa", "under the sofa", "in front of the sofa"], answer: 2, expl: "under veut dire sous. On veut dire sur, next to veut dire à côté de, in front of veut dire devant." }
+        ],
+        [ /* 17 — Can / Can't + Gerunds — abilities & hobbies */
+          { q: "She ___ swim very well.", options: ["can", "cans", "to can", "can to"], answer: 0, expl: "Après can, on met la base verbale : can swim. Can ne prend jamais -s." },
+          { q: "I love ___ football on Sundays.", options: ["play", "playing", "to play", "plays"], answer: 1, expl: "Après love, le verbe prend obligatoirement -ing : love playing." },
+          { q: "___ you ride a bike?", options: ["Does", "Is", "Can", "Do can"], answer: 2, expl: "Pour demander si on sait faire quelque chose, on utilise Can you... ?" }
+        ],
+        [ /* 18 — Past Simple — regular & irregular verbs */
+          { q: "Yesterday, I ______ to school by bus.", options: ["go", "went", "gone", "going"], answer: 1, expl: "go est irrégulier : son passé est went, et avec yesterday on utilise le Past Simple." },
+          { q: "She ______ TV last night.", options: ["watch", "watches", "watched", "watching"], answer: 2, expl: "watch est régulier : on ajoute -ed, donc watched, avec last night." },
+          { q: "______ you eat breakfast this morning ?", options: ["Do", "Does", "Did", "Are"], answer: 2, expl: "Pour une question au passé, on utilise Did + base verbale : Did you eat... ?" }
+        ],
+        [ /* 19 — Comparatives & Superlatives */
+          { q: "Casablanca is ___ than Fès.", options: ["bigger", "more big", "biggest", "the biggest"], answer: 0, expl: "big est un adjectif court : bigger than. « more big » est faux, on ne combine jamais more et -er." },
+          { q: "Marrakech is ___ than a small village.", options: ["interestinger", "more interesting", "most interesting", "the interestingest"], answer: 1, expl: "interesting est un adjectif long : more + adjectif + than. On ne peut pas ajouter -er à un adjectif long." },
+          { q: "The Atlas Mountains are ___ mountains in Morocco.", options: ["taller", "more tall", "the tallest", "the most tallest"], answer: 2, expl: "Superlatif d'un adjectif court : the + tallest. « the most tallest » combine deux formes, c'est faux." }
+        ],
+        [ /* 20 — Will vs Be going to — future plans */
+          { q: "Your friend is thirsty. You decide now to help. What do you say?", options: ["I will bring you some water.", "I am going to bring you some water.", "I bring you some water.", "I will brings you some water."], answer: 0, expl: "C'est une décision spontanée au moment où l'on parle : on utilise will." },
+          { q: "We ___ visit Agadir next summer. We already bought the tickets.", options: ["will", "are going to", "go to", "going to"], answer: 1, expl: "Le projet est déjà décidé et les billets sont achetés : on utilise be going to." },
+          { q: "Look at the dark clouds! It ___ rain.", options: ["will rains", "is going", "is going to", "will to rain"], answer: 2, expl: "La pluie est prévisible car on voit les nuages : on utilise be going to pour une prévision visible." }
+        ],
+        [ /* 21 — Writing — the paragraph */
+          { q: "Quelle phrase est une bonne topic sentence ?", options: ["My school is a great place to study.", "Firstly, the teachers are kind.", "In conclusion, I like my school.", "It is big and clean."], answer: 0, expl: "La topic sentence annonce l'idée du paragraphe : My school is a great place to study. Les autres phrases sont des détails ou une conclusion." },
+          { q: "Quel mot de liaison introduit un exemple ?", options: ["Firstly", "For example", "Finally", "Also"], answer: 1, expl: "For example introduit un exemple. Firstly introduit le premier détail, Finally annonce la fin, Also ajoute une idée." },
+          { q: "Combien de phrases doit contenir un bon paragraphe de Tronc Commun ?", options: ["1 ou 2 phrases", "10 phrases ou plus", "4 à 6 phrases", "Une seule phrase très longue"], answer: 2, expl: "Un bon paragraphe a 4 à 6 phrases : une phrase d'accroche, 2 ou 3 détails, et une phrase de fin." }
         ]
       ];
 
@@ -1436,9 +1527,9 @@
       }
       function updateProgressUI() {
         var txt = document.getElementById("progressText");
-        if (txt) txt.textContent = llProgress.length + " / 15 leçons lues · score quiz total " + quizTotal() + " / " + quizMax();
+        if (txt) txt.textContent = llProgress.length + " / 22 leçons lues · score quiz total " + quizTotal() + " / " + quizMax();
         var bar = document.getElementById("progressBar");
-        if (bar) bar.style.width = (llProgress.length / 15 * 100) + "%";
+        if (bar) bar.style.width = (llProgress.length / 22 * 100) + "%";
         lessonCards.forEach(function (card, idx) {
           var zone = card.querySelector(".progress-badges");
           if (!zone) return;
