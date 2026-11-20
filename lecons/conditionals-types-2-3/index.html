@@ -230,7 +230,8 @@
         function renderQuiz() {
           var box = document.getElementById("readerQuiz");
           if (!box) return;
-          var state = { done: [false, false, false], good: [false, false, false] };
+          var state = { done: [], good: [] };
+          QUIZ.forEach(function () { state.done.push(false); state.good.push(false); });
           box.innerHTML = "";
           var title = document.createElement("h2");
           title.textContent = "Exercice — vérifie que tu as compris";
@@ -240,7 +241,7 @@
           function refreshScore() {
             var n = 0;
             state.good.forEach(function (g) { if (g) n++; });
-            scoreLine.textContent = "Score : " + n + " / 3" + (llQuizScores[LESSON_INDEX] !== undefined ? " · Meilleur score : " + llQuizScores[LESSON_INDEX] + "/3" : "");
+            scoreLine.textContent = "Score : " + n + " / " + QUIZ.length + (llQuizScores[LESSON_INDEX] !== undefined ? " · Meilleur score : " + llQuizScores[LESSON_INDEX] + "/" + QUIZ.length : "");
           }
           QUIZ.forEach(function (q, qi) {
             var wrap = document.createElement("div");
@@ -275,8 +276,9 @@
                   expl.className = "lq-expl bad";
                 }
                 expl.hidden = false;
-                if (state.done[0] && state.done[1] && state.done[2]) {
-                  var total = (state.good[0] ? 1 : 0) + (state.good[1] ? 1 : 0) + (state.good[2] ? 1 : 0);
+                if (state.done.every(function (d) { return d; })) {
+                  var total = 0;
+                  state.good.forEach(function (g) { if (g) total++; });
                   if (llQuizScores[LESSON_INDEX] === undefined || total > llQuizScores[LESSON_INDEX]) { llQuizScores[LESSON_INDEX] = total; llSave("ll_quiz_scores", llQuizScores); }
                 }
                 refreshScore();
