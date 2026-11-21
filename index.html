@@ -582,7 +582,7 @@
             <p>L'année du diplôme : programme complet, méthode d'examen et entraînement sur les vraies annales du ministère.</p>
             <ul>
               <li>9 leçons &amp; fiches complètes (grammaire, writing, reading)</li>
-              <li>50 PDF d'examens nationaux 2020–2026, corrigés compris</li>
+              <li>53 PDF d'examens nationaux 2020–2026, corrigés compris</li>
               <li>Quiz du jour et préparation ciblée (Reading 15 · Language 15 · Writing 10)</li>
             </ul>
             <p class="level-status done">✓ Contenu complet — disponible dès maintenant.</p>
@@ -670,7 +670,7 @@
 
         <p class="exam-count" id="examCount"></p>
         <div class="grid c3" id="examGrid"></div>
-        <p class="exam-note">50 PDF au total (sujets et corrigés). Le rattrapage 2020 n'est pas publié par le ministère en ligne, 3 corrigés de 2021 sont absents de la source. Pour 2025 et 2026, seuls les sujets Sciences sont disponibles en PDF pour l'instant : le corrigé Sciences 2025 est réservé aux membres du site source, et les papiers Lettres et Sciences Humaines ne sont publiés qu'en ligne, sans PDF — la bibliothèque reflète exactement ce qui existe.</p>
+        <p class="exam-note">53 PDF au total (sujets et corrigés). Le rattrapage 2020 n'est pas publié par le ministère en ligne, 3 corrigés de 2021 sont absents de la source. Les sujets Lettres 2025 et 2026 et Sciences Humaines 2025 sont des retranscriptions du sujet officiel (texte publié en ligne, sans PDF d'origine) — la source est indiquée dans chaque PDF. Le corrigé Sciences 2025 est réservé aux membres du site source ; le rattrapage 2026 n'est pas encore publié.</p>
       </section>
 
       <!-- ======== QUIZ ======== -->
@@ -1878,18 +1878,15 @@
         "sh|2021|rattrapage|corrige": 1,
         "sciences|2025|normale|corrige": 1,
         "sciences|2025|rattrapage|corrige": 1,
-        "lettres|2025|normale|sujet": 1,
         "lettres|2025|normale|corrige": 1,
         "lettres|2025|rattrapage|sujet": 1,
         "lettres|2025|rattrapage|corrige": 1,
-        "sh|2025|normale|sujet": 1,
         "sh|2025|normale|corrige": 1,
         "sh|2025|rattrapage|sujet": 1,
         "sh|2025|rattrapage|corrige": 1,
         "sciences|2026|normale|corrige": 1,
         "sciences|2026|rattrapage|sujet": 1,
         "sciences|2026|rattrapage|corrige": 1,
-        "lettres|2026|normale|sujet": 1,
         "lettres|2026|normale|corrige": 1,
         "lettres|2026|rattrapage|sujet": 1,
         "lettres|2026|rattrapage|corrige": 1,
@@ -1915,7 +1912,7 @@
                  (state.track === "all" || e.track === state.track);
         });
         document.getElementById("examCount").innerHTML =
-          "<b>" + shown.length + " examen" + (shown.length > 1 ? "s" : "") + "</b> affiché" + (shown.length > 1 ? "s" : "") + " — bibliothèque complète : 50 PDF téléchargés (2ème année du Baccalauréat)";
+          "<b>" + shown.length + " examen" + (shown.length > 1 ? "s" : "") + "</b> affiché" + (shown.length > 1 ? "s" : "") + " — bibliothèque complète : 53 PDF téléchargés (2ème année du Baccalauréat)";
         if (!shown.length) {
           grid.innerHTML = '<p class="exam-note">Aucun examen pour cette combinaison — le rattrapage 2020, par exemple, n\'a pas été publié en ligne.</p>';
           return;
