@@ -301,10 +301,10 @@
       /* Musique douce (bouton « Musique » dans l'en-tête) : « Happy Piano Music With Light Rhythm »
          d'Alex Morgan — licence CC BY 4.0
          (https://creativecommons.org/licenses/by/4.0/). Fichier local :
-         ../../assets/musique-douce.mp3. Jamais de lecture automatique : la musique est éteinte à la
-         première visite et ne démarre qu'au clic sur le bouton. Le choix est
-         mémorisé (localStorage, clé « ll_music ») ; si l'élève l'avait laissée
-         allumée, la lecture reprend à son premier clic sur la page. */
+         ../../assets/musique-douce.mp3. La musique est allumée par défaut : elle essaie de démarrer dès le chargement
+         de la page ; si le navigateur bloque la lecture automatique (il exige un premier
+         geste), elle démarre au premier clic ou toucher sur la page. L'élève peut l'éteindre
+         avec le bouton ; son choix est mémorisé (localStorage, clé « ll_music »). */
       (function () {
         var BTN_ID = "musicBtn";
         var KEY = "ll_music";
@@ -372,10 +372,10 @@
             if (audio) audio.pause();
           }
         });
-        if (loadPref() === "on") {
+        if (loadPref() !== "off") {
           wanted = true;
           setBtn(true);
-          armResume();
+          tryPlay();
         }
       })();
     </script>
