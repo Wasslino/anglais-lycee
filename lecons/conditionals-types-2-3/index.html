@@ -84,9 +84,9 @@
       .site-header p { margin: 8px 0 0; color: #d9d0b8; font-size: .95rem; }
       .back-link { display: inline-block; margin-top: 14px; color: #fff; font-size: .85rem; text-decoration: none; border: 1px solid rgba(255,255,255,.45); border-radius: 999px; padding: 6px 14px; }
       .back-link:hover { background: rgba(255,255,255,.12); }
-      .music-btn { display: inline-block; margin-top: 10px; margin-left: 8px; font: inherit; font-size: .85rem; color: #fff; background: transparent; border: 1px solid rgba(255,255,255,.45); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+      .music-btn { display: inline-block; margin-top: 10px; margin-left: 8px; font: inherit; font-size: .85rem; color: #fff; background: transparent; border: 1px solid rgba(255,255,255,.45); border-radius: 999px; padding: 6px 14px; cursor: pointer; white-space: nowrap; flex: none; }
       .music-btn:hover { background: rgba(255,255,255,.12); }
-      .music-btn.on { background: var(--gold); border-color: transparent; font-weight: 700; }
+      .music-btn.on { background: var(--gold); border-color: transparent; }
 
       main { max-width: 860px; margin: 0 auto; padding: 28px 18px 40px; }
 
@@ -158,8 +158,8 @@
       </div>
       <p>Anglais au lycée Maroc</p>
       <a class="back-link" href="../../#lecons">← Toutes les leçons</a>
-      <!-- Musique douce : Gymnopédie No. 1 d'Erik Satie, interprétée par Kevin MacLeod — licence CC BY 3.0 -->
-      <button type="button" id="musicBtn" class="music-btn" aria-pressed="false" title="Musique douce : Gymnopédie No. 1 d'Erik Satie, interprétée par Kevin MacLeod — licence CC BY 3.0">♪ Musique</button>
+      <!-- Musique douce : « Happy Piano Music With Light Rhythm » d'Alex Morgan — licence CC BY 4.0 -->
+      <button type="button" id="musicBtn" class="music-btn" aria-pressed="false" title="Musique douce : « Happy Piano Music With Light Rhythm » d'Alex Morgan — licence CC BY 4.0">♪ Musique</button>
     </header>
     <main>
       <article class="reader">
@@ -244,7 +244,7 @@
     <footer>
       © LinguaLink — Conditionals &amp; Wishes.<br />
       <a href="../../#lecons">Toutes les leçons</a> · <a href="../../">Accueil du site</a> · <a href="mailto:lingualinkcenter@gmail.com">lingualinkcenter@gmail.com</a> · WhatsApp : 0650 41 39 04<br />
-      Musique : « Gymnopédie No. 1 » d'Erik Satie, interprétée par Kevin MacLeod (incompetech.com), licence <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+      Musique : « Happy Piano Music With Light Rhythm » d'Alex Morgan, licence <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
     </footer>
     <script>
       (function () {
@@ -337,9 +337,9 @@
       })();
     </script>
     <script>
-      /* Musique douce (bouton « Musique » dans l'en-tête) : Gymnopédie No. 1
-         d'Erik Satie, interprétée par Kevin MacLeod — licence CC BY 3.0
-         (https://creativecommons.org/licenses/by/3.0). Fichier local :
+      /* Musique douce (bouton « Musique » dans l'en-tête) : « Happy Piano Music With Light Rhythm »
+         d'Alex Morgan — licence CC BY 4.0
+         (https://creativecommons.org/licenses/by/4.0/). Fichier local :
          ../../assets/musique-douce.mp3. Jamais de lecture automatique : la musique est éteinte à la
          première visite et ne démarre qu'au clic sur le bouton. Le choix est
          mémorisé (localStorage, clé « ll_music ») ; si l'élève l'avait laissée
@@ -369,7 +369,6 @@
         function setBtn(on) {
           btn.setAttribute("aria-pressed", on ? "true" : "false");
           btn.classList.toggle("on", on);
-          btn.textContent = on ? "\u266a Musique : en cours" : "\u266a Musique";
         }
         function ensureAudio() {
           if (!audio) {
