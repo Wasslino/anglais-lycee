@@ -462,6 +462,9 @@
       }
       .topnav a.nav-cta { background: var(--gold); color: #fff; font-weight: 700; }
       .topnav a.nav-cta:hover, .topnav a.nav-cta:focus-visible { filter: brightness(1.08); color: #fff; }
+      .music-btn { font: inherit; font-size: 0.92rem; padding: 7px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.45); background: transparent; color: #e9e2cf; cursor: pointer; white-space: nowrap; }
+      .music-btn:hover, .music-btn:focus-visible { background: rgba(255,255,255,0.12); color: #fff; }
+      .music-btn.on { background: var(--gold); border-color: transparent; color: #fff; font-weight: 700; }
       /* ---------- Boutons d'action du héros ---------- */
       .hero-cta { display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0 2px; }
       .hero-cta .btn-ghost { color: #fff; border-color: rgba(255,255,255,0.6); background: transparent; }
@@ -496,6 +499,8 @@
           <a href="#pack">Pack Bac</a>
           <a href="#cours" class="nav-cta">Cours en direct</a>
         </nav>
+          <!-- Musique douce : Gymnopédie No. 1 d'Erik Satie, interprétée par Kevin MacLeod — licence CC BY 3.0 -->
+          <button type="button" id="musicBtn" class="music-btn" aria-pressed="false" title="Musique douce : Gymnopédie No. 1 d'Erik Satie, interprétée par Kevin MacLeod — licence CC BY 3.0">♪ Musique</button>
       </div>
     </header>
 
@@ -829,7 +834,7 @@
             <a href="avis/">Ton avis</a>
           </div>
         </div>
-        <p class="fine">Examens : sujets et corrigés officiels du ministère de l'Éducation nationale (2ème année du Baccalauréat uniquement). Photos : Pexels (libres de droits).</p>
+        <p class="fine">Examens : sujets et corrigés officiels du ministère de l'Éducation nationale (2ème année du Baccalauréat uniquement). Photos : Pexels (libres de droits). Musique : « Gymnopédie No. 1 » d'Erik Satie, interprétée par Kevin MacLeod (incompetech.com), licence <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
       </div>
     </footer>
 
@@ -2085,6 +2090,89 @@
         var i = parseInt(m[1], 10);
         if (i < 0 || i >= LESSONS.length) return;
         showLesson(i, false);
+      })();
+    </script>
+    <script>
+      /* Musique douce (bouton « Musique » dans l'en-tête) : Gymnopédie No. 1
+         d'Erik Satie, interprétée par Kevin MacLeod — licence CC BY 3.0
+         (https://creativecommons.org/licenses/by/3.0). Fichier local :
+         assets/musique-douce.mp3. Jamais de lecture automatique : la musique est éteinte à la
+         première visite et ne démarre qu'au clic sur le bouton. Le choix est
+         mémorisé (localStorage, clé « ll_music ») ; si l'élève l'avait laissée
+         allumée, la lecture reprend à son premier clic sur la page. */
+      (function () {
+        var BTN_ID = "musicBtn";
+        var KEY = "ll_music";
+        var SRC = "assets/musique-douce.mp3";
+        var btn = document.getElementById(BTN_ID);
+        if (!btn) return;
+        var audio = null;
+        var wanted = false;
+        var armed = false;
+        function loadPref() {
+          try {
+            if (typeof llLoad === "function") return llLoad(KEY, null);
+            var v = localStorage.getItem(KEY);
+            return v === null ? null : JSON.parse(v);
+          } catch (e) { return null; }
+        }
+        function savePref(v) {
+          try {
+            if (typeof llSave === "function") { llSave(KEY, v); return; }
+            localStorage.setItem(KEY, JSON.stringify(v));
+          } catch (e) {}
+        }
+        function setBtn(on) {
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+          btn.classList.toggle("on", on);
+          btn.textContent = on ? "\u266a Musique : en cours" : "\u266a Musique";
+        }
+        function ensureAudio() {
+          if (!audio) {
+            audio = document.createElement("audio");
+            audio.preload = "none";
+            audio.loop = true;
+            audio.volume = 0.3;
+            audio.src = SRC;
+            document.body.appendChild(audio);
+          }
+          return audio;
+        }
+        function tryPlay() {
+          var a = ensureAudio();
+          var p = a.play();
+          if (p && p.catch) p.catch(function () { armResume(); });
+        }
+        function armResume() {
+          if (armed) return;
+          armed = true;
+          var resume = function () {
+            armed = false;
+            document.removeEventListener("pointerdown", resume);
+            document.removeEventListener("keydown", resume);
+            if (wanted) tryPlay();
+          };
+          document.addEventListener("pointerdown", resume);
+          document.addEventListener("keydown", resume);
+        }
+        btn.addEventListener("click", function () {
+          if (!wanted) {
+            wanted = true;
+            savePref("on");
+            setBtn(true);
+            tryPlay();
+          } else {
+            wanted = false;
+            savePref("off");
+            setBtn(false);
+            if (audio) audio.pause();
+          }
+        });
+        if (loadPref() === "on") {
+          wanted = true;
+          setBtn(true);
+          armResume();
+        }
       })();
     </script>
   </body>
