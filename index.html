@@ -1373,7 +1373,20 @@
       function slugifyTitle(t) {
         return t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
       }
-      var LESSON_SLUGS = LESSONS.map(function (l) { return slugifyTitle(l.title); });
+      /* Dossiers réels quand le titre complet donnerait un autre slug (10 leçons, sinon lien cassé). */
+      var SLUG_OVERRIDES = {
+        "Conditionals & Wishes": "conditionals-types-2-3",
+        "Countables & Quantifiers — some / any, much / many": "countables-and-quantifiers",
+        "There is / There are + Prepositions of place": "there-is-there-are",
+        "Can / Can't + Gerunds — abilities & hobbies": "can-cant-and-gerunds",
+        "Past Simple — regular & irregular verbs": "past-simple",
+        "Comparatives & Superlatives": "comparatives-and-superlatives",
+        "Will vs Be going to — future plans": "will-vs-be-going-to",
+        "Used to — past habits": "used-to",
+        "Relative Pronouns — who, which, whose": "relative-pronouns",
+        "Too & Enough": "too-and-enough"
+      };
+      var LESSON_SLUGS = LESSONS.map(function (l) { return SLUG_OVERRIDES[l.title] || slugifyTitle(l.title); });
       LESSONS.forEach(function (l, i) {
         var card = document.createElement("article");
         card.className = "card";
